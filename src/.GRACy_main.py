@@ -1,6 +1,3 @@
-#!/home/gracy/Desktop/GRACy_easyinstall/src/conda/bin/python
-installationDirectory = "/home/gracy/Desktop/GRACy_easyinstall/"
- 
 
 
 try:
