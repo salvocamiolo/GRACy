@@ -1,0 +1,5 @@
+.references = center
+.target = scaffolds
+
+center.fasta = merlinGenome_190000_200000_f.txt
+scaffolds.fasta = ./centerScaffold/scaffolds.fasta

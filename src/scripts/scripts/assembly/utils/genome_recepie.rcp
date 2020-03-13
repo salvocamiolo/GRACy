@@ -1,0 +1,5 @@
+.references = genome
+.target = scaffolds
+
+genome.fasta = hcmv_genome.fasta
+scaffolds.fasta = ../2_spadesAssembly/scaffolds.fasta

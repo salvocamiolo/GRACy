@@ -1,0 +1,3 @@
+merlinSim_evenCov_20000_reads_1.fastq	sampleName1_1.fastq
+merlinSim_evenCov_20000_reads_2.fastq	sampleName1_2.fastq
+
