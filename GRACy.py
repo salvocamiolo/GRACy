@@ -58,10 +58,10 @@ class Toplevel1:
 			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/readsFiltering/readsQualityCheck.py "+installationDirectory+" &")
 
 		def denovoAssembly():
-			os.system("python "+installationDirectory+"assembly/hcmvAssembly.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/assembly.py "+installationDirectory+" &")
 
 		def genotyping():
-			os.system("python "+installationDirectory+"genotyping/hcmvGenotypingGUI.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/genotyping/genotyping.py "+installationDirectory+" &")
 
 		def annotation():
 			os.system("python "+installationDirectory+"annotation/hcmvAnnonation.py "+installationDirectory+" &")
