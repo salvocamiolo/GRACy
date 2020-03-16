@@ -13,7 +13,7 @@ installationDirectory = sys.argv[4]
 for seq_record in SeqIO.parse(inputFile,"fasta"):
     seq2fill = str(seq_record.seq)
 
-
+os.system(installationDirectory+"src/conda/bin/makeblastdb -dbtype nucl -in hcmv_genomes.fasta")
 sequences = {}
 for seq_record in SeqIO.parse("hcmv_genomes.fasta","fasta"):
     if str(seq_record.id) not in sequences:
@@ -77,7 +77,7 @@ while a < len(seq2fill)-1:
                 t.write(">"+item+"\n"+foundSequences[item]+"\n")
             t.close()
             print("Aligning the reads to the found sequences....")
-            os.system(installationDirectory+"src/conda/bin/bowtie2-build foundSequences.fasta found >null 2>&1")
+            os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/bowtie2-build foundSequences.fasta found >null 2>&1")
             os.system(installationDirectory+"src/conda/bin/bowtie2 --local -x found -1 "+read1+" -2 "+read2+" -S alignment.sam >null 2>&1")
             print("Converting sam to bam....")
             os.system(installationDirectory+"src/conda/bin/samtools view -bS -h -F 4 alignment.sam >alignment.bam  2>&1")

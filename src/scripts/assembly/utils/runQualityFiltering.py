@@ -68,7 +68,7 @@ while True:
 
     #Qualiti filetering fastq 1
     print("Quality filtering for file ",sample.reads1)
-    comand = installationDirectory+"resources/prinseq -fastq " + sample.reads1 + " -out_format 3 -min_qual_mean " + str(sample.minQualMean)
+    comand = installationDirectory+"src/conda/bin/prinseq-lite.pl -fastq " + sample.reads1 + " -out_format 3 -min_qual_mean " + str(sample.minQualMean)
     if not sample.trimLeft == "no":
         comand += " -trim_left " + str(sample.trimLeft)
 

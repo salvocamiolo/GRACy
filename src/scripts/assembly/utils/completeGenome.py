@@ -33,7 +33,7 @@ for scaffold in scaffolds:
 outfile.close()
 
 os.system("rm -rf sb*")
-os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/scaffold_builder.py -q allSequences.fasta -r merlinGenome_1_20000_f.txt -p sb")
+os.system(installationDirectory+"src/conda2/bin/python "+installationDirectory+"src/scripts/assembly/utils/scaffold_builder.py "+installationDirectory+"  -q allSequences.fasta -r "+installationDirectory+"data/merlinReference/merlinGenome_1_20000_f.txt -p sb")
 
 if os.path.isfile("sb_Scaffold.fasta")==True:
 
@@ -51,7 +51,7 @@ if os.path.isfile("sb_Scaffold.fasta")==True:
     logFile.write("The five prime end was reconstructed with ragout\nand has a length of "+str(len(fivePrimeEnd_scaffold))+"\n\n")
 
     os.system(installationDirectory+"src/conda/bin/makeblastdb -dbtype nucl -in fivePrimeEnd_scaffold.fasta")
-    os.system(installationDirectory+"src/conda/bin/blastn -query sequence_trl.fasta -db fivePrimeEnd_scaffold.fasta  -task blastn -outfmt 6 -out outputBlast1a.txt")
+    os.system(installationDirectory+"src/conda/bin/blastn -query "+installationDirectory+"data/merlinReference/sequence_trl.fasta -db fivePrimeEnd_scaffold.fasta  -task blastn -outfmt 6 -out outputBlast1a.txt")
     blastFile = open("outputBlast1a.txt")
     line = blastFile.readline().rstrip()
     fields = line.split("\t")
@@ -122,7 +122,7 @@ outfile.close()
 
 
 os.system("rm -rf sb*")
-os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/scaffold_builder.py -q allSequences.fasta -r merlinGenome_215000_235646_f.txt -p sb")
+os.system(installationDirectory+"src/conda2/bin/python "+installationDirectory+"src/scripts/assembly/utils/scaffold_builder.py "+installationDirectory+" -q allSequences.fasta -r "+installationDirectory+"data/merlinReference/merlinGenome_215000_235646_f.txt -p sb")
 
 if os.path.isfile("sb_Scaffold.fasta")==True:
 
@@ -139,7 +139,7 @@ if os.path.isfile("sb_Scaffold.fasta")==True:
 
 
     os.system(installationDirectory+"src/conda/bin/makeblastdb -dbtype nucl -in threePrimeEnd_scaffold.fasta")
-    os.system(installationDirectory+"src/conda/bin/blastn -query sequence_irs.fasta -db threePrimeEnd_scaffold.fasta  -task blastn -outfmt 6 -out outputBlast1b.txt")
+    os.system(installationDirectory+"src/conda/bin/blastn -query "+installationDirectory+"data/merlinReference/sequence_irs.fasta -db threePrimeEnd_scaffold.fasta  -task blastn -outfmt 6 -out outputBlast1b.txt")
     blastFile = open("outputBlast1b.txt")
     line = blastFile.readline().rstrip()
     fields = line.split("\t")

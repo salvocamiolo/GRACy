@@ -531,7 +531,8 @@ helpMsg="\nScaffold_builder version v 2.2\n\nUsage:\npython scaffold_builder.py 
 
 def run():
     #Set parameters
-    userParameters=sys.argv[1:]
+    userParameters=sys.argv[2:]
+    installationDirectory = sys.argv[1]
     if "-h" in userParameters:
         print(userParameters)
         return 0
@@ -551,7 +552,8 @@ def run():
         parameters["-b"]=int(parameters["-b"])
         
         #Run Nucmer // Creates the folder to the aligments and overlaps
-        os.system(which("nucmer")+" "+parameters["-r"]+" "+parameters["-q"]+" && "+which("show-coords")+" out.delta >"+parameters["-p"]+".coords && rm out.delta && mkdir "+parameters["-p"]+"_overlap_alignment")
+        os.system(installationDirectory+"src/conda2/bin/nucmer"+" "+parameters["-r"]+" "+parameters["-q"]+" && "+installationDirectory+"src/conda2/bin/show-coords"+" out.delta >"+parameters["-p"]+".coords && rm out.delta && mkdir "+parameters["-p"]+"_overlap_alignment")
+        #print installationDirectory+"src/conda2/bin/nucmer"
         return True
 
 

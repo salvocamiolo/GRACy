@@ -2,7 +2,6 @@ import sys
 import os
 from Bio import SeqIO
 
-import commands
 
 from itertools import groupby
 import numpy
@@ -55,7 +54,7 @@ for b in range(2):
                 
                 for record in faiter:
                     ## join sequence lines
-                    seq = "".join(s.strip() for s in faiter.next())
+                    seq = "".join(s.strip() for s in next(faiter))
                     lengths.append(len(seq))
 
             ## sort contigs longest>shortest

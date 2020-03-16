@@ -58,14 +58,17 @@ fi
 #./src/conda/bin/conda install -c bioconda -y  picard=2.21
 #./src/conda/bin/conda install -c bioconda -y  lastz=1.0.4
 #./src/conda2/bin/conda install -c bioconda -y  ragout=2.2
-#./src/conda/bin/conda/install -c bioconda -y  perl-perl4-corelibs
+#./src/conda/bin/conda install -c bioconda -y  perl-perl4-corelibs
 #./src/conda/bin/conda install -c bioconda -y  blast=2.9.0
 #./src/conda/bin/conda install -c bioconda -y  lofreq=2.1.4
 #./src/conda/bin/conda install -c bioconda -y  cd-hit=4.8.1
 #./src/conda/bin/conda install -c bioconda -y  cap3
 #./src/conda/bin/conda install -c bioconda -y  bedtools=2.29.2
 #./src/conda/bin/conda install -c bioconda -y  fastx_toolkit=0.0.14
-./src/conda/bin/conda install -c bioconda -y  blat=36
+#./src/conda/bin/conda install -c bioconda -y  blat=36
+#./src/conda2/bin/conda install -c bioconda -y  mummer
+./src/conda/bin/conda install -c bioconda -y  bcftools=1.8
+
 
 
 

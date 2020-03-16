@@ -50,8 +50,8 @@
   $Text::Wrap::columns = 61;
    require "getopts.pl";
 
-  use vars qw($opt_m $opt_o $opt_v $opt_p $opt_k $opt_a $opt_z $opt_s $opt_b $opt_n $opt_l $opt_x $opt_u $opt_t $opt_T $opt_g $opt_r $opt_d $opt_S $opt_i);
-  &Getopts('m:o:v:p:k:a:z:s:b:n:l:x:u:t:T:g:r:d:S:i:');
+  use vars qw($opt_q $opt_m $opt_o $opt_v $opt_p $opt_k $opt_a $opt_z $opt_s $opt_b $opt_n $opt_l $opt_x $opt_u $opt_t $opt_T $opt_g $opt_r $opt_d $opt_S $opt_i);
+  &Getopts('q:m:o:v:p:k:a:z:s:b:n:l:x:u:t:T:g:r:d:S:i:');
    my ($keep, $trim, $gaps, $threads, $difference,$base_overlap,$min_overlap,$min_base_ratio,$base_name, $min_tig_overlap, $numiteration)= (0, 10,1,1, 50, 2,29, 0.7, "standard_output", 10,10);
 
   my $seplines = ("-" x 60)."\n";
@@ -84,6 +84,10 @@
   }
   my $scaffold = $opt_s if($opt_s);
   my $libraryfile;
+  my $installationDirectory;
+  $installationDirectory = $opt_q;
+
+
   $libraryfile = $opt_l if ($opt_l);
   $min_overlap = $opt_m if ($opt_m);
   $base_overlap = $opt_o if ($opt_o);
@@ -208,7 +212,7 @@
 #BWA!
       if($aligner eq "bwa" || $aligner eq "bwasw"){
         my @readfiles= <$base_name/reads/$base_name.$aligner.reads.lib$ctlib*>;
-        my $bwapath = "/software/bin/bwa";
+        my $bwapath = "$installationDirectory/src/conda/bin/bwa";
         $bwapath =~ s/ /\\ /g;
         my $bwaout = $base_name . ".bwaIndex";
         my $filesize = -s "$contigFile";

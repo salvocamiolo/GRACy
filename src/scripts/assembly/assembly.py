@@ -48,7 +48,7 @@ class Toplevel1:
 	def __init__(self, top=None):
 
 		def bowtiePE(reference,read1,read2,numTh):
-			os.system(installationDirectory+"src/conda/bin/bowtie2-build "+reference+" reference -q >null 2>&1")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/bowtie2-build "+reference+" reference -q >null 2>&1")
 
 			os.system(installationDirectory+"src/conda/bin/bowtie2  -1 "+read1+" -2 "+read2+" -x reference -S test.sam -p "+numTh)
 			os.system(installationDirectory+"src/conda/bin/samtools view -bS -h test.sam > test.bam 2>null")
@@ -91,7 +91,7 @@ class Toplevel1:
 				os.system("mkdir -p "+projectName)
 				os.system("cp "+line+" "+projectName)
 				os.chdir(projectName)
-				logFile = open("logFile.log","w",buffering=0)
+				logFile = open('logFile.log','w')
 				read1 = ((confFile.readline().rstrip()).split("\t"))[1]
 				read2 = ((confFile.readline().rstrip()).split("\t"))[1]
 				read1_toFill = ((confFile.readline().rstrip()).split("\t"))[1]
@@ -326,7 +326,7 @@ class Toplevel1:
 						gfFile = open("gapfillerlib.txt","w")
 						gfFile.write("lib1 bwa ../1_cleanReads/qualityFiltered_1.fq ../1_cleanReads/qualityFiltered_2.fq "+ insertSize+" 0.25 FR")
 						gfFile.close()
-						os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/GapFiller -l gapfillerlib.txt -s filledGenome.fasta -T "+self.threadsEntry.get())
+						os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/GapFiller -q "+installationDirectory+" -l gapfillerlib.txt -s filledGenome.fasta -T "+self.threadsEntry.get())
 						os.system("mv finalScaffold.fasta finalScaffold.fasta_beforeGapfilling")
 						os.system("cp standard_output/standard_output.gapfilled.final.fa ./finalScaffold.fasta")
 
@@ -439,6 +439,7 @@ class Toplevel1:
 					os.system("mv output_filtered.vcf  output_firstPortion_filtered.vcf")
 					os.system("rm -f test*")
 					os.system("rm -f *.dict")
+					
 
 
 					self.logArea.configure(state='normal')
@@ -480,7 +481,7 @@ class Toplevel1:
 					os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt")
 					os.system(installationDirectory+"src/conda/bin/lofreq call -q 30 -Q 30  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
 					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
-					os.system(installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
+					os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 					os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 					os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
 					#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
@@ -537,7 +538,7 @@ class Toplevel1:
 					os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
 					os.system(installationDirectory+"src/conda/bin/lofreq call -q 30 -Q 30  -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
-					os.system(installationDirectory+"src/scripts/assembly/utils//vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
+					os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils//vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 					os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 					os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
 					#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
@@ -604,7 +605,7 @@ class Toplevel1:
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/joinScaffolds_careful.py ./5_refineAssembly/")
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/joinScaffolds.py ./5_refineAssembly/")
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/joinScaffolds_trivial.py ./5_refineAssembly/")
-					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/biomodule.py ./5_refineAssembly/")
+					os.system("cp "+installationDirectory+"src/scripts/utils/biomodule.py ./5_refineAssembly/")
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/maskLowCoverage.py ./5_refineAssembly/")
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/cleanSoftAndUnmapped.py ./5_refineAssembly/")
 					os.system("cp "+installationDirectory+"data/merlinReference/sequence_a.fasta ./5_refineAssembly/")
@@ -772,6 +773,7 @@ class Toplevel1:
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py ./6_createConsensus")
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/revComp.py ./6_createConsensus/")
 					os.system("cp "+installationDirectory+"src/scripts/assembly/utils/completeGenome.py ./6_createConsensus/")
+					#os.system("cp "+installationDirectory+"src/scripts/utils/biomodule.py ./6_createConsensus/")
 
 
 					os.chdir("6_createConsensus")
@@ -839,8 +841,8 @@ class Toplevel1:
 
 					os.system(installationDirectory+"src/conda/bin/lofreq call -q 30 -Q 30  -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
 					#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_1_15001_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
-					os.system(installationDirectory+"src/conda/binpython "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
-					os.system(installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
+					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
+					os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 					os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 					os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
 					self.logArea.configure(state='normal')
@@ -894,7 +896,7 @@ class Toplevel1:
 					os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt")
 					os.system(installationDirectory+"src/conda/bin/lofreq call -q 30 -Q 30  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
 					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
-					os.system(installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
+					os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 					os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 					os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
 					#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
@@ -952,7 +954,7 @@ class Toplevel1:
 					os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
 					os.system(installationDirectory+"src/conda/bin/lofreq call -q 30 -Q 30  -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
-					os.system(installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
+					os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 					os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 					os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
 					#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")

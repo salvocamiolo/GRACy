@@ -13,7 +13,7 @@ os.system("cp "+installationDirectory+"src/scripts/assembly/utils/center_recepie
 
 
 #new bit
-os.system(installationDirectory+"src/conda/bin/bowtie2-build merlinGenome_190000_200000_f.txt reference")
+os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/bowtie2-build merlinGenome_190000_200000_f.txt reference")
 os.system(installationDirectory+"src/conda/bin/bowtie2  -x reference -1 ../1_cleanReads/"+projectName+"_hq_1.fastq -2 ../1_cleanReads/"+projectName+"_hq_2.fastq -S alignment.sam -p "+numThreads)
 os.system(installationDirectory+"src/conda/bin/samtools view -h -Sb alignment.sam >alignment.bam")
 os.system(installationDirectory+"src/conda/bin/samtools view -F 12 -b alignment.bam >botMapped.bam")
@@ -23,7 +23,7 @@ os.system(installationDirectory+"src/conda/bin/samtools merge all.bam botMapped.
 os.system(installationDirectory+"src/conda/bin/bam2fastq -o reads#.fastq all.bam")
 os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/spades.py -1 reads_1.fastq -2 reads_2.fastq  --cov-cutoff auto --careful -k 51,61,71 -o centerScaffold")
 #Following command replaced by the following
-os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/scaffold_builder.py -q ./centerScaffold/scaffolds.fasta -r merlinGenome_190000_200000_f.txt -p sb2 ")
+os.system(installationDirectory+"src/conda2/bin/python "+installationDirectory+"src/scripts/assembly/utils/scaffold_builder.py "+installationDirectory+" -q ./centerScaffold/scaffolds.fasta -r merlinGenome_190000_200000_f.txt -p sb2 ")
 #os.system(installationDirectory+"resources/Ragout/bin/ragout --overwrite center_recepie.rcp")
 
 
@@ -98,7 +98,7 @@ if "N" in centerScaffold:
     gfFile.write("lib1 bwa ../1_cleanReads/qualityFiltered_1.fq ../1_cleanReads/qualityFiltered_2.fq "+ insertSize+" 0.25 FR")
     gfFile.close()
     centerScaffoldFile = bestAlignment[0]+"_"+str(bestAlignment[3])+"_"+str(bestAlignment[4])+"_f.txt"
-    os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/GapFiller -l gapfillerlib.txt -s "+centerScaffoldFile+" -T "+numThreads)
+    os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/GapFiller -q "+installationDirectory+" -l gapfillerlib.txt -s "+centerScaffoldFile+" -T "+numThreads)
     os.system("cp ./standard_output/standard_output.gapfilled.final.fa "+centerScaffoldFile)
 
 
