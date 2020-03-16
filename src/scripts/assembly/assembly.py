@@ -784,7 +784,26 @@ class Toplevel1:
 						for seq_record in SeqIO.parse("newGenome2.fasta","fasta"):
 							newGenome2seq = str(seq_record.seq)
 							break
-
+						
+						if "N" in newGenome2seq:
+							os.system("head -40000 ../1_cleanReads/qualityFiltered_1.fq >subsample_1.fastq")
+							os.system("head -40000 ../1_cleanReads/qualityFiltered_2.fq >subsample_2.fastq")
+							bowtiePE("newGenome2.fasta","subsample_1.fastq","subsample_2.fastq",self.threadsEntry.get())
+							os.system(installationDirectory+"src/conda/bin/picard CollectInsertSizeMetrics I=test_sorted.bam  O=insert_size_metrics.txt H=insert_size_histogram.pdf M=0.5")
+							os.system("head -8 insert_size_metrics.txt | tail -2 | cut -f 6 | tail -1 >insert.size")
+							isize = open("insert.size")
+							insertSize = isize.readline().rstrip()
+							isize.close()
+							print(insertSize)
+							gfFile = open("gapfillerlib.txt","w")
+							gfFile.write("lib1 bwa ../1_cleanReads/qualityFiltered_1.fq ../1_cleanReads/qualityFiltered_2.fq "+ insertSize+" 0.25 FR")
+							gfFile.close()
+							os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/GapFiller -q "+installationDirectory+" -l gapfillerlib.txt -s newGenome2.fasta -T "+self.threadsEntry.get())
+							os.system("cp ./standard_output/standard_output.gapfilled.final.fa newGenome2.fasta")
+							for seq_record in SeqIO.parse("newGenome2.fasta","fasta"):
+								newGenome2seq = str(seq_record.seq)
+								break
+						
 						os.system("mv finalScaffold.fasta finalScaffold_noEnds.fasta")
 						fs = open("finalScaffold.fasta","w")
 						fs.write(">finalScaffold\n"+newGenome2seq+"\n")

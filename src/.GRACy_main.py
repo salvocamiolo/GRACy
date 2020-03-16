@@ -61,10 +61,10 @@ class Toplevel1:
 			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/genotyping/genotyping.py "+installationDirectory+" &")
 
 		def annotation():
-			os.system("python "+installationDirectory+"annotation/hcmvAnnonation.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/annotation/annotation.py "+installationDirectory+" &")
 
 		def snpAnalysis():
-			os.system("python "+installationDirectory+"snpAnalysis/hcmvSNPAnalysisGUI.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/snpCalling.py "+installationDirectory+" &")
 
 		def dbSubmission():
 			os.system("python "+installationDirectory+"databaseSubmission/hcmvDataSubmission.py "+installationDirectory+" &")

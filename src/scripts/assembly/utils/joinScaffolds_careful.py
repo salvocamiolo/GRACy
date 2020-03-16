@@ -246,7 +246,7 @@ while True:
 
 
 	print("Indexing.....")
-	os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/bowtie2-build --threads 10 toElong.fasta toElong  >null 2>&1")
+	os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/bowtie2-build  toElong.fasta toElong  >null 2>&1")
 	print("Aligning.....")
 	os.system(installationDirectory+"src/conda/bin/bowtie2 --local --very-sensitive-local  -p "+ numThreads+" -x toElong -1 "+ read1 + " -2 " + read2 + " -S "+ projectName+".sam >null 2>&1" )
 

@@ -67,7 +67,8 @@ fi
 #./src/conda/bin/conda install -c bioconda -y  fastx_toolkit=0.0.14
 #./src/conda/bin/conda install -c bioconda -y  blat=36
 #./src/conda2/bin/conda install -c bioconda -y  mummer
-./src/conda/bin/conda install -c bioconda -y  bcftools=1.8
+#./src/conda/bin/conda install -c bioconda -y  bcftools=1.8
+#./src/conda/bin/conda install -c bioconda -y  exonerate=2.4
 
 
 

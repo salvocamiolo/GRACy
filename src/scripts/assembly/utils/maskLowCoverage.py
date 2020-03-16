@@ -73,6 +73,8 @@ infile = open("Nranges.txt")
 outfile = open("Nranges_smooth.txt","w")
 
 line = infile.readline().rstrip()
+if not line:
+    exit()
 fields = line.split("\t")
 
 value_1a = int(fields[0])
@@ -80,7 +82,8 @@ value_1b = int(fields[1])
 
 line = infile.readline().rstrip()
 if not line:
-    print("No gap to fill")
+    print("One gap to fill")
+    outfile.write(str(value_1a)+"\t"+str(value_1b)+"\n")
     exit()
 else:
     infile.seek(0)
