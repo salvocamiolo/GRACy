@@ -63,7 +63,6 @@ while True:
 #cutting the best alignment sequence from the genome to complete
 os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py "+genomeToComplete+" finalScaffold "+str(bestPos1)+" "+str(bestPos2)+" r")
 os.system("cp "+installationDirectory+"src/scripts/assembly/utils/joinScaffolds_careful.py .")
-os.system("cp "+installationDirectory+"src/scripts/utils/biomodule.py .")
 os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py "+genomeToComplete+" finalScaffold 1 2000 f")
 
 
@@ -120,10 +119,9 @@ while True:
 
 
 #cutting the best alignment sequence from the genome to complete
-os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"rsc/scripts/assembly/utils/extractSeqByRange.py newGenome1.fasta finalScaffold "+bestPos1+" "+bestPos2+" r")
+os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py newGenome1.fasta finalScaffold "+bestPos1+" "+bestPos2+" r")
 os.system("cp "+installationDirectory+"src/scripts/assembly/utils/joinScaffolds_careful.py .")
-os.system("cp "+installationDirectory+"src/scripts/assembly/utils/biomodule.py .")
-os.systeminstallationDirectory+"/src/conda/bin/python "+(installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py newGenome1.fasta finalScaffold "+str(len(genomeToCompleteSeq)-2000) +" "+ str(len(genomeToCompleteSeq)) + " f")
+os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py newGenome1.fasta finalScaffold "+str(len(genomeToCompleteSeq)-2000) +" "+ str(len(genomeToCompleteSeq)) + " f")
 
 for seq_record in SeqIO.parse("newGenome1.fasta", "fasta"):
 	genomeToCompleteSeq = str(seq_record.seq)

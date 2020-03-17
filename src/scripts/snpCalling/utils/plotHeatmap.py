@@ -52,7 +52,7 @@ outfile.write("\n")
 allSNPs = set()
 
 for experiments in snpPositions:
-    print "In the experiment",experiments,"There are",len(snpPositions[experiments]),"snps"
+    print("In the experiment",experiments,"There are",len(snpPositions[experiments]),"snps")
     for snp in snpPositions[experiments]:
         allSNPs.add(snp)
 

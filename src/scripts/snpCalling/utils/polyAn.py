@@ -177,7 +177,7 @@ while True:
                                 break
                             else:
                                 relativePosition += ranges[1] -ranges[0] +1
-                                print "First exonLenfth",relativePosition
+                                print("First exonLenfth",relativePosition)
                                 introns =1
                         print(relativePosition)
 

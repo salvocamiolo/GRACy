@@ -67,7 +67,7 @@ class Toplevel1:
 			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/snpCalling.py "+installationDirectory+" &")
 
 		def dbSubmission():
-			os.system("python "+installationDirectory+"databaseSubmission/hcmvDataSubmission.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/dbsubmission/dbsubmission.py "+installationDirectory+" &")
 
 
 

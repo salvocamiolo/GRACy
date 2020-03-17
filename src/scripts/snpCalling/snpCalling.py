@@ -121,7 +121,7 @@ class Toplevel1:
 
 						sampleTempFolder = sampleName+"_4864985345_tempFolder"
 						os.system("mkdir -p "+sampleTempFolder)
-						os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"resources/bowtie2-build "+referenceFile+" ./"+sampleTempFolder+"/reference -q")
+						os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/conda/bin/bowtie2-build "+referenceFile+" ./"+sampleTempFolder+"/reference -q")
 
 						print("Analising sample",sampleName)
 						self.logArea.configure(state='normal')
@@ -172,7 +172,7 @@ class Toplevel1:
 						self.logArea.update()
 						os.system(installationDirectory+"src/conda/bin/prinseq-lite.pl -fastq "+sampleTempFolder+"/"+sampleName+"_trimmed_dedup_1.fastq  -fastq2 "+sampleTempFolder+"/"+sampleName+"_trimmed_dedup_2.fastq -min_qual_mean 25 -trim_qual_right 30 -trim_ns_right 20  -trim_qual_window 5 -trim_qual_step 1 -min_len 80 -out_bad null -out_good "+sampleName+"_trimmed_dedup_pr")
 						os.system("mv "+sampleName+"_trimmed_dedup_pr* ./"+sampleTempFolder)
-						os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"snpAnalysis/trimPolyN.py "+sampleTempFolder+"/"+sampleName+"_trimmed_dedup_pr_1.fastq "+sampleTempFolder+"/"+sampleName+"_trimmed_dedup_pr_2.fastq")
+						os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/utils/trimPolyN.py "+sampleTempFolder+"/"+sampleName+"_trimmed_dedup_pr_1.fastq "+sampleTempFolder+"/"+sampleName+"_trimmed_dedup_pr_2.fastq")
 
 						self.logArea.configure(state='normal')
 						self.logArea.insert(tk.END, "*  Reads alignment on reference\n")
@@ -222,6 +222,7 @@ class Toplevel1:
 							os.system("mv "+sampleTempFolder+"/"+sampleName+"_alignment_sorted.bam "+sampleTempFolder+"/"+sampleName+"_markedDuplicates.bam")
 						print("Calling snps with lofreq")
 						#Analyze snps with lowfreq
+						os.system(installationDirectory+"/src/conda/bin/samtools faidx "+referenceFile)
 						self.logArea.configure(state='normal')
 						self.logArea.insert(tk.END, "*  Calling SNPs with lofreq\n")
 						self.logArea.see(tk.END)
@@ -241,7 +242,7 @@ class Toplevel1:
 						self.logArea.update()
 
 
-						os.system(installationDirectory+"resources/samtools faidx "+referenceFile)
+						os.system(installationDirectory+"src/conda/bin/samtools faidx "+referenceFile)
 
 						self.logArea.configure(state='normal')
 						self.logArea.insert(tk.END, "*  *  Calling INDELs....\n")
