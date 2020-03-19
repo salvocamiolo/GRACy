@@ -100,8 +100,8 @@ class Ui_Form(object):
 		#font = QtGui.QFont()
 		#font.setPointSize(11)
 		#Form.setFont(font)
-		self.label.setFont(font)
-		self.inputFileButton.setFont(font)
+		#self.label.setFont(font)
+		#self.inputFileButton.setFont(font)
 		self.inputFileButton.clicked.connect(self.selectInputFile)
 		self.runButton.clicked.connect(self.performAssembly)
 
