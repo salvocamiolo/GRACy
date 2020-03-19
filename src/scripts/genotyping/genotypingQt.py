@@ -99,9 +99,6 @@ class Ui_Form(object):
 		self.outputFolderButton.clicked.connect(self.selectOutputFolder)
 		self.plotButton.clicked.connect(self.plotGenotypes)
 		self.genotypeButton.clicked.connect(self.runGenotyping)
-		font = QtGui.QFont()
-		font.setPointSize(11)
-		Form.setFont(font)
 
 	def selectInputFile(self):
 		filename, __ = QFileDialog.getOpenFileName(None,"Select input file","./")
