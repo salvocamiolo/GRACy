@@ -102,10 +102,11 @@ class Toplevel1:
                     MsgBox = tk.messagebox.askquestion("You are going to submit your data to ENA. This is not a test submission. Do you with to continue?")
                     if MsgBox == 'yes':
                         os.system("curl -u "+self.usernameEntry.get()+":"+self.passwordEntry.get()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
-                receiptFile = open("projectReceipt")
+                
                     else:
                         exit()
 
+                receiptFile = open("projectReceipt")
                 while True:
                     line = receiptFile.readline().rstrip()
                     if not line:
@@ -351,7 +352,7 @@ class Toplevel1:
                             self.logArea.configure(state='disabled')
                             self.logArea.update()
                             
-                            print experimentAccession[sampleName],"Submitted"
+                            print(experimentAccession[sampleName],"Submitted")
                             sys.stdin.read(1)
 
 

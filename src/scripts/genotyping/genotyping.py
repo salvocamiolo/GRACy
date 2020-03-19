@@ -3,6 +3,7 @@ from PIL import ImageTk, Image
 from matplotlib.patches import Patch
 from matplotlib import colors as colorcode
 from tkinter import simpledialog
+from tkinter import font
 
 installationDirectory = sys.argv[1]
 
@@ -582,21 +583,21 @@ class Toplevel1:
 
 
 
-				plot1.text(1,0.25,"UL120",rotation=14,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(0.78,0.70,"UL9",rotation=37,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(0.4,1.03,"RL12",rotation=62,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-0.2,1.11,"RL13",rotation=-80,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-0.65,0.91,"UL1",rotation=-60,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-1.03,0.54,"UL11",rotation=-30,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-1.19,-0.03,"UL139",rotation=3,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-1.06,-0.50,"RL5A",rotation=20,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-0.67,-0.87,"RL6",rotation=50,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(-0.17,-1.05,"UL20",rotation=80,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(0.35,-0.99,"UL146",rotation=-70,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(0.73,-0.74,"UL73",rotation=-45,fontweight='bold',fontsize=12,fontname="arial")
-				plot1.text(0.99,-0.30,"UL74",rotation=-14,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(1,0.16,"UL120",rotation=14,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(0.80,0.61,"UL9",rotation=37,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(0.4,0.93,"RL12",rotation=62,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-0.15,1.02,"RL13",rotation=-85,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-0.66,0.84,"UL1",rotation=-60,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-1.05,0.46,"UL11",rotation=-30,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-1.22,-0.05,"UL139",rotation=3,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-1.05,-0.57,"RL5A",rotation=24,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-0.67,-0.94,"RL6",rotation=50,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(-0.17,-1.16,"UL20",rotation=75,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(0.35,-1.13,"UL146",rotation=-70,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(0.75,-0.81,"UL73",rotation=-45,fontweight='bold',fontsize=12,fontname="arial")
+				plot1.text(0.97,-0.36,"UL74",rotation=-14,fontweight='bold',fontsize=12,fontname="arial")
 
-				fig.savefig(outputFileName,dpi=300)
+				fig.savefig(self.OutputFolderEntry.get()+"/"+outputFileName,dpi=300)
 
 				
 
@@ -641,21 +642,21 @@ class Toplevel1:
 
 
 
-		'''This class configures and populates the toplevel window.
-		   top is the toplevel containing window.'''
-		_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-		_fgcolor = '#000000'  # X11 color: 'black'
-		_compcolor = '#d9d9d9' # X11 color: 'gray85'
-		_ana1color = '#d9d9d9' # X11 color: 'gray85'
-		_ana2color = '#ececec' # Closest X11 color: 'gray92'
-		self.style = ttk.Style()
-		if sys.platform == "win32":
-			self.style.theme_use('winnative')
-		self.style.configure('.',background=_bgcolor)
-		self.style.configure('.',foreground=_fgcolor)
-		self.style.configure('.',font="TkDefaultFont")
-		self.style.map('.',background=
-			[('selected', _compcolor), ('active',_ana2color)])
+		#'''This class configures and populates the toplevel window.
+		#   top is the toplevel containing window.'''
+		#_bgcolor = '#d9d9d9'  # X11 color: 'gray85'
+		#_fgcolor = '#000000'  # X11 color: 'black'
+		#_compcolor = '#d9d9d9' # X11 color: 'gray85'
+		#_ana1color = '#d9d9d9' # X11 color: 'gray85'
+		#_ana2color = '#ececec' # Closest X11 color: 'gray92'
+		#self.style = ttk.Style()
+		#if sys.platform == "win32":
+	#		self.style.theme_use('winnative')
+		#self.style.configure('.',background=_bgcolor)
+		#self.style.configure('.',foreground=_fgcolor)
+		#self.style.configure('.',font="TkDefaultFont")
+		#self.style.map('.',background=
+		#	[('selected', _compcolor), ('active',_ana2color)])
 
 		w=840
 		h=470
@@ -668,9 +669,8 @@ class Toplevel1:
 		top.title("Genotyping")
 		top.configure(highlightcolor="black",background="white")
 
-
-		self.InputFileLabel = tk.Label(top,highlightthickness=0,background="white",borderwidth=0,foreground="#204949",font=("arial",10,"bold"))
-		self.InputFileLabel.place(x=20, y=20,height=20, width=90)
+		self.InputFileLabel = ttk.Label(top,background="white",borderwidth=0,foreground="#204949",font="arial")
+		self.InputFileLabel.place(x=20, y=20,height=20, width=80)
 		self.InputFileLabel.configure(text="Input file")
 
 		self.InputFileEntry = tk.Entry(top,font=("arial",10,"bold"))
@@ -710,7 +710,7 @@ class Toplevel1:
 		self.changeDB.configure(text="Change DB")
 
 		self.CutoffLabel = tk.Label(top,highlightthickness=0,background="white",borderwidth=0,foreground="#204949",font=("arial",10,"bold"))
-		self.CutoffLabel.place(x=500, y=100,height=20, width=120)
+		self.CutoffLabel.place(x=500, y=100,height=20, width=130)
 		self.CutoffLabel.configure(text="Detection treshold")
 
 		self.CutoffText = tk.Entry(top, justify='right',font=("arial",10,"bold"))
@@ -726,7 +726,7 @@ class Toplevel1:
 		self.numThreadsEntry.insert(0,"8")
 
 		self.logFileLabel = tk.Label(top,highlightthickness=0,background="white",borderwidth=0,foreground="#204949",font=("arial",10,"bold"))
-		self.logFileLabel.place(x=20,y=180,height=20,width=90)
+		self.logFileLabel.place(x=20,y=180,height=20,width=80)
 		self.logFileLabel.configure(text="Log window")
 
 		self.logFrame = tk.Frame(top)

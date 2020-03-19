@@ -52,22 +52,22 @@ class Toplevel1:
 	def __init__(self, top=None):
 
 		def launchQC():
-			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/readsFiltering/readsQualityCheck.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/readsFiltering/readsFilteringQt.py "+installationDirectory+" &")
 
 		def denovoAssembly():
-			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/assembly.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/assemblyQt.py "+installationDirectory+" &")
 
 		def genotyping():
-			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/genotyping/genotyping.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/genotyping/genotypingQt.py "+installationDirectory+" &")
 
 		def annotation():
-			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/annotation/annotation.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/annotation/annotationQt.py "+installationDirectory+" &")
 
 		def snpAnalysis():
-			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/snpCalling.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/snpCallingQt.py "+installationDirectory+" &")
 
 		def dbSubmission():
-			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/dbsubmission/dbsubmission.py "+installationDirectory+" &")
+			os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/dbsubmission/dbsubmissionQt.py "+installationDirectory+" &")
 
 
 
