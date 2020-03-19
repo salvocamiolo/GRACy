@@ -38,7 +38,7 @@ fi
 
 ./src/conda/bin/conda install -c anaconda -y pillow
 ./src/conda/bin/conda install -c anaconda -y numpy
-/src/conda/bin/conda install -c conda-forge -y matplotlib 
+./src/conda/bin/conda install -c conda-forge -y matplotlib 
 ./src/conda/bin/conda config --add channels bioconda
 ./src/conda/bin/conda install -y  trim-galore
 ./src/conda/bin/conda install -c bioconda -y  bowtie2=2.3.5.1
