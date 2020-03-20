@@ -141,7 +141,7 @@ class Ui_Form(object):
 		self.label_9 = QtWidgets.QLabel(Form)
 		self.label_9.setGeometry(QtCore.QRect(1000, 320, 201, 211))
 		self.label_9.setText("")
-		self.label_9.setPixmap(QtGui.QPixmap("GRACy_easyinstall/src/GUI/IconsFinal/SNPcalling.jpg"))
+		self.label_9.setPixmap(QtGui.QPixmap(installationDirectory+"src/GUI/IconsFinal/SNPcalling.jpg"))
 		self.label_9.setObjectName("label_9")
 		self.logArea = QtWidgets.QTextEdit(Form)
 		self.logArea.setGeometry(QtCore.QRect(10, 320, 981, 241))

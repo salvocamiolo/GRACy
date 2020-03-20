@@ -86,7 +86,7 @@ class Ui_Form(object):
 		self.label_6 = QtWidgets.QLabel(Form)
 		self.label_6.setGeometry(QtCore.QRect(560, 380, 191, 191))
 		self.label_6.setText("")
-		self.label_6.setPixmap(QtGui.QPixmap("../GRACy_easyinstall/src/GUI/IconsFinal/Assembly.jpg"))
+		self.label_6.setPixmap(QtGui.QPixmap(installationDirectory+"src/GUI/IconsFinal/Assembly.jpg"))
 		self.label_6.setObjectName("label_6")
 		self.runButton = QtWidgets.QPushButton(Form)
 		self.runButton.setGeometry(QtCore.QRect(560, 580, 191, 32))

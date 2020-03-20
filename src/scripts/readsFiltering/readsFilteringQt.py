@@ -22,7 +22,7 @@ import subprocess
 
 class Ui_Form(object):
 	def setupUi(self, Form,installationDirectory):
-		Form.setObjectName("Form")
+		Form.setObjectName("Reads filtering tool")
 		Form.resize(1160, 718)
 		self.label_2 = QtWidgets.QLabel(Form)
 		self.label_2.setGeometry(QtCore.QRect(440, 10, 261, 20))
@@ -96,7 +96,7 @@ class Ui_Form(object):
 		self.label_10 = QtWidgets.QLabel(Form)
 		self.label_10.setGeometry(QtCore.QRect(940, 460, 201, 211))
 		self.label_10.setText("")
-		self.label_10.setPixmap(QtGui.QPixmap("../../../../Desktop/GRACy_easyinstall/src/GUI/IconsFinal/filtering.jpg"))
+		self.label_10.setPixmap(QtGui.QPixmap(installationDirectory+"src/GUI/IconsFinal/filtering.jpg"))
 		self.label_10.setObjectName("label_10")
 		self.outputFolderButton = QtWidgets.QPushButton(Form)
 		self.outputFolderButton.setGeometry(QtCore.QRect(700, 30, 112, 32))
@@ -301,7 +301,7 @@ class Ui_Form(object):
 			return
 
 		outputFolder = self.outputFolderEntry.text()
-		if outputFolder == "No folder selected":
+		if outputFolder == "":
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("An output folder should be selected.")
@@ -312,7 +312,7 @@ class Ui_Form(object):
 			return
 
 		recodFile = self.recodingFileEntry.text()
-		if recodFile == "No index selected" and self.humanReadsRemovalCheckbox.isChecked()==True:
+		if recodFile == "" and self.humanReadsRemovalCheckbox.isChecked()==True:
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("A valid recoding table should be provided")
@@ -340,7 +340,7 @@ class Ui_Form(object):
 
 
 		bowtie2Ref = self.bowtieIndexEntry.text()
-		if bowtie2Ref == "No file selected" and self.recodingFileEntry.isChecked()==True:
+		if bowtie2Ref == "" and self.recodingFileEntry.isChecked()==True:
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("A valid bowtie2 index for the human reference genome should be specified")
@@ -871,17 +871,17 @@ class Ui_Form(object):
 
 	def retranslateUi(self, Form):
 		_translate = QtCore.QCoreApplication.translate
-		Form.setWindowTitle(_translate("Form", "Form"))
+		Form.setWindowTitle(_translate("Form", "Reads filtering tool"))
 		self.label_2.setText(_translate("Form", "Output folder"))
-		self.outputFolderEntry.setText(_translate("Form", "No folder selected"))
+		self.outputFolderEntry.setText(_translate("Form", ""))
 		self.label_3.setText(_translate("Form", "Recoding file"))
 		self.label_4.setText(_translate("Form", "Human reference bowtie2 index"))
 		self.label_5.setText(_translate("Form", "Adapter 1"))
 		self.label_6.setText(_translate("Form", "Adapter 2"))
 		self.label_7.setText(_translate("Form", "Number of threads"))
 		self.label_8.setText(_translate("Form", "Log window"))
-		self.recodingFileEntry.setText(_translate("Form", "No file selected"))
-		self.bowtieIndexEntry.setText(_translate("Form", "No index selected"))
+		self.recodingFileEntry.setText(_translate("Form", ""))
+		self.bowtieIndexEntry.setText(_translate("Form", ""))
 		self.humanReadsRemovalCheckbox.setText(_translate("Form", "Human reads removal"))
 		self.adaptersTrimmingCheckbox.setText(_translate("Form", "Adapters trimming"))
 		self.sampleNameRecodingCheckbox.setText(_translate("Form", "Sample file name recoding"))

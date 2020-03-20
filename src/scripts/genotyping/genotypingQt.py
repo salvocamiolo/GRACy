@@ -77,9 +77,9 @@ class Ui_Form(object):
 		self.logArea.setGeometry(QtCore.QRect(10, 280, 681, 291))
 		self.logArea.setObjectName("logArea")
 		self.label_7 = QtWidgets.QLabel(Form)
-		self.label_7.setGeometry(QtCore.QRect(700, 290, 201, 211))
+		self.label_7.setGeometry(QtCore.QRect(700, 280, 201, 211))
 		self.label_7.setText("")
-		self.label_7.setPixmap(QtGui.QPixmap("GRACy_easyinstall/src/GUI/IconsFinal/Classification.jpg"))
+		self.label_7.setPixmap(QtGui.QPixmap(installationDirectory+"src/GUI/IconsFinal/Classification.jpg"))
 		self.label_7.setObjectName("label_7")
 		self.genotypeButton = QtWidgets.QPushButton(Form)
 		self.genotypeButton.setGeometry(QtCore.QRect(700, 500, 201, 32))
@@ -194,7 +194,7 @@ class Ui_Form(object):
 			return
 
 		outputFolder = self.outputFolderEntry.text()
-		if outputFolder == "No folder selected":
+		if outputFolder == "":
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("An output folder should be selected.")
@@ -633,7 +633,7 @@ class Ui_Form(object):
 		colorDict = {"G1":"blue","G1A":"lightblue","G1B":"darkblue","G1C":"deepskyblue","G2":"red","G2A":"lightcoral","G2B":"darkred","G3":"salmon","G3A":"green","G3B":"darkgreen","G4":"lightgreen","G4A":"yellow","G4B":"darkseagreen","G4C":"pink","G4D":"maroon","G5":"magenta","G6":"orchid","G7":"purple","G8":"silver","G9":"blueviolet","G10":"darkcyan","G11":"navy","G12":"black","G13":"gray","G14":"lightgray"}
 		
 		outputFolder = self.outputFolderEntry.text()
-		if outputFolder == "No folder selected":
+		if outputFolder == "":
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("An output folder should be selected.")
@@ -740,7 +740,7 @@ class Ui_Form(object):
 		self.label_4.setText(_translate("Form", "Detection threshold"))
 		self.label_5.setText(_translate("Form", "Number of threads"))
 		self.label_6.setText(_translate("Form", "Log window"))
-		self.outputFolderEntry.setText(_translate("Form", "No folder selected"))
+		self.outputFolderEntry.setText(_translate("Form", ""))
 		self.inputFileButton.setText(_translate("Form", "Select files"))
 		self.outputFolderButton.setText(_translate("Form", "Open folder"))
 		self.dbEntry.setText(_translate("Form", "mainDB_seqs_filtered.txt"))
