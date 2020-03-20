@@ -9,7 +9,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
 from PyQt5.QtWidgets import QMessageBox
-
+from PyQt5.QtCore import QProcess
 import sys
 from os import listdir
 from os.path import isfile, join
@@ -464,7 +464,10 @@ class Ui_Form(object):
 					
 					self.logTextArea.append( "Mapping reads to the host reference genome....")
 					self.logTextArea.repaint()
-					subprocess.call(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam",shell=True)
+
+					process  = QProcess()
+					process.start(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam")
+					#subprocess.call(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam",shell=True)
 
 					time.sleep(2)
 
