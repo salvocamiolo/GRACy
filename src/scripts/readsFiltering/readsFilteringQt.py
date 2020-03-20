@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
+from PyQt5.QtWidgets import QMessageBox
 
 import sys
 from os import listdir
@@ -16,68 +17,61 @@ import os
 import time
 import numpy as nm
 import matplotlib.pyplot as plt
+import subprocess
+
 
 class Ui_Form(object):
 	def setupUi(self, Form,installationDirectory):
-		Form.setObjectName("Read filtering")
-		Form.resize(864, 796)
-		self.label = QtWidgets.QLabel(Form)
-		self.label.setGeometry(QtCore.QRect(10, 20, 261, 20))
-		self.label.setObjectName("label")
-		self.inputFolderEntry = QtWidgets.QLineEdit(Form)
-		self.inputFolderEntry.setGeometry(QtCore.QRect(10, 40, 381, 32))
-		self.inputFolderEntry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-		self.inputFolderEntry.setObjectName("inputFolderEntry")
+		Form.setObjectName("Form")
+		Form.resize(1160, 718)
 		self.label_2 = QtWidgets.QLabel(Form)
-		self.label_2.setGeometry(QtCore.QRect(10, 90, 261, 20))
+		self.label_2.setGeometry(QtCore.QRect(440, 10, 261, 20))
 		self.label_2.setObjectName("label_2")
 		self.outputFolderEntry = QtWidgets.QLineEdit(Form)
-		self.outputFolderEntry.setGeometry(QtCore.QRect(10, 110, 381, 32))
+		self.outputFolderEntry.setGeometry(QtCore.QRect(440, 30, 251, 32))
 		self.outputFolderEntry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
 		self.outputFolderEntry.setObjectName("outputFolderEntry")
 		self.label_3 = QtWidgets.QLabel(Form)
-		self.label_3.setGeometry(QtCore.QRect(10, 160, 241, 20))
+		self.label_3.setGeometry(QtCore.QRect(440, 80, 241, 20))
 		self.label_3.setObjectName("label_3")
 		self.label_4 = QtWidgets.QLabel(Form)
-		self.label_4.setGeometry(QtCore.QRect(10, 230, 271, 20))
+		self.label_4.setGeometry(QtCore.QRect(440, 150, 271, 20))
 		self.label_4.setObjectName("label_4")
 		self.label_5 = QtWidgets.QLabel(Form)
-		self.label_5.setGeometry(QtCore.QRect(10, 300, 241, 20))
+		self.label_5.setGeometry(QtCore.QRect(440, 220, 241, 20))
 		self.label_5.setObjectName("label_5")
 		self.label_6 = QtWidgets.QLabel(Form)
-		self.label_6.setGeometry(QtCore.QRect(10, 370, 241, 20))
+		self.label_6.setGeometry(QtCore.QRect(440, 290, 241, 20))
 		self.label_6.setObjectName("label_6")
 		self.label_7 = QtWidgets.QLabel(Form)
-		self.label_7.setGeometry(QtCore.QRect(10, 440, 241, 20))
+		self.label_7.setGeometry(QtCore.QRect(440, 360, 241, 20))
 		self.label_7.setObjectName("label_7")
 		self.label_8 = QtWidgets.QLabel(Form)
-		self.label_8.setGeometry(QtCore.QRect(20, 510, 241, 20))
+		self.label_8.setGeometry(QtCore.QRect(20, 430, 241, 20))
 		self.label_8.setObjectName("label_8")
 		self.recodingFileEntry = QtWidgets.QLineEdit(Form)
-		self.recodingFileEntry.setGeometry(QtCore.QRect(10, 180, 381, 32))
+		self.recodingFileEntry.setGeometry(QtCore.QRect(440, 100, 251, 32))
 		self.recodingFileEntry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
 		self.recodingFileEntry.setObjectName("recodingFileEntry")
 		self.bowtieIndexEntry = QtWidgets.QLineEdit(Form)
-		self.bowtieIndexEntry.setGeometry(QtCore.QRect(10, 250, 381, 32))
+		self.bowtieIndexEntry.setGeometry(QtCore.QRect(440, 170, 251, 32))
 		self.bowtieIndexEntry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
 		self.bowtieIndexEntry.setObjectName("bowtieIndexEntry")
 		self.adapter1Entry = QtWidgets.QLineEdit(Form)
-		self.adapter1Entry.setGeometry(QtCore.QRect(10, 320, 381, 32))
+		self.adapter1Entry.setGeometry(QtCore.QRect(440, 240, 251, 32))
+		self.adapter1Entry.setText("")
 		self.adapter1Entry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
 		self.adapter1Entry.setObjectName("adapter1Entry")
 		self.adapter2Entry = QtWidgets.QLineEdit(Form)
-		self.adapter2Entry.setGeometry(QtCore.QRect(10, 390, 381, 32))
+		self.adapter2Entry.setGeometry(QtCore.QRect(440, 310, 251, 32))
+		self.adapter2Entry.setText("")
 		self.adapter2Entry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
 		self.adapter2Entry.setObjectName("adapter2Entry")
-		self.numThreadsEntry = QtWidgets.QLineEdit(Form)
-		self.numThreadsEntry.setGeometry(QtCore.QRect(10, 460, 151, 32))
-		self.numThreadsEntry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-		self.numThreadsEntry.setObjectName("numThreadsEntry")
 		self.logTextArea = QtWidgets.QTextEdit(Form)
-		self.logTextArea.setGeometry(QtCore.QRect(20, 540, 601, 241))
+		self.logTextArea.setGeometry(QtCore.QRect(20, 460, 901, 241))
 		self.logTextArea.setObjectName("logTextArea")
 		self.frame = QtWidgets.QFrame(Form)
-		self.frame.setGeometry(QtCore.QRect(560, 40, 291, 231))
+		self.frame.setGeometry(QtCore.QRect(850, 30, 291, 231))
 		self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
 		self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
 		self.frame.setObjectName("frame")
@@ -97,63 +91,169 @@ class Ui_Form(object):
 		self.merlinReferenceAlignmentCheckbox.setGeometry(QtCore.QRect(30, 180, 251, 25))
 		self.merlinReferenceAlignmentCheckbox.setObjectName("merlinReferenceAlignmentCheckbox")
 		self.label_9 = QtWidgets.QLabel(Form)
-		self.label_9.setGeometry(QtCore.QRect(570, 20, 161, 21))
+		self.label_9.setGeometry(QtCore.QRect(860, 10, 161, 21))
 		self.label_9.setObjectName("label_9")
 		self.label_10 = QtWidgets.QLabel(Form)
-		self.label_10.setGeometry(QtCore.QRect(650, 540, 201, 211))
+		self.label_10.setGeometry(QtCore.QRect(940, 460, 201, 211))
 		self.label_10.setText("")
-		self.label_10.setPixmap(QtGui.QPixmap(installationDirectory+"src/GUI/IconsFinal/filtering.jpg"))
+		self.label_10.setPixmap(QtGui.QPixmap("../../../../Desktop/GRACy_easyinstall/src/GUI/IconsFinal/filtering.jpg"))
 		self.label_10.setObjectName("label_10")
-		self.inputFolderButton = QtWidgets.QPushButton(Form)
-		self.inputFolderButton.setGeometry(QtCore.QRect(400, 40, 111, 32))
-		self.inputFolderButton.setObjectName("inputFolderButton")
 		self.outputFolderButton = QtWidgets.QPushButton(Form)
-		self.outputFolderButton.setGeometry(QtCore.QRect(400, 110, 112, 32))
+		self.outputFolderButton.setGeometry(QtCore.QRect(700, 30, 112, 32))
 		self.outputFolderButton.setObjectName("outputFolderButton")
 		self.recodingButton = QtWidgets.QPushButton(Form)
-		self.recodingButton.setGeometry(QtCore.QRect(400, 180, 112, 32))
+		self.recodingButton.setGeometry(QtCore.QRect(700, 100, 112, 32))
 		self.recodingButton.setObjectName("recodingButton")
 		self.bowtieIndexButton = QtWidgets.QPushButton(Form)
-		self.bowtieIndexButton.setGeometry(QtCore.QRect(400, 250, 112, 32))
+		self.bowtieIndexButton.setGeometry(QtCore.QRect(700, 170, 112, 32))
 		self.bowtieIndexButton.setObjectName("bowtieIndexButton")
 		self.runButton = QtWidgets.QPushButton(Form)
-		self.runButton.setGeometry(QtCore.QRect(650, 750, 201, 32))
+		self.runButton.setGeometry(QtCore.QRect(940, 670, 201, 32))
 		self.runButton.setObjectName("runButton")
+		self.numThreadsCombo = QtWidgets.QComboBox(Form)
+		self.numThreadsCombo.setGeometry(QtCore.QRect(440, 380, 90, 28))
+		self.numThreadsCombo.setObjectName("numThreadsCombo")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.numThreadsCombo.addItem("")
+		self.selectedFilesArea = QtWidgets.QTextEdit(Form)
+		self.selectedFilesArea.setGeometry(QtCore.QRect(20, 30, 271, 381))
+		self.selectedFilesArea.setObjectName("selectedFilesArea")
+		self.selectFilesButton = QtWidgets.QPushButton(Form)
+		self.selectFilesButton.setGeometry(QtCore.QRect(300, 30, 112, 32))
+		self.selectFilesButton.setObjectName("selectFilesButton")
+		self.label = QtWidgets.QLabel(Form)
+		self.label.setGeometry(QtCore.QRect(20, 10, 101, 20))
+		self.label.setObjectName("label")
 
 		self.retranslateUi(Form)
 		QtCore.QMetaObject.connectSlotsByName(Form)
 
-
 		#Addition to GUI generated by Qt designer
 
 		self.outputFolderButton.clicked.connect(self.selectOutputFolder)
-		self.inputFolderButton.clicked.connect(self.selectInputFolder)
+		self.selectFilesButton.clicked.connect(self.selectFiles)
 		self.recodingButton.clicked.connect(self.selectRecodingFile)
 		self.bowtieIndexButton.clicked.connect(self.selectBowtieIndex)
 		self.runButton.clicked.connect(lambda:self.runTool(installationDirectory))
+		self.recodingFileEntry.setReadOnly(True)
+		self.outputFolderEntry.setReadOnly(True)
+		self.bowtieIndexEntry.setReadOnly(True)
 
 
 
 
 
 
+
+	onlyfiles = []
 	def selectOutputFolder(self):
 		folderName = QFileDialog.getExistingDirectory(None, "Select output folder","./")
-		self.outputFolderEntry.setText(folderName)
+		if len(folderName)>2:
+			self.outputFolderEntry.setText(folderName)
 
-	def selectInputFolder(self):
-		folderName = QFileDialog.getExistingDirectory(None, "Select input folder","./")
-		self.inputFolderEntry.setText(folderName)
+	def selectFiles(self):
+		self.selectedFilesArea.clear()
+		self.onlyfiles = []
+		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./")
+		if len(filenames)>0:
+			for a in filenames:
+				if "_1.fastq" in a:
+					self.selectedFilesArea.append((a.replace("_1.fastq","").split("/")[-1]))
+				if "R1_001.fastq" in a:
+					self.selectedFilesArea.append((a.replace("_R1_001.fastq","").split("/"))[-1])
+				if "_1.fq" in a:
+					self.selectedFilesArea.append((a.replace("_1.fq","").split("/"))[-1])
+				if "R1_001.fq" in a:
+					self.selectedFilesArea.append((a.replace("_R1_001.fq","").split("/"))[-1])
+
+		for a in range(0,len(filenames)-1,+2):
+			if ("_1.fastq" in filenames[a] or "_2.fastq" in filenames[a] or "_R1_001.fastq" in filenames[a] or "_R2_001.fastq" in filenames[a] or "_1.fq" in filenames[a] or "_2.fq" in filenames[a] or "_R1_001.fq" in filenames[a] or "_R2_001.fq" in filenames[a])  and ( "_1.fastq" in filenames[a+1] or "_2.fastq" in filenames[a+1] or "_R1_001.fastq" in filenames[a+1] or "_R2_001.fastq" in filenames[a+1] or "_1.fq" in filenames[a+1] or "_2.fq" in filenames[a+1] or "_R1_001.fq" in filenames[a+1] or "_R2_001.fq" in filenames[a+1]):
+				self.onlyfiles.append((filenames[a],filenames[a+1]))
+			else:
+				msg = QMessageBox()
+				msg.setIcon(QMessageBox.Warning)
+				msg.setText("Some of the selected files are not in the expected format")
+				msg.setWindowTitle("Warning")
+				msg.setDetailedText("Accepted format are _1.fastq   _2.fastq\n_1.fq   _2.fastq\n_R1_001.fastq   _R2_001.fastq\n_R1_001.fq   _R2_001.fq\n ")
+				msg.setStandardButtons(QMessageBox.Ok)
+				msg.exec_()
+
+
+	def refreshTextArea(self,selected):
+		self.selectedFilesArea.clear()
+		for item in self.onlyfiles:
+			if "_1.fastq" in item[0]:
+
+				if (item[0].replace("_1.fastq","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_1.fastq","").split("/")[-1])+"  <--- ")
+				else:
+					self.selectedFilesArea.append((item[0].replace("_1.fastq","").split("/")[-1]))
+			if "R1_001.fastq" in item[0]:
+				if (item[0].replace("_R1_001.fastq","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fastq","").split("/"))[-1]+"  <---")
+				else:
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fastq","").split("/"))[-1])
+			if "_1.fq" in item[0]:
+				if (item[0].replace("_1.fq","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_1.fq","").split("/"))[-1]+"  <---")
+				else:
+					self.selectedFilesArea.append((item[0].replace("_1.fq","").split("/"))[-1])
+			if "R1_001.fq" in item[0]:
+				if (item[0].replace("_R1_001.fq","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fq","").split("/"))[-1]+"  <---")
+				else:
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fq","").split("/"))[-1])
+			
+		
+		
+
+
+	def getPrefix(self,a):
+		if "_1.fastq" in a:
+			return ((a.replace("_1.fastq","").split("/")[-1]))
+		if "R1_001.fastq" in a:
+			return ((a.replace("_R1_001.fastq","").split("/"))[-1])
+		if "_1.fq" in a:
+			return ((a.replace("_1.fq","").split("/"))[-1])
+		if "R1_001.fq" in a:
+			return ((a.replace("_R1_001.fq","").split("/"))[-1])
+
+
 
 		
 	def selectRecodingFile(self):
 		filename, __ = QFileDialog.getOpenFileName(None,"Select recoding file","./")
-		self.recodingFileEntry.setText(filename)
+		if len(filename)>2:
+			self.recodingFileEntry.setText(filename)
 
 
 	def selectBowtieIndex(self):
-		filename, __ = QFileDialog.getOpenFileName(None,"Select human bowtie2 index","./")
-		self.bowtieIndexEntry.setText(filename)
+		filename, __ = QFileDialog.getOpenFileName(None,"Select human bowtie2 index","./","*index.1.bt2")
+
+		if len(filename)>2:
+			self.bowtieIndexEntry.setText(filename)
 
 	def plotCoveragePlot(self,covFile,expName):
 		position = []
@@ -185,30 +285,71 @@ class Ui_Form(object):
 		plt.xticks(nm.arange(0,235000,10000))
 		plt.xlabel("Position (bp)")
 		plt.ylabel("Coverage")
-		plt.text(1000,950,expName)
+		plt.title(expName)
 		plt.savefig(expName+"_covPlot.png")
 
 	def runTool(self,installationDirectory):
-		inputFolder = self.inputFolderEntry.text()
+		
+		if str(self.selectedFilesArea.toPlainText) == "":
+			msg = QMessageBox()
+			msg.setIcon(QMessageBox.Warning)
+			msg.setText("No fastq files has been selected.")
+			msg.setWindowTitle("Warning")
+			msg.setDetailedText("You should select at least one paired end reads dataset.\n ")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_()
+			return
+
 		outputFolder = self.outputFolderEntry.text()
+		if outputFolder == "No folder selected":
+			msg = QMessageBox()
+			msg.setIcon(QMessageBox.Warning)
+			msg.setText("An output folder should be selected.")
+			msg.setWindowTitle("Warning")
+			msg.setDetailedText("You should open the folder where all the produced output files will be saved")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_()
+			return
+
+		recodFile = self.recodingFileEntry.text()
+		if recodFile == "No index selected" and self.humanReadsRemovalCheckbox.isChecked()==True:
+			msg = QMessageBox()
+			msg.setIcon(QMessageBox.Warning)
+			msg.setText("A valid recoding table should be provided")
+			msg.setWindowTitle("Warning")
+			msg.setDetailedText("It seems like you chose to recode the your sequencing data filenames but you did not provide any recoding table file.\n You should select a file reporting two tab separated columns (see manual) ")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_()
+			return
+
+		dnaBases = "agctAGCT"
+		adapter1Chars = self.adapter1Entry.text()
+		adapter2Chars = self.adapter2Entry.text()
+		for base in dnaBases:
+			adapter1Chars = adapter1Chars.replace(base,"")
+			adapter2Chars = adapter2Chars.replace(base,"")
+		if len(adapter1Chars)>0 or len(adapter2Chars) >0:
+			msg = QMessageBox()
+			msg.setIcon(QMessageBox.Warning)
+			msg.setText("One of the adapter contains non-canonical DNA bases")
+			msg.setWindowTitle("Warning")
+			msg.setDetailedText("Only bases A, G, C and T are allowed in the adapter string ")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_()
+			return
+
+
 		bowtie2Ref = self.bowtieIndexEntry.text()
-		#Collect files to quality check
-		onlyfiles = [f for f in listdir(inputFolder) if isfile(join(inputFolder, f))]
+		if bowtie2Ref == "No file selected" and self.recodingFileEntry.isChecked()==True:
+			msg = QMessageBox()
+			msg.setIcon(QMessageBox.Warning)
+			msg.setText("A valid bowtie2 index for the human reference genome should be specified")
+			msg.setWindowTitle("Warning")
+			msg.setDetailedText("It seems like you chose to remove the human reads but no bowtie2 index for the human reference genome was specified. Please select the file ending with the suffix \"index.1.bt2\" ")
+			msg.setStandardButtons(QMessageBox.Ok)
+			msg.exec_()
+			return
 
-		fileNumber = {}
-		for item in onlyfiles:
-			if not item[:-8] in fileNumber:
-				fileNumber[item[:-8]] = 1
-			else:
-				fileNumber[item[:-8]] += 1
-
-		paired2filter = []
-		single2filter = []
-		for files in fileNumber:
-			if fileNumber[files]==2:
-				paired2filter.append(files)
-			if fileNumber[files]==1:
-				single2filter.append(files)
 
 		#Check recoding file
 		codes = {}
@@ -225,12 +366,13 @@ class Ui_Form(object):
 				if not oldName in codes:
 					codes[oldName]=fields[1]
 		else:
-			for item in paired2filter:
-				if not item+"_1.fastq" in codes:
-					codes[item+"_1.fastq"] = item+"_1.fastq"
-				if not item+"_2.fastq" in codes:
-					codes[item+"_2.fastq"] = item+"_2.fastq"
-
+			for item in self.onlyfiles:
+				justFile = item[0].split("/")[-1]
+				if not justFile in codes:
+					codes[justFile] = justFile
+				justFile = item[1].split("/")[-1]
+				if not justFile in codes:
+					codes[justFile] = justFile
 
 
 		#Start filtering
@@ -271,36 +413,34 @@ class Ui_Form(object):
 
 
 
-		numTasks = numTasks*len(paired2filter)
-		progressBarIncrement = 100000/numTasks
-		step = 0
-
-		for dataset in paired2filter:
+		for dataset in self.onlyfiles:
 			if not dataset[0] ==".":
 				if not dataset in datasetStatistics:
 					datasetStatistics[dataset] = []
-
 				
-				self.logTextArea.append("Starting filtering for dataset "+dataset+"")
+				self.refreshTextArea(self.getPrefix( (dataset[0].split("/"))[-1]))
+
+
+				self.logTextArea.append("Starting filtering for reads in dataset "+self.getPrefix(codes[(dataset[0].split("/"))[-1]]))
 				self.logTextArea.repaint()
 				
 
 
-				os.system("cp "+inputFolder+"/"+dataset+"_1.fastq tempReads_140875_1.fastq")
-				os.system("cp "+inputFolder+"/"+dataset+"_2.fastq tempReads_140875_2.fastq")
+				os.system("cp "+dataset[0] + " tempReads_140875_1.fastq")
+				os.system("cp "+dataset[1] + " tempReads_140875_2.fastq")
 				#Check the format of the input fastq file header
 				fqfile = open("tempReads_140875_1.fastq")
 				header = fqfile.readline().rstrip()
 				time.sleep(1)
 				if " 1" in header:
-					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/utils/changeHeaderFormat.py tempReads_140875_1.fastq tempReads_140875_2.fastq")
+					subprocess.call(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/utils/changeHeaderFormat.py tempReads_140875_1.fastq tempReads_140875_2.fastq",shell=True)
 
 				
-				self.logTextArea.append( "Calculating the number of reads for dataset "+dataset+"")
+				self.logTextArea.append( "Calculating the number of reads")
 				self.logTextArea.repaint()
 				
-				os.system("wc -l "+inputFolder+"/"+dataset+"_1.fastq  >numReads_140875")
-				step+=1
+				subprocess.call("wc -l "+dataset[0]+"   >numReads_140875",shell=True)
+				
 
 				numreads = open("numReads_140875")
 
@@ -319,17 +459,17 @@ class Ui_Form(object):
 				if self.humanReadsRemovalCheckbox.isChecked() == True:
 					suffixCode+="_nh"
 					
-					self.logTextArea.append( "Removing human reads from dataset "+dataset+"")
+					self.logTextArea.append( "Removing human reads from dataset "+self.getPrefix(codes[(dataset[0].split("/"))[-1]]))
 					self.logTextArea.repaint()
 					
-					self.logTextArea.append( "Mapping reads "+dataset+" to the host reference genome....")
+					self.logTextArea.append( "Mapping reads to the host reference genome....")
 					self.logTextArea.repaint()
-					os.system(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsEntry.text()+" -S hostAlignment_140875.sam")
+					subprocess.call(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam",shell=True)
 
 					time.sleep(2)
 
 					
-					self.logTextArea.append( "Converting alignment format for reads "+dataset+"")
+					self.logTextArea.append( "Converting alignment format for reads")
 					self.logTextArea.repaint()
 					
 					
@@ -339,17 +479,17 @@ class Ui_Form(object):
 					self.logTextArea.repaint()
 					
 					
-					step+=1
+					
 
 					time.sleep(2)
 					
-					self.logTextArea.append( "Extracting unmapped reads for dataset "+dataset+"....")
+					self.logTextArea.append( "Extracting unmapped reads")
 					self.logTextArea.repaint()
 					
 					
 					
 					os.system(installationDirectory+"src/conda/bin/bam2fastq --no-aligned --force --strict -o unmapped_140875#.fq hostAlignment_140875.bam")
-					step+=1
+					
 
 					
 					self.logTextArea.append( "Done!")
@@ -362,12 +502,12 @@ class Ui_Form(object):
 					os.system("rm -f hostAlignment_140875.bam ")
 
 					
-					self.logTextArea.append( "Calculating the number of host free reads for dataset "+dataset+"....")
+					self.logTextArea.append( "Calculating the number of host free reads")
 					self.logTextArea.repaint()
 					
 					
 					os.system("wc -l tempReads_140875_1.fastq >numReads_140875")
-					step+=1
+					
 
 					numreads = open("numReads_140875")
 					numberOfReads = int(((numreads.readline().rstrip()).split(" "))[0])/2
@@ -393,7 +533,7 @@ class Ui_Form(object):
 					suffixCode += "_tr"
 
 					
-					self.logTextArea.append( "Trimming reads for dataset "+dataset+"....")
+					self.logTextArea.append( "Trimming reads for dataset "+self.getPrefix(codes[(dataset[0].split("/"))[-1]]))
 					self.logTextArea.repaint()
 					
 					
@@ -407,7 +547,7 @@ class Ui_Form(object):
 					else:
 						os.system(installationDirectory+"src/conda/bin/trim_galore --path_to_cutadapt "+installationDirectory+"src/conda/bin/cutadapt -paired tempReads_140875_1.fastq tempReads_140875_2.fastq ")
 
-					step+=1
+					
 
 					
 					self.logTextArea.append( "Done!")
@@ -421,12 +561,12 @@ class Ui_Form(object):
 					os.system("rm -f tempReads_140875_1.fastq_trimming_report.txt tempReads_140875_2.fastq_trimming_report.txt")
 
 					
-					self.logTextArea.append( "Calculating the number reads after trimming for dataset "+dataset+"....")
+					self.logTextArea.append( "Calculating the number reads after trimming")
 					self.logTextArea.repaint()
 					
 					
 					os.system("wc -l tempReads_140875_1.fastq >numReads_140875")
-					step+=1
+					
 
 					numreads = open("numReads_140875")
 					numberOfReads = int(((numreads.readline().rstrip()).split(" "))[0])/2
@@ -447,32 +587,32 @@ class Ui_Form(object):
 				if self.readsDeduplicationCheckbox.isChecked() == True:
 
 					
-					self.logTextArea.append( "Performing deduplication on dataset "+dataset+"....")
+					self.logTextArea.append( "Performing deduplication on dataset "+self.getPrefix(codes[(dataset[0].split("/"))[-1]]))
 					self.logTextArea.repaint()
 					
 					
 					
 					os.system("echo tempReads_140875_1.fastq >dedupTemplate.txt")
 					os.system("echo tempReads_140875_2.fastq >> dedupTemplate.txt")
-					os.system(installationDirectory+"src/conda/bin/fastuniq -i dedupTemplate.txt -t q -o "+codes[dataset+"_1.fastq"].replace("_1.fastq","")+suffixCode+"_dd_1.fastq -p "+codes[dataset+"_2.fastq"].replace("_2.fastq","")+suffixCode+"_dd_2.fastq")
+					os.system(installationDirectory+"src/conda/bin/fastuniq -i dedupTemplate.txt -t q -o "+ self.getPrefix( codes[ (dataset[0].split("/"))[-1] ] )+suffixCode+"_dd_1.fastq -p "+self.getPrefix( codes[ (dataset[0].split("/"))[-1] ]) +suffixCode+"_dd_2.fastq")
 					os.system("rm -f dedupTemplate.txt")
-					dedupFileName1 = codes[dataset+"_1.fastq"].replace("_1.fastq","")+suffixCode+"_dd_1.fastq"
-					dedupFileName2 = codes[dataset+"_2.fastq"].replace("_2.fastq","")+suffixCode+"_dd_2.fastq"
+					dedupFileName1 = self.getPrefix( codes[ (dataset[0].split("/"))[-1] ] )+suffixCode+"_dd_1.fastq"
+					dedupFileName2 = self.getPrefix( codes[ (dataset[0].split("/"))[-1] ] )+suffixCode+"_dd_2.fastq"
 					
 					self.logTextArea.append( "Done!")
 					
 					
 					
-					step+=1
+					
 
 					
-					self.logTextArea.append( "Calculating the number reads after deduplicating for dataset "+dataset+"....")
+					self.logTextArea.append( "Calculating the number reads after deduplicating for dataset "+self.getPrefix(codes[(dataset[0].split("/"))[-1]]))
 					self.logTextArea.repaint()
 					
 					
 					
 					os.system("wc -l "+dedupFileName1+" >numReads_140875")
-					step+=1
+					
 
 					numreads = open("numReads_140875")
 					numberOfReads = int(((numreads.readline().rstrip()).split(" "))[0])/2
@@ -489,13 +629,13 @@ class Ui_Form(object):
 
 				if self.merlinReferenceAlignmentCheckbox.isChecked() == True:
 					
-					self.logTextArea.append( "Performing alignment for original dataset "+dataset+"....")
+					self.logTextArea.append( "Performing alignment for original dataset")
 					self.logTextArea.repaint()
 					
 					
 					
-					os.system(installationDirectory+"src/conda/bin/bowtie2 -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -x "+installationDirectory+"data/merlinReference/hcmv -p "+ self.numThreadsEntry.text()+" -S alignment_140875.sam")
-					step+=1
+					os.system(installationDirectory+"src/conda/bin/bowtie2 -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -x "+installationDirectory+"data/merlinReference/hcmv -p "+ self.numThreadsCombo.currentText()+" -S alignment_140875.sam")
+					
 
 					
 					self.logTextArea.append( "Done!")
@@ -512,7 +652,7 @@ class Ui_Form(object):
 					
 					
 					os.system(installationDirectory+"src/conda/bin/samtools view -bS -h  alignment_140875.sam >alignment_140875.bam")
-					step+=1
+					
 
 					self.logTextArea.append( "Done!")
 					
@@ -527,7 +667,7 @@ class Ui_Form(object):
 					
 					
 					os.system(installationDirectory+"src/conda/bin/samtools sort -o alignment_140875_sorted.bam alignment_140875.bam")
-					step+=1
+					
 					
 					
 					
@@ -538,16 +678,16 @@ class Ui_Form(object):
 
 
 					
-					self.logTextArea.append( "Calculating coverage for original dataset "+dataset+"....")
+					self.logTextArea.append( "Calculating coverage for original dataset ")
 					self.logTextArea.repaint()
 					
 					
 					
 					os.system(installationDirectory+"src/conda/bin/samtools depth -d 10000000 alignment_140875_sorted.bam  |  awk '{sum+=$3} END { print sum/NR}' >avCoverage_140875.txt")
 					os.system(installationDirectory+"src/conda/bin/samtools depth -a -d 10000000 alignment_140875_sorted.bam >coverage_140875.txt")
-					self.plotCoveragePlot("coverage_140875.txt",codes[dataset+"_1.fastq"].replace("_1.fastq","")+"_nh_tr")
+					self.plotCoveragePlot("coverage_140875.txt",self.getPrefix(codes[  (dataset[0].split("/"))[-1] ] ))
 					os.system(installationDirectory+"src/conda/bin/samtools depth -d 10000000 alignment_140875_sorted.bam  | wc -l >breadth_140875.txt")
-					step+=1
+					
 					
 					
 					
@@ -565,7 +705,7 @@ class Ui_Form(object):
 					datasetStatistics[dataset].append(avCov)
 
 					os.system(installationDirectory+"src/conda/bin/samtools view -F 4 alignment_140875.sam | wc -l > readsMapping_140875")
-					step+=1
+					
 					
 					
 					readsMappingFile = open("readsMapping_140875")
@@ -586,12 +726,12 @@ class Ui_Form(object):
 
 					if self.readsDeduplicationCheckbox.isChecked() == True:
 						
-						self.logTextArea.append( "Performing alignment for deduplicated dataset "+dataset+"....")
+						self.logTextArea.append( "Performing alignment for deduplicated dataset")
 						self.logTextArea.repaint()
 						
 						
-						os.system(installationDirectory+"src/conda/bin/bowtie2 -1 "+dedupFileName1+" -2 "+ dedupFileName2+ "  -x "+installationDirectory+"data/merlinReference/hcmv -p "+self.numThreadsEntry.text()+" -S alignment_140875.sam")
-						step+=1
+						os.system(installationDirectory+"src/conda/bin/bowtie2 -1 "+dedupFileName1+" -2 "+ dedupFileName2+ "  -x "+installationDirectory+"data/merlinReference/hcmv -p "+self.numThreadsCombo.currentText()+" -S alignment_140875.sam")
+						
 						
 						
 						
@@ -607,7 +747,7 @@ class Ui_Form(object):
 						
 						
 						os.system(installationDirectory+"src/conda/bin/samtools view -bS -h  alignment_140875.sam >alignment_140875.bam")
-						step+=1
+						
 						
 						
 						
@@ -623,7 +763,7 @@ class Ui_Form(object):
 						
 						
 						os.system(installationDirectory+"src/conda/bin/samtools sort -o alignment_140875_sorted.bam alignment_140875.bam")
-						step+=1
+						
 						
 						
 						
@@ -633,16 +773,16 @@ class Ui_Form(object):
 						
 
 						
-						self.logTextArea.append( "Calculating coverage for deduplicated dataset "+dataset+"....")
+						self.logTextArea.append( "Calculating coverage for deduplicated dataset ")
 						self.logTextArea.repaint()
 						
 						
 						
 						os.system(installationDirectory+"src/conda/bin/samtools depth -d 10000000 alignment_140875_sorted.bam  |  awk '{sum+=$3} END { print sum/NR}' >avCoverage_140875.txt")
 						os.system(installationDirectory+"src/conda/bin/samtools depth -a -d 10000000 alignment_140875_sorted.bam   >coverage_140875.txt")
-						self.plotCoveragePlot("coverage_140875.txt",codes[dataset+"_1.fastq"].replace("_1.fastq","")+"_nh_tr_dd")
+						self.plotCoveragePlot("coverage_140875.txt",self.getPrefix(codes[(dataset[0].split("/"))[-1]])+"_nh_tr_dd")
 						os.system(installationDirectory+"src/conda/bin/samtools depth -d 10000000 alignment_140875_sorted.bam  | wc -l >breadth_140875.txt")
-						step+=1
+						
 						
 						
 						avCovFile = open("avCoverage_140875.txt")
@@ -660,7 +800,7 @@ class Ui_Form(object):
 						datasetStatistics[dataset].append(avCov)
 
 						os.system(installationDirectory+"src/conda/bin/samtools view -F 4 alignment_140875.sam | wc -l > readsMapping_140875")
-						step+=1
+						
 						
 						
 						readsMappingFile = open("readsMapping_140875")
@@ -687,12 +827,12 @@ class Ui_Form(object):
 				self.logTextArea.repaint()
 				
 
-				os.system("mv tempReads_140875_1.fastq "+outputFolder+"/"+codes[dataset+"_1.fastq"].replace("_1.fastq","")+suffixCode+"_1.fastq")
-				os.system("mv tempReads_140875_2.fastq "+outputFolder+"/"+codes[dataset+"_2.fastq"].replace("_2.fastq","")+suffixCode+"_2.fastq")
+				os.system("mv tempReads_140875_1.fastq "+outputFolder+"/"+self.getPrefix(codes[(dataset[0].split("/"))[-1]])  +suffixCode+"_1.fastq")
+				os.system("mv tempReads_140875_2.fastq "+outputFolder+"/"+self.getPrefix(codes[(dataset[0].split("/"))[-1]]) +suffixCode+"_2.fastq")
 				if self.readsDeduplicationCheckbox.isChecked() == True:
 					os.system("mv "+dedupFileName1+" "+outputFolder+"/")
 					os.system("mv "+dedupFileName2+" "+outputFolder+"/")
-				os.system("mv "+codes[dataset+"_1.fastq"].replace("_1.fastq","")+"* "+outputFolder+"/")
+				os.system("mv "+self.getPrefix(codes[(dataset[0].split("/"))[-1]])+"* "+outputFolder+"/")
 
 				for a in range(len(statisticsToReport)):
 					print(statisticsToReport[a],datasetStatistics[dataset][a])
@@ -713,7 +853,7 @@ class Ui_Form(object):
 
 
 		for item in datasetStatistics:
-			outfile.write(codes[item+"_1.fastq"].replace("_1.fastq","")+"\t")
+			outfile.write(self.getPrefix(codes[(dataset[0].split("/"))[-1]])  +"\t")
 		outfile.write("\n")
 		for a in range(len(statisticsToReport)):
 			outfile.write(statisticsToReport[a]+"\t")
@@ -726,33 +866,9 @@ class Ui_Form(object):
 		os.system("mv summaryTable.txt "+outputFolder+"/")
 		os.system("rm -f coverage.txt *140875*")
 
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
 	def retranslateUi(self, Form):
 		_translate = QtCore.QCoreApplication.translate
 		Form.setWindowTitle(_translate("Form", "Form"))
-		self.label.setText(_translate("Form", "Input folder"))
-		self.inputFolderEntry.setText(_translate("Form", "No folder selected"))
 		self.label_2.setText(_translate("Form", "Output folder"))
 		self.outputFolderEntry.setText(_translate("Form", "No folder selected"))
 		self.label_3.setText(_translate("Form", "Recoding file"))
@@ -763,28 +879,49 @@ class Ui_Form(object):
 		self.label_8.setText(_translate("Form", "Log window"))
 		self.recodingFileEntry.setText(_translate("Form", "No file selected"))
 		self.bowtieIndexEntry.setText(_translate("Form", "No index selected"))
-		self.adapter1Entry.setText(_translate("Form", "Auto detect"))
-		self.adapter2Entry.setText(_translate("Form", "Auto detect"))
-		self.numThreadsEntry.setText(_translate("Form", "8"))
 		self.humanReadsRemovalCheckbox.setText(_translate("Form", "Human reads removal"))
 		self.adaptersTrimmingCheckbox.setText(_translate("Form", "Adapters trimming"))
 		self.sampleNameRecodingCheckbox.setText(_translate("Form", "Sample file name recoding"))
 		self.readsDeduplicationCheckbox.setText(_translate("Form", "Reads deduplication"))
 		self.merlinReferenceAlignmentCheckbox.setText(_translate("Form", "Merlin reference alignment"))
 		self.label_9.setText(_translate("Form", "Tasks to perform"))
-		self.inputFolderButton.setText(_translate("Form", "Open folder"))
 		self.outputFolderButton.setText(_translate("Form", "Open folder"))
 		self.recodingButton.setText(_translate("Form", "Open file"))
 		self.bowtieIndexButton.setText(_translate("Form", "Open file"))
 		self.runButton.setText(_translate("Form", "Run"))
+		self.numThreadsCombo.setItemText(0, _translate("Form", "1"))
+		self.numThreadsCombo.setItemText(1, _translate("Form", "2"))
+		self.numThreadsCombo.setItemText(2, _translate("Form", "3"))
+		self.numThreadsCombo.setItemText(3, _translate("Form", "4"))
+		self.numThreadsCombo.setItemText(4, _translate("Form", "5"))
+		self.numThreadsCombo.setItemText(5, _translate("Form", "6"))
+		self.numThreadsCombo.setItemText(6, _translate("Form", "7"))
+		self.numThreadsCombo.setItemText(7, _translate("Form", "8"))
+		self.numThreadsCombo.setItemText(8, _translate("Form", "9"))
+		self.numThreadsCombo.setItemText(9, _translate("Form", "10"))
+		self.numThreadsCombo.setItemText(10, _translate("Form", "11"))
+		self.numThreadsCombo.setItemText(11, _translate("Form", "12"))
+		self.numThreadsCombo.setItemText(12, _translate("Form", "13"))
+		self.numThreadsCombo.setItemText(13, _translate("Form", "14"))
+		self.numThreadsCombo.setItemText(14, _translate("Form", "15"))
+		self.numThreadsCombo.setItemText(15, _translate("Form", "16"))
+		self.numThreadsCombo.setItemText(16, _translate("Form", "17"))
+		self.numThreadsCombo.setItemText(17, _translate("Form", "18"))
+		self.numThreadsCombo.setItemText(18, _translate("Form", "19"))
+		self.numThreadsCombo.setItemText(19, _translate("Form", "20"))
+		self.numThreadsCombo.setItemText(20, _translate("Form", "21"))
+		self.numThreadsCombo.setItemText(21, _translate("Form", "22"))
+		self.numThreadsCombo.setItemText(22, _translate("Form", "23"))
+		self.numThreadsCombo.setItemText(23, _translate("Form", "24"))
+		self.selectFilesButton.setText(_translate("Form", "Select files"))
+		self.label.setText(_translate("Form", "Fastq files"))
 
 
 if __name__ == "__main__":
 	import sys
-
-	installationDirectory = sys.argv[1]
 	app = QtWidgets.QApplication(sys.argv)
 	Form = QtWidgets.QWidget()
+	installationDirectory = sys.argv[1]
 	ui = Ui_Form()
 	ui.setupUi(Form,installationDirectory)
 	Form.show()
