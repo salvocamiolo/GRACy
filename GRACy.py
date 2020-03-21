@@ -1,5 +1,5 @@
-#!/home/gracy/Desktop/GRACy_easyinstall/src/conda/bin/python
-installationDirectory = "/home/gracy/Desktop/GRACy_easyinstall/"
+#!/home/salvo/Desktop/GRACy_v0.1/src/conda/bin/python
+installationDirectory = "/home/salvo/Desktop/GRACy_v0.1/"
  
 
 

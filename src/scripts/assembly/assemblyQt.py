@@ -150,7 +150,10 @@ class Ui_Form(object):
 			msg.exec_()
 			return
 
+		workingDirectoryList = (self.confFiles[0].split("/"))[:-1]
+		workingDirectory = "/".join(workingDirectoryList)
 
+		os.chdir(workingDirectory)
 		for cFile in self.confFiles:
 			self.refreshTextArea((cFile.split("/"))[-1])
 			confFile = open(cFile)
@@ -1132,7 +1135,8 @@ class Ui_Form(object):
 
 				outfile = open(projectName+"_genome.fasta","w")
 				outfile.write(">finalScaffold\n"+finalSequence)
-
+				outfile.close()
+				os.system("cp "+projectName+"_genome.fasta "+workingDirectory)
 
 
 

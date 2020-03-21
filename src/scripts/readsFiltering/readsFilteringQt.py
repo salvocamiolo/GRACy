@@ -4,12 +4,12 @@
 #
 # Created by: PyQt5 UI code generator 5.10.1
 #
-# WARNING! All changes made in this file will be lost!
+# WARNING! All changes made in this file will process lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtCore import QProcess
+
 import sys
 from os import listdir
 from os.path import isfile, join
@@ -17,7 +17,7 @@ import os
 import time
 import numpy as nm
 import matplotlib.pyplot as plt
-import subprocess
+
 
 
 class Ui_Form(object):
@@ -177,6 +177,7 @@ class Ui_Form(object):
 		self.selectedFilesArea.clear()
 		self.onlyfiles = []
 		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./")
+		filenames = sorted(filenames)
 		if len(filenames)>0:
 			for a in filenames:
 				if "_1.fastq" in a:
@@ -188,6 +189,8 @@ class Ui_Form(object):
 				if "R1_001.fq" in a:
 					self.selectedFilesArea.append((a.replace("_R1_001.fq","").split("/"))[-1])
 
+		
+		
 		for a in range(0,len(filenames)-1,+2):
 			if ("_1.fastq" in filenames[a] or "_2.fastq" in filenames[a] or "_R1_001.fastq" in filenames[a] or "_R2_001.fastq" in filenames[a] or "_1.fq" in filenames[a] or "_2.fq" in filenames[a] or "_R1_001.fq" in filenames[a] or "_R2_001.fq" in filenames[a])  and ( "_1.fastq" in filenames[a+1] or "_2.fastq" in filenames[a+1] or "_R1_001.fastq" in filenames[a+1] or "_R2_001.fastq" in filenames[a+1] or "_1.fq" in filenames[a+1] or "_2.fq" in filenames[a+1] or "_R1_001.fq" in filenames[a+1] or "_R2_001.fq" in filenames[a+1]):
 				self.onlyfiles.append((filenames[a],filenames[a+1]))
@@ -289,7 +292,8 @@ class Ui_Form(object):
 		plt.savefig(expName+"_covPlot.png")
 
 	def runTool(self,installationDirectory):
-		
+
+	
 		if str(self.selectedFilesArea.toPlainText) == "":
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
@@ -312,7 +316,7 @@ class Ui_Form(object):
 			return
 
 		recodFile = self.recodingFileEntry.text()
-		if recodFile == "" and self.humanReadsRemovalCheckbox.isChecked()==True:
+		if recodFile == "" and self.sampleNameRecodingCheckbox.isChecked()==True:
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("A valid recoding table should be provided")
@@ -340,7 +344,7 @@ class Ui_Form(object):
 
 
 		bowtie2Ref = self.bowtieIndexEntry.text()
-		if bowtie2Ref == "" and self.recodingFileEntry.isChecked()==True:
+		if bowtie2Ref == "" and self.humanReadsRemovalCheckbox.isChecked()==True:
 			msg = QMessageBox()
 			msg.setIcon(QMessageBox.Warning)
 			msg.setText("A valid bowtie2 index for the human reference genome should be specified")
@@ -419,7 +423,8 @@ class Ui_Form(object):
 					datasetStatistics[dataset] = []
 				
 				self.refreshTextArea(self.getPrefix( (dataset[0].split("/"))[-1]))
-
+				for item in self.onlyfiles:
+					print(item)
 
 				self.logTextArea.append("Starting filtering for reads in dataset "+self.getPrefix(codes[(dataset[0].split("/"))[-1]]))
 				self.logTextArea.repaint()
@@ -433,13 +438,13 @@ class Ui_Form(object):
 				header = fqfile.readline().rstrip()
 				time.sleep(1)
 				if " 1" in header:
-					subprocess.call(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/utils/changeHeaderFormat.py tempReads_140875_1.fastq tempReads_140875_2.fastq",shell=True)
+					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/utils/changeHeaderFormat.py tempReads_140875_1.fastq tempReads_140875_2.fastq")
 
 				
 				self.logTextArea.append( "Calculating the number of reads")
 				self.logTextArea.repaint()
 				
-				subprocess.call("wc -l "+dataset[0]+"   >numReads_140875",shell=True)
+				os.system("wc -l "+dataset[0]+"   >numReads_140875")
 				
 
 				numreads = open("numReads_140875")
@@ -465,8 +470,8 @@ class Ui_Form(object):
 					self.logTextArea.append( "Mapping reads to the host reference genome....")
 					self.logTextArea.repaint()
 
-					process  = QProcess()
-					process.start(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam")
+
+					os.system(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam")
 					#subprocess.call(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam",shell=True)
 
 					time.sleep(2)
@@ -821,15 +826,6 @@ class Ui_Form(object):
 						datasetStatistics[dataset].append(str( breadthValue / 235646.0 )[:4])
 
 
-
-
-
-				print("finished")
-				
-				self.logTextArea.append( "\n\nFiltering complete on all datasets!\n")
-				self.logTextArea.repaint()
-				
-
 				os.system("mv tempReads_140875_1.fastq "+outputFolder+"/"+self.getPrefix(codes[(dataset[0].split("/"))[-1]])  +suffixCode+"_1.fastq")
 				os.system("mv tempReads_140875_2.fastq "+outputFolder+"/"+self.getPrefix(codes[(dataset[0].split("/"))[-1]]) +suffixCode+"_2.fastq")
 				if self.readsDeduplicationCheckbox.isChecked() == True:
@@ -868,6 +864,13 @@ class Ui_Form(object):
 		outfile.close()
 		os.system("mv summaryTable.txt "+outputFolder+"/")
 		os.system("rm -f coverage.txt *140875*")
+		print("finished")
+				
+		self.logTextArea.append( "\n\nFiltering complete on all datasets!\n")
+		self.logTextArea.repaint()
+
+
+		
 
 	def retranslateUi(self, Form):
 		_translate = QtCore.QCoreApplication.translate

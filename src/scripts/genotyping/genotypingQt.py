@@ -49,7 +49,7 @@ class Ui_Form(object):
 		self.label_6.setGeometry(QtCore.QRect(10, 260, 211, 20))
 		self.label_6.setObjectName("label_6")
 		self.outputFolderEntry = QtWidgets.QLineEdit(Form)
-		self.outputFolderEntry.setGeometry(QtCore.QRect(540, 30, 231, 32))
+		self.outputFolderEntry.setGeometry(QtCore.QRect(550, 30, 221, 32))
 		self.outputFolderEntry.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
 		self.outputFolderEntry.setObjectName("outputFolderEntry")
 		self.inputFileButton = QtWidgets.QPushButton(Form)
@@ -175,6 +175,7 @@ class Ui_Form(object):
 		self.outputFolderEntry.setText(folderName)
 
 	def runGenotyping(self):
+		self.onlyfiles = sorted(self.onlyfiles)
 		#Initialize variables
 		orderedHyperLoci = ["rl5a","rl6","rl12","rl13","ul1","ul9","ul11","ul20","ul73","ul74","ul120","ul139","ul146"]
 
@@ -677,11 +678,17 @@ class Ui_Form(object):
 			colors = []
 
 			for gene in genes:
-				for item in hg[gene]:
-					colors.append(colorDict[item[0]])
-					sizes.append(float(item[1]))
-				colors.append("white")
-				sizes.append(0.05)
+				if len(hg[gene])>0:
+					for item in hg[gene]:
+						colors.append(colorDict[item[0]])
+						sizes.append(float(item[1]))
+					colors.append("white")
+					sizes.append(0.05)
+				else:
+					colors.append("white")
+					sizes.append(1)
+					colors.append("white")
+					sizes.append(0.05)
 
 
 			plot1.pie(sizes,radius=1-shift,colors=colors)
