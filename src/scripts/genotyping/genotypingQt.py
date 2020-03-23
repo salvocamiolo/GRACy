@@ -657,8 +657,8 @@ class Ui_Form(object):
 
 
 		shift = 0
-		fig = plt.figure(figsize=(10,10))
-		plot1 = fig.add_subplot(111)
+		fig = plt.figure(figsize=(20,10))
+		plot1 = fig.add_subplot(1,2,1)
 
 		for sample in numberOfPlots:
 			inputFile = sample
@@ -696,10 +696,6 @@ class Ui_Form(object):
 			
 			shift = shift + 0.07
 
-		yLabel = 0.5
-		for sample in numberOfPlots:
-			plt.text(-0.67,yLabel,(sample.split("/"))[-1],fontsize=14)
-			yLabel = yLabel - 0.07
 
 		legend_elements = []
 		for item in colorDict:
@@ -722,6 +718,18 @@ class Ui_Form(object):
 		plot1.text(0.35,-1.13,"UL146",rotation=-70,fontweight='bold',fontsize=12,fontname="arial")
 		plot1.text(0.75,-0.81,"UL73",rotation=-45,fontweight='bold',fontsize=12,fontname="arial")
 		plot1.text(0.97,-0.36,"UL74",rotation=-14,fontweight='bold',fontsize=12,fontname="arial")
+
+
+
+		plot2 = fig.add_subplot(1,2,2)
+		plot2.axis('off')
+		yLabel = 0.9
+		for sample in numberOfPlots:
+			plot2.text(0.15,yLabel,(sample.split("/"))[-1],fontsize=14)
+			yLabel = yLabel - 0.05
+
+		if len(numberOfPlots)>1:
+			plot2.arrow(0.1,0.9,0,-yLabel,width=0.005)
 
 		fig.savefig(self.outputFolderEntry.text()+"/"+outputFileName,dpi=300)
 
