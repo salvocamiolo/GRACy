@@ -65,7 +65,7 @@ while a < len(seq2fill)-1:
         numMatches = 0
         foundSequences = {}
         for item in best5hits:
-            if item in best3hits:
+            if item in best3hits and int(best5hits[item][0]) < int(best3hits[item][1]):
                 numMatches+=1
                 foundSequences[item] = sequences[item][best5hits[item][0]:best3hits[item][1]]
         t5.close()
