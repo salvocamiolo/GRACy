@@ -25,7 +25,7 @@ while True:
     fields = line.split("\t")
     freq = float((((fields[7].split("AF="))[-1]).split(";"))[0])
     dp4 = ((fields[7].split("DP4="))[-1]).split(",")
-    freq = (float(dp4[2])+float(dp[3]))/(float(dp4[2])+float(dp[3])+float(dp4[0])+float(dp[1]))
+    freq = (float(dp4[2])+float(dp4[3]))/(float(dp4[2])+float(dp4[3])+float(dp4[0])+float(dp4[1]))
 
 
     if freq > 0.5:
