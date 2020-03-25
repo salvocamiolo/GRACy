@@ -23,14 +23,15 @@ while True:
     if not line:
         break
     fields = line.split("\t")
-    freq = (((fields[7].split("AF="))[-1]).split(";"))[0]
-    print(freq)
-    if not fields[1] in entryFreq:
-        entryFreq[fields[1]] = freq
-        vcfEntry[fields[1]] = line
-    if freq > entryFreq[fields[1]]:
-        entryFreq[fields[1]] = freq
-        vcfEntry[fields[1]] = line
+    freq = float((((fields[7].split("AF="))[-1]).split(";"))[0])
+
+    if freq > 0.5:
+        if not fields[1] in entryFreq:
+            entryFreq[fields[1]] = freq
+            vcfEntry[fields[1]] = line
+        if freq > entryFreq[fields[1]]:
+            entryFreq[fields[1]] = freq
+            vcfEntry[fields[1]] = line
 
 for item in vcfEntry:
     outfile.write(vcfEntry[item]+"\n")
