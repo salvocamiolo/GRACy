@@ -507,8 +507,8 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_1_15001_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_1_15001_f.txt")
-
-				os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
+				os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
 				#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_1_15001_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
@@ -572,7 +572,8 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt")
-				os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
+				os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
@@ -636,7 +637,8 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
-				os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
+				os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils//vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
@@ -972,8 +974,8 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_1_15001_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_1_15001_f.txt")
-
-				os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
+				os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
 				#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_1_15001_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
@@ -1034,7 +1036,8 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt")
-				os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
+				os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
@@ -1099,7 +1102,8 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
-				os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
+				os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30  -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
