@@ -1117,7 +1117,7 @@ class Ui_Form(object):
 				#os.system(installationDirectory+"src/conda/bin/lofreq  call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 				#os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam > pileup.txt")
-				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf --min-var-freq 0.5 > output_filtered.vcf"
+				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf --min-var-freq 0.5 > output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 				os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
