@@ -808,7 +808,7 @@ class Ui_Form(object):
 							os.system(installationDirectory+"src/conda/bin/python joinScaffolds_careful.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
 							if os.path.isfile("joined_finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==False:
 								print("Refining range",fields[0],fields[1],"with joinScaffold_careful failed. Now trying joinScaffold on range",line,"....")
-								os.system(installationDirectory+"src/conda/bin/python joinScaffolds.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
+								#os.system(installationDirectory+"src/conda/bin/python joinScaffolds.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
 								if os.path.isfile("joined_finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==False:
 									print("Both alogrithms failed on range,",line)
 									print("Now performing 30 steps of joinScaffold trivial in both directions and recording the output")
