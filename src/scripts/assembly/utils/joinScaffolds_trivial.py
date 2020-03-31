@@ -18,6 +18,7 @@ installationDirectory = sys.argv[8]
 
 
 
+
 sequences = {}
 #Creating fasta concatenated file
 outfile = open("reads.fasta","w")
@@ -52,7 +53,7 @@ def fuseSequences2(s1,s2):
     toFuse.write(">s2\n"+s2+"\n")
     toFuse.close()
     os.system(installationDirectory+"src/conda/bin/makeblastdb -dbtype nucl -in s1.fasta >null 2>&1")
-    os.system(installationDirectory+"src/conda/bin/blastn -query s2.fasta -db s1.fasta -outfmt 6 -task blastn  -dust no -soft_masking false -out outputBlast.txt >null 2>&1")
+    os.system(installationDirectory+"src/conda/bin/blastn -query s2.fasta -db s1.fasta -outfmt 6 -task blastn  -dust no -soft_masking false -out outputBlast.txt  >null 2>&1")
     blastFile = open("outputBlast.txt")
 
     downstreamAlignment = []

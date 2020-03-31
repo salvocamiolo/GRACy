@@ -438,7 +438,7 @@ class Ui_Form(object):
 				header = fqfile.readline().rstrip()
 				time.sleep(1)
 				if " 1" in header:
-					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/utils/changeHeaderFormat.py tempReads_140875_1.fastq tempReads_140875_2.fastq")
+					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/readsFiltering/utils/changeHeaderFormat.py tempReads_140875_1.fastq tempReads_140875_2.fastq")
 
 				
 				self.logTextArea.append( "Calculating the number of reads")

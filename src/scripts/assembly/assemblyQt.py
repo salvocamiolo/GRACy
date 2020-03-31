@@ -799,31 +799,27 @@ class Ui_Form(object):
 						os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py newReference.fasta finalScaffold "+str(int(fields[0])-1500)+" "+str(int(fields[0])-500)+" f")
 						os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/extractSeqByRange.py newReference.fasta finalScaffold "+str(int(fields[1])+500)+" "+str(int(fields[1])+1500)+" f")
 
-						numTries = 0
-						while True:
-							numTries += 1
-							if numTries ==2:
-								break
-							print("Performing joinScaffold_careful algorithm on range",line,"....")
-							os.system(installationDirectory+"src/conda/bin/python joinScaffolds_careful.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
+					
+						print("Performing joinScaffold_careful algorithm on range",line,"....")
+						os.system(installationDirectory+"src/conda/bin/python joinScaffolds_careful.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
+						if os.path.isfile("joined_finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==False:
+							print("Refining range",fields[0],fields[1],"with joinScaffold_careful failed. Now trying joinScaffold on range",line,"....")
+							#os.system(installationDirectory+"src/conda/bin/python joinScaffolds.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
 							if os.path.isfile("joined_finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==False:
-								print("Refining range",fields[0],fields[1],"with joinScaffold_careful failed. Now trying joinScaffold on range",line,"....")
-								#os.system(installationDirectory+"src/conda/bin/python joinScaffolds.py join "+read1_toFill+"  "+read2_toFill+"  finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f "+installationDirectory+" "+self.numThreadsCombo.currentText())
-								if os.path.isfile("joined_finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==False:
-									print("Both alogrithms failed on range,",line)
-									print("Now performing 30 steps of joinScaffold trivial in both directions and recording the output")
-									os.system(installationDirectory+"src/conda/bin/python joinScaffolds_trivial.py "+ read1_toFill+" "+read2_toFill+" finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f 30 "+installationDirectory )
-									os.system("mv joinScaffold_trivialSeq.fasta finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_greedy.fasta ")
-									os.system(installationDirectory+"src/conda/bin/python joinScaffolds_trivial.py "+ read1_toFill+" "+read2_toFill+" finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt r finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt r 30 "+installationDirectory )
-									os.system(installationDirectory+"src/conda/bin/python revComp.py joinScaffold_trivialSeq.fasta >temp.fasta; mv temp.fasta joinScaffold_trivialSeq.fasta")
-									os.system("mv joinScaffold_trivialSeq.fasta finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_greedy.fasta")
+								print("Both alogrithms failed on range,",line)
+								print("Now performing 30 steps of joinScaffold trivial in both directions and recording the output")
+								os.system(installationDirectory+"src/conda/bin/python joinScaffolds_trivial.py "+ read1_toFill+" "+read2_toFill+" finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt f finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt f 30 "+installationDirectory )
+								os.system("mv joinScaffold_trivialSeq.fasta finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_greedy.fasta ")
+								os.system(installationDirectory+"src/conda/bin/python joinScaffolds_trivial.py "+ read1_toFill+" "+read2_toFill+" finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt r finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt r 30 "+installationDirectory )
+								os.system(installationDirectory+"src/conda/bin/python revComp.py joinScaffold_trivialSeq.fasta >temp.fasta; mv temp.fasta joinScaffold_trivialSeq.fasta")
+								os.system("mv joinScaffold_trivialSeq.fasta finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_greedy.fasta")
 
-								else:
-									print("The algorithm joinScaffold was sucessful on range",line)
-									break
 							else:
-								print("The algorithm joinScaffold_careful was sucessful on range",line)
+								print("The algorithm joinScaffold was sucessful on range",line)
 								break
+						else:
+							print("The algorithm joinScaffold_careful was sucessful on range",line)
+							break
 
 
 						if os.path.isfile("joined_"+"finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==True:
