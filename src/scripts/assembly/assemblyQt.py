@@ -816,10 +816,10 @@ class Ui_Form(object):
 
 							else:
 								print("The algorithm joinScaffold was sucessful on range",line)
-								break
+								#break
 						else:
 							print("The algorithm joinScaffold_careful was sucessful on range",line)
-							break
+							#break
 
 
 						if os.path.isfile("joined_"+"finalScaffold_"+str(int(fields[0])-1500)+"_"+str(int(fields[0])-500)+"_f.txt_finalScaffold_"+str(int(fields[1])+500)+"_"+str(int(fields[1])+1500)+"_f.txt")==True:
