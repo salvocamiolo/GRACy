@@ -79,7 +79,7 @@ for seq_record in SeqIO.parse("./ragout-out/scaffolds_scaffolds.fasta","fasta"):
 print("The main scaffold has length",len(mainScaffold))
 
 
-
+centerScaffold = ""
 #Get the central repetitive region into the variable centralScaffold
 for seq_record in SeqIO.parse(bestAlignment[0]+"_"+str(bestAlignment[3])+"_"+str(bestAlignment[4])+"_f.txt","fasta"):
     centerScaffold = str(seq_record.seq)
