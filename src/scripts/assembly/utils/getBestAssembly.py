@@ -27,7 +27,7 @@ bestN50 = 0
 bestLength = 0
 bestAssembly_length = 0
 for b in range(2):
-    for a in range(int(numReads*0.1),int(numReads*0.9),int(numReads*0.2)):
+    for a in range(int(numReads*0.1),int(numReads*1),int(numReads*0.2)):
         print("Subsampling ",a,"reads....")
         os.system(installationDirectory+"src/conda/bin/seqtk sample -s"+str(a*b)+" "+read1+" "+str(a)+" >subsample_1.fq")
         os.system(installationDirectory+"src/conda/bin/seqtk sample -s"+str(a*b)+" "+read2+" "+str(a)+" >subsample_2.fq")
