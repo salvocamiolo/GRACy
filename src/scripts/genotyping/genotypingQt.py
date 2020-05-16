@@ -409,7 +409,7 @@ class Ui_Form(object):
 			
 			
 			
-			os.system(installationDirectory+"src/conda/bin/jellyfish count -m 17 -s 100M -t 8 -C "+dedupFile1+" -o "+dedupFile1+"_kmerCount.jf")
+			os.system(installationDirectory+"src/conda/bin/jellyfish count -m 17 -s 6G -t 8 -C "+dedupFile1+" -o "+dedupFile1+"_kmerCount.jf")
 
 			
 			
@@ -428,7 +428,7 @@ class Ui_Form(object):
 			
 			
 
-			os.system(installationDirectory+"src/conda/bin/jellyfish count -m 17 -s 100M -t 8 -C "+dedupFile2+" -o "+dedupFile2+"_kmerCount.jf")
+			os.system(installationDirectory+"src/conda/bin/jellyfish count -m 17 -s 6G -t 8 -C "+dedupFile2+" -o "+dedupFile2+"_kmerCount.jf")
 
 			
 			
