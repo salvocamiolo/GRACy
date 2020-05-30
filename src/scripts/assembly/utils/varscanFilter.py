@@ -15,6 +15,8 @@ infile = open(inputFile)
 outfile = open(outputFile,"w")
 
 line = infile.readline().rstrip()
+outfile.write(line+"\n")
+
 while not "#CHROM" in line:
     line = infile.readline().rstrip()
     outfile.write(line+"\n")
