@@ -458,7 +458,8 @@ class Ui_Form(object):
 					assemblyLength = len(str(seq_record.seq))
 
 
-				
+				os.system(installationDirectory+"src/conda/bin/prinseq-lite.pl -fastq ../1_cleanReads/qualityFiltered_2.fq  -fastq2 ../1_cleanReads/qualityFiltered_2.fq -min_qual_mean 25 -trim_qual_right 30 -trim_ns_right 20  -trim_qual_window 5 -trim_qual_step 1 -min_len 80 -out_bad null -out_good ../1_cleanReads/prinSeqReads")
+				os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/utils/trimPolyN.py ../1_cleanReads/prinSeqReads_1.fastq ../1_cleanReads/prinSeqReads_2.fastq")
 				self.logArea.append("*  Analyzing first portion....")
 				self.logArea.repaint()
 				
@@ -472,7 +473,7 @@ class Ui_Form(object):
 				
 				
 
-				self.bowtiePE("finalScaffold_1_15001_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				self.bowtiePE("finalScaffold_1_15001_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
 
 				
 				self.logArea.append("*  *  Extracting mapped reads")
@@ -502,7 +503,6 @@ class Ui_Form(object):
 				
 				self.logArea.append("*  *  Calling polymorphisms")
 				self.logArea.repaint()
-				
 				
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_1_15001_f.txt >null 2>&1")
@@ -544,7 +544,7 @@ class Ui_Form(object):
 				
 				
 				
-				self.bowtiePE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				self.bowtiePE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
 				
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
@@ -612,7 +612,7 @@ class Ui_Form(object):
 				
 				
 				
-				self.bowtiePE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				self.bowtiePE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
 				
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
@@ -891,6 +891,9 @@ class Ui_Form(object):
 
 
 				os.chdir("6_createConsensus")
+				if os.path.isfile("../1_cleanReads/prinSeqReads_1.fastq") == False:
+					os.system(installationDirectory+"src/conda/bin/prinseq-lite.pl -fastq ../1_cleanReads/qualityFiltered_2.fq  -fastq2 ../1_cleanReads/qualityFiltered_2.fq -min_qual_mean 25 -trim_qual_right 30 -trim_ns_right 20  -trim_qual_window 5 -trim_qual_step 1 -min_len 80 -out_bad null -out_good ../1_cleanReads/prinSeqReads")
+					os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"src/scripts/snpCalling/utils/trimPolyN.py ../1_cleanReads/prinSeqReads_1.fastq ../1_cleanReads/prinSeqReads_2.fastq")
 
 				#Attempts five and three prime ends reconstruction
 				os.system(installationDirectory+"src/conda/bin/python completeGenome2.py "+installationDirectory+"  finalScaffold.fasta 0")
@@ -942,7 +945,7 @@ class Ui_Form(object):
 				
 				
 
-				self.bowtiePE("finalScaffold_1_15001_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				self.bowtiePE("finalScaffold_1_15001_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
 
 				
 				self.logArea.append("*  *  Extracting mapped reads")
@@ -1012,7 +1015,7 @@ class Ui_Form(object):
 				
 				
 				
-				self.bowtiePE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				self.bowtiePE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
 				
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
@@ -1080,7 +1083,7 @@ class Ui_Form(object):
 				
 				
 				
-				self.bowtiePE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				self.bowtiePE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
 				
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
