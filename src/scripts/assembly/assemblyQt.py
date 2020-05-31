@@ -1154,7 +1154,68 @@ class Ui_Form(object):
 				outfile = open(projectName+"_genome.fasta","w")
 				outfile.write(">finalScaffold\n"+finalSequence+"\n")
 				outfile.close()
-				os.system("cp "+projectName+"_genome.fasta "+workingDirectory)
+				
+
+
+				self.logArea.append("*  Last consensus calling....")
+				self.logArea.repaint()
+				
+				
+				
+
+				self.logArea.append("*  *  Aligning reads to the assembly")
+				self.logArea.repaint()
+				
+				
+				
+				self.bowtiePE(projectName+"_genome.fasta","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
+				
+				self.logArea.append("*  *  Extracting mapped reads")
+				self.logArea.repaint()
+				
+				
+				
+				os.system(installationDirectory+"src/conda/bin/samtools view -bF 4 test_sorted.bam >mapped.bam 2>null")
+				
+				self.logArea.append("*  *  Adding gorup names")
+				self.logArea.repaint()
+				
+				
+				
+				os.system(installationDirectory+"src/conda/bin/picard AddOrReplaceReadGroups I=mapped.bam O=rg_added_sorted.bam SO=coordinate RGID=id RGLB=library RGPL=Ilumina RGPU=machine RGSM=Consensus >null 2>&1")
+				
+				self.logArea.append("*  *  Deduplicating")
+				self.logArea.repaint()
+				
+				
+				
+				os.system(installationDirectory+"src/conda/bin/picard MarkDuplicates I=rg_added_sorted.bam O=dedupped.bam  CREATE_INDEX=true VALIDATION_STRINGENCY=SILENT M=output.metrics >null 2>&1")
+				
+				self.logArea.append("*  *  Calling polymorphisms")
+				self.logArea.repaint()
+				
+				
+				
+				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt >null 2>&1")
+				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
+			
+				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam > pileup.txt")
+				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf 1 --strand-filter 0 > output.vcf")
+				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/varscanFilter.py -i output.vcf -o output_filtered.vcf")
+				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
+				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
+				os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
+				self.logArea.append("*  *  Creating consensus")
+				self.logArea.repaint()
+				
+				
+				
+				os.system("cat "+projectName+"_genome.fasta | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > "+projectName+"_genome.fasta_con.fasta 2>null")
+				os.system("mv output.vcf completeGenome.vcf")
+				os.system("mv output_filtered.vcf  completeGenome_filtered.vcf")
+				os.system("rm -f test*")
+				os.system("rm -f *.dict")
+
 
 
 
@@ -1163,9 +1224,9 @@ class Ui_Form(object):
 				self.logArea.repaint()
 				
 				
-				
+				os.system("cp "+projectName+"_genome.fasta_con.fasta "+workingDirectory+"/"+projectName+"_genome.fasta)
 				now = datetime.datetime.now()
-				logFile.write("First consensus calline ended at "+now.strftime("%H:%M")+"\n\n")
+				logFile.write("Second consensus calline ended at "+now.strftime("%H:%M")+"\n\n")
 				os.chdir("../")
 			else:
 				if os.path.isfile("./6_createConsensus/"+projectName+"_genome.fasta")==False:
