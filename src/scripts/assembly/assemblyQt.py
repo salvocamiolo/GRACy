@@ -1224,7 +1224,7 @@ class Ui_Form(object):
 				self.logArea.repaint()
 				
 				
-				os.system("cp "+projectName+"_genome.fasta_con.fasta "+workingDirectory+"/"+projectName+"_genome.fasta)
+				os.system("cp "+projectName+"_genome.fasta_con.fasta "+workingDirectory+"/"+projectName+"_genome.fasta")
 				now = datetime.datetime.now()
 				logFile.write("Second consensus calline ended at "+now.strftime("%H:%M")+"\n\n")
 				os.chdir("../")
