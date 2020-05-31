@@ -1196,10 +1196,10 @@ class Ui_Form(object):
 				
 				
 				
-				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt >null 2>&1")
-				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
+				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R="+projectName+"_genome.fasta >null 2>&1")
+				os.system(installationDirectory+"src/conda/bin/samtools faidx "+projectName+"_genome.fasta")
 			
-				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam > pileup.txt")
+				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f "+projectName+"_genome.fasta dedupped.bam > pileup.txt")
 				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf 1 --strand-filter 0 > output.vcf")
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/varscanFilter.py -i output.vcf -o output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
