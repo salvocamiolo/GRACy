@@ -63,8 +63,11 @@ while True:
 			os.system(installationDirectory+"src/conda/bin/jellyfish query kmerCount.jf "+refAllele+" >count.txt")
 			countFile = open("count.txt")
 			countLine = countFile.readline().rstrip()
-			countList = countLine.split(" ")
-			refReads = int(countList[1])
+			if not countLine:
+				refReads = 0
+			else:
+				countList = countLine.split(" ")
+				refReads = int(countList[1])
 			countFile.close()
 			print(refReads)
 
@@ -72,8 +75,11 @@ while True:
 			os.system(installationDirectory+"src/conda/bin/jellyfish query kmerCount.jf "+altAllele+" >count.txt")
 			countFile = open("count.txt")
 			countLine = countFile.readline().rstrip()
-			countList = countLine.split(" ")
-			altReads = int(countList[1])
+			if not countLine:
+				altReads=0
+			else:
+				countList = countLine.split(" ")
+				altReads = int(countList[1])
 			countFile.close()
 			print(altReads)
 		
@@ -95,8 +101,11 @@ while True:
 			os.system(installationDirectory+"src/conda/bin/jellyfish query kmerCount.jf "+refAllele+" >count.txt")
 			countFile = open("count.txt")
 			countLine = countFile.readline().rstrip()
-			countList = countLine.split(" ")
-			refReads = int(countList[1])
+			if not countLine:
+				refReads=0
+			else:
+				countList = countLine.split(" ")
+				refReads = int(countList[1])
 			countFile.close()
 			print(refReads)
 
@@ -104,8 +113,11 @@ while True:
 			os.system(installationDirectory+"src/conda/bin/jellyfish query kmerCount.jf "+altAllele+" >count.txt")
 			countFile = open("count.txt")
 			countLine = countFile.readline().rstrip()
-			countList = countLine.split(" ")
-			altReads = int(countList[1])
+			if not countLine:
+				altReads=0
+			else:
+				countList = countLine.split(" ")
+				altReads = int(countList[1])
 			countFile.close()
 			print(altReads)
 		
