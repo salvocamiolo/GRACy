@@ -64,14 +64,16 @@ while True:
             print("Validating deletion at position %s" %fields[1])
             refAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[3]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[3])]
             altAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[4]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[4])]
-            print(refAllele,kmersInReads.count(refAllele))
-            print(altAllele,kmersInReads.count(altAllele))
-            
-            sys.stdin.read(1)
+            refReads = kmersInReads.count(refAllele) + kmersInReads.count(Seq.reverse_complement(refAllele))
+            altReads = kmersInReads.count(altAllele) + kmersInReads.count(Seq.reverse_complement(altAllele))
+
+            print(refReads,altReads)
+            if altReads>refReads:
+                outfile.write(line+"\n")
     
     
-    if int(info[5]) > int(info[4]): #the alternate allele has a highe number of reads than the reference allele
-        outfile.write(line+"\n")
+    #if int(info[5]) > int(info[4]): #the alternate allele has a highe number of reads than the reference allele
+    #    outfile.write(line+"\n")
 
 
 infile.close()
