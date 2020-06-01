@@ -54,8 +54,8 @@ while True:
 	if validate == 1:
 		if len(fields[3]) >1 or len(fields[4])>1: #an indel
 			print("Validating deletion at position %s" %fields[1])
-			refAllele = refSeq[int(fields[1])-25:int(fields[1])-2]+fields[3]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[3])]
-			altAllele = refSeq[int(fields[1])-25:int(fields[1])-2]+fields[4]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[4])]
+			refAllele = refSeq[int(fields[1])-25:int(fields[1])-2]+fields[3]+refSeq[int(fields[1]):int(fields[1])+25-len(fields[3])]
+			altAllele = refSeq[int(fields[1])-25:int(fields[1])-2]+fields[4]+refSeq[int(fields[1]):int(fields[1])+25-len(fields[4])]
 			refReads = kmersInReads.count(refAllele) + kmersInReads.count(Seq.reverse_complement(refAllele))
 			altReads = kmersInReads.count(altAllele) + kmersInReads.count(Seq.reverse_complement(altAllele))
 
