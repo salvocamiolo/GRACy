@@ -27,13 +27,13 @@ if validate == 1:
     print("Reading read1")
     for seq_record in SeqIO.parse(read1,"fastq"):
         sequence = str(seq_record.seq)
-        for a in range(0,len(sequence)-50,+50):
+        for a in range(0,len(sequence)-50,+1):
             kmersInReads.append(sequence[a:a+50])
     
     print("Reading read2")
     for seq_record in SeqIO.parse(read2,"fastq"):
         sequence = str(seq_record.seq)
-        for a in range(0,len(sequence)-50,+50):
+        for a in range(0,len(sequence)-50,+1):
             kmersInReads.append(sequence[a:a+50])
 
     for seq_record in SeqIO.parse(reference,"fasta"):
