@@ -1200,10 +1200,11 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R="+projectName+"_genome.fasta >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx "+projectName+"_genome.fasta")
-			
+				os.system(installationDirectory+"src/conda/bin/samtools view -b -h -F 1024 dedupped.bam > dedupped_nodup.bam")
+				os.system(installationDirectory+"src/conda/bin/bam2fastq -o deduppedReads#.fastq --aligned --no-unaligned --force dedupped_nodup.bam")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f "+projectName+"_genome.fasta dedupped.bam > pileup.txt")
 				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf 1 --strand-filter 0 > output.vcf")
-				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/varscanFilter.py -i output.vcf -o output_filtered.vcf -1 ../1_cleanReads/qualityFiltered_1.fq -g 1 -2 ../1_cleanReads/qualityFiltered_2.fq -r "+projectName+"_genome.fasta")
+				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/varscanFilter.py -i output.vcf -o output_filtered.vcf -1 deduppedReads_1.fastq -g 1 -2 deduppedReads_2.fastq -r "+projectName+"_genome.fasta")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 				os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")
