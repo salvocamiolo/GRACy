@@ -112,8 +112,8 @@ class Ui_Form(object):
 
 
 	def bwaPE(self,reference,read1,read2,alName,numThreads,editDist):
-		os.system(installationDirectory+"src/conda/bin/bwa index "+reference) #+" >null 2>&1")
-		os.system(installationDirectory+"src/conda/bin/bwa aln "+reference+" "+read1+" -t "+numThreads+" -n "+editDist+" -k "+editDist)#+" >read1.sai 2>null")
+		os.system(installationDirectory+"src/conda/bin/bwa index "+reference+" >null 2>&1")
+		os.system(installationDirectory+"src/conda/bin/bwa aln "+reference+" "+read1+" -t "+numThreads+" -n "+editDist+" -k "+editDist+" >read1.sai 2>null")
 		os.system(installationDirectory+"src/conda/bin/bwa aln "+reference+" "+read2+" -t "+numThreads+" -n "+editDist+" -k "+editDist+" >read2.sai 2>null")
 		os.system(installationDirectory+"src/conda/bin/bwa sampe "+reference+" read1.sai read2.sai "+read1+" "+read2+" >"+alName+".sam 2>null")
 		os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/cleanSoftAndUnmapped.py "+alName+".sam")
