@@ -62,8 +62,8 @@ while True:
     if len(fields[3]) >1: #a deletion
         if validate == 1:
             print("Validating deletion at position %s" %fields[1])
-            refAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[2]+refSeq[int(fields[1]):int(fields[1])+25]
-            altAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[3]+refSeq[int(fields[1]):int(fields[1])+25]
+            refAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[3]+refSeq[int(fields[1]):int(fields[1])+25]
+            altAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[4]+refSeq[int(fields[1]):int(fields[1])+25]
             print(refAllele)
             print(altAllele)
             sys.stdin.read(1)
