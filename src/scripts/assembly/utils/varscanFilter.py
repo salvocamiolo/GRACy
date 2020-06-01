@@ -19,6 +19,9 @@ if not args['validateIndel']:
 else:
     validate =1
 
+read1 = args['read1']
+read2 = args['read2']
+
 kmersInReads = []
 if validate == 1:
     print("Reading read1")
