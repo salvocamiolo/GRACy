@@ -17,7 +17,7 @@ reference = args['reference']
 if not args['validateIndel']:
     validate = 0
 else:
-    validate =1
+    validate = 1
 
 read1 = args['read1']
 read2 = args['read2']
@@ -59,8 +59,8 @@ while True:
         break
     fields = line.split("\t")
     info = fields[9].split(":")
-    if len(fields[3]) >1 or len(fields[4])>1: #an indel
-        if validate == 1:
+    if validate == 1:
+        if len(fields[3]) >1 or len(fields[4])>1: #an indel
             print("Validating deletion at position %s" %fields[1])
             refAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[3]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[3])]
             altAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[4]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[4])]
@@ -70,10 +70,9 @@ while True:
             print(refReads,altReads)
             if altReads>refReads:
                 outfile.write(line+"\n")
-    
-    
-    #if int(info[5]) > int(info[4]): #the alternate allele has a highe number of reads than the reference allele
-    #    outfile.write(line+"\n")
+    else:
+        if int(info[5]) > int(info[4]): #the alternate allele has a highe number of reads than the reference allele
+            outfile.write(line+"\n")
 
 
 infile.close()
