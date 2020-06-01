@@ -1203,7 +1203,7 @@ class Ui_Form(object):
 			
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f "+projectName+"_genome.fasta dedupped.bam > pileup.txt")
 				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf 1 --strand-filter 0 > output.vcf")
-				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/varscanFilter.py -i output.vcf -o output_filtered.vcf")
+				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/varscanFilter.py -i output.vcf -o output_filtered.vcf -1 ../1_cleanReads/qualityFiltered_1.fq -g 1 -2 ../1_cleanReads/qualityFiltered_2.fq -r "+projectName+"_genome.fasta")
 				os.system(installationDirectory+"src/conda/bin/perl "+installationDirectory+"src/scripts/assembly/utils/vcf-sort output_filtered.vcf >temp.vcf ; mv temp.vcf output_filtered.vcf")
 				os.system(installationDirectory+"src/conda/bin/bgzip -c output_filtered.vcf > output_filtered.vcf.gz 2>null")
 				os.system(installationDirectory+"src/conda/bin/tabix output_filtered.vcf.gz >null 2>&1")

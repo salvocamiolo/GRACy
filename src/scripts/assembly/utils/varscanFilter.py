@@ -1,13 +1,42 @@
 import os,sys
 from Bio import SeqIO
+from Bio import Seq
 import argparse
 parser = argparse.ArgumentParser(description="Filter varscan output in vcf format by only keeping variants with the highest number of reads")
 parser.add_argument("-o","--output",required=True,help="The varscn output file")
 parser.add_argument("-i","--input",required=True,help="The varscan input file")
+parser.add_argument("-g","--validateIndel",required=False,help="Validate indels by searching the flanking motif in the reads")
+parser.add_argument("-1","--read1",required=False,help="First fastq file in reads, needed for indel validation")
+parser.add_argument("-2","--read2",required=False,help="Second fastq file in reads, needed for indel validation")
+parser.add_argument("-r","--reference",required=False,help="Reference fasta file, needed for indel validation")
 
 args = vars(parser.parse_args())
 inputFile = args['input']
 outputFile = args['output']
+reference = args['reference']
+if not args['validateIndel']:
+    validate = 0
+else:
+    validate =1
+
+kmersInReads = []
+if validate == 1:
+    print("Reading read1")
+    for seq_record in SeqIO.parse(read1,"fastq"):
+        sequence = str(seq_record.seq)
+        for a in range(0,len(sequence)-50,+50):
+            kmersInReads.append(sequence[a:a+50])
+    
+    print("Reading read1")
+    for seq_record in SeqIO.parse(read2,"fastq"):
+        sequence = str(seq_record.seq)
+        for a in range(0,len(sequence)-50,+50):
+            kmersInReads.append(sequence[a:a+50])
+
+    for seq_record in SeqIO.parse(reference,"fasta"):
+        refSeq = str(seq_record.seq)
+    
+
 
 
 
@@ -27,6 +56,16 @@ while True:
         break
     fields = line.split("\t")
     info = fields[9].split(":")
+    if len(fields[3]) >1: #a deletion
+        if validate == 1:
+            print("Validating deletion at position %s" %fields[1])
+            refAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[2]+refSeq[fields[1]:fields[1]+25]
+            altAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[3]+refSeq[fields[1]:fields[1]+25]
+            print(refAllele)
+            print(altAllele)
+            sys.stdin.read(1)
+    
+    
     if int(info[5]) > int(info[4]): #the alternate allele has a highe number of reads than the reference allele
         outfile.write(line+"\n")
 
