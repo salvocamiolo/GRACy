@@ -52,10 +52,10 @@ while True:
 	fields = line.split("\t")
 	info = fields[9].split(":")
 	if validate == 1:
-		if len(fields[4])>1: #a deletion
+		if len(fields[4])>1 or len(fields[3])>1: #a deletion
 			print("Validating deletion at position %s" %fields[1])
-			refAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[3]+refSeq[int(fields[1]):int(fields[1])+25-len(fields[3])]
-			altAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[4]+refSeq[int(fields[1]):int(fields[1])+25-len(fields[4])]
+			refAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[3]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[3])]
+			altAllele = refSeq[int(fields[1])-25:int(fields[1])-1]+fields[4]+refSeq[int(fields[1]):int(fields[1])+26-len(fields[4])]
 			refReads = kmersInReads.count(refAllele) + kmersInReads.count(Seq.reverse_complement(refAllele))
 			altReads = kmersInReads.count(altAllele) + kmersInReads.count(Seq.reverse_complement(altAllele))
 
@@ -84,49 +84,10 @@ while True:
 			print(altReads)
 		
 
-
-
-
 			if altReads>refReads:
 				outfile.write(line+"\n")
 
-		if len(fields[3])>1: #a insertion
-			print("Validating deletion at position %s" %fields[1])
-			refAllele = refSeq[int(fields[1])-25:int(fields[1])-2]+fields[3]+refSeq[int(fields[1]):int(fields[1])+25-len(fields[3])]
-			altAllele = refSeq[int(fields[1])-25:int(fields[1])-2]+fields[4]+refSeq[int(fields[1]):int(fields[1])+25-len(fields[4])]
-			refReads = kmersInReads.count(refAllele) + kmersInReads.count(Seq.reverse_complement(refAllele))
-			altReads = kmersInReads.count(altAllele) + kmersInReads.count(Seq.reverse_complement(altAllele))
-
-			print(refAllele)
-			os.system(installationDirectory+"src/conda/bin/jellyfish query kmerCount.jf "+refAllele+" >count.txt")
-			countFile = open("count.txt")
-			countLine = countFile.readline().rstrip()
-			if not countLine:
-				refReads=0
-			else:
-				countList = countLine.split(" ")
-				refReads = int(countList[1])
-			countFile.close()
-			print(refReads)
-
-			print(altAllele)
-			os.system(installationDirectory+"src/conda/bin/jellyfish query kmerCount.jf "+altAllele+" >count.txt")
-			countFile = open("count.txt")
-			countLine = countFile.readline().rstrip()
-			if not countLine:
-				altReads=0
-			else:
-				countList = countLine.split(" ")
-				altReads = int(countList[1])
-			countFile.close()
-			print(altReads)
 		
-
-
-
-
-			if altReads>refReads:
-				outfile.write(line+"\n")
 	else:
 		if int(info[5]) > int(info[4]): #the alternate allele has a highe number of reads than the reference allele
 			outfile.write(line+"\n")
