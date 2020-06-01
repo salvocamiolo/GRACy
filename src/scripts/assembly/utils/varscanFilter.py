@@ -30,7 +30,7 @@ if validate == 1:
         for a in range(0,len(sequence)-50,+50):
             kmersInReads.append(sequence[a:a+50])
     
-    print("Reading read1")
+    print("Reading read2")
     for seq_record in SeqIO.parse(read2,"fastq"):
         sequence = str(seq_record.seq)
         for a in range(0,len(sequence)-50,+50):
@@ -62,8 +62,8 @@ while True:
     if len(fields[3]) >1: #a deletion
         if validate == 1:
             print("Validating deletion at position %s" %fields[1])
-            refAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[2]+refSeq[fields[1]:fields[1]+25]
-            altAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[3]+refSeq[fields[1]:fields[1]+25]
+            refAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[2]+refSeq[int(fields[1]):int(fields[1])+25]
+            altAllele = refSeq[int(fields[1])-25:int(fields[1])-23]+fields[3]+refSeq[int(fields[1]):int(fields[1])+25]
             print(refAllele)
             print(altAllele)
             sys.stdin.read(1)
