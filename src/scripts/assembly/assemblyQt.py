@@ -945,8 +945,8 @@ class Ui_Form(object):
 				
 				
 
-				#self.bowtiePE("finalScaffold_1_15001_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
-				self.bwaPE("finalScaffold_1_15001_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
+				self.bowtiePE("finalScaffold_1_15001_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				#self.bwaPE("finalScaffold_1_15001_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
 				
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
@@ -1015,8 +1015,8 @@ class Ui_Form(object):
 				
 				
 				
-				#self.bowtiePE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
-				self.bwaPE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
+				self.bowtiePE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				#self.bwaPE("finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
 
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
@@ -1084,8 +1084,8 @@ class Ui_Form(object):
 				
 				
 				
-				#self.bowtiePE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
-				self.bwaPE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
+				self.bowtiePE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				#self.bwaPE("finalScaffold_"+str(assemblyLength -10000 )+"_2000000_f.txt","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
 				
@@ -1169,8 +1169,8 @@ class Ui_Form(object):
 				
 				
 				
-				#self.bowtiePE(projectName+"_genome.fasta","../1_cleanReads/prinSeqReads_1.fastq","../1_cleanReads/prinSeqReads_2.fastq",self.numThreadsCombo.currentText())
-				self.bwaPE(projectName+"_genome.fasta","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
+				self.bowtiePE(projectName+"_genome.fasta","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq",self.numThreadsCombo.currentText())
+				#self.bwaPE(projectName+"_genome.fasta","../1_cleanReads/qualityFiltered_1.fq","../1_cleanReads/qualityFiltered_2.fq","test",self.numThreadsCombo.currentText(),"0.06")
 
 				self.logArea.append("*  *  Extracting mapped reads")
 				self.logArea.repaint()
