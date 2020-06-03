@@ -112,6 +112,7 @@ class Ui_Form(object):
 		self.sampleInfoButton.clicked.connect(self.selectSampleTable)
 		self.readsInfoButton.clicked.connect(self.selectReadsInfo)
 		self.sampleToSubmitButton.clicked.connect(self.selectFiles)
+		self.pushButton_6.clicked.connect(self.submitSamples)
 
 
 	onlyfiles = []
