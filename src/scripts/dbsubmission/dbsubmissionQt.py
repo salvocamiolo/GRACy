@@ -480,7 +480,7 @@ class Ui_Form(object):
 					os.system("ln -s "+inputFolder+"/"+fq1)
 					os.system("ln -s "+inputFolder+"/"+fq2)
 
-					manifest = open(sampleName+"_manifestFile.txt","w",buffering=0)
+					manifest = open(sampleName+"_manifestFile.txt","w")
 					manifest.write("INSTRUMENT\t"+instrument+"\nINSERT_SIZE\t"+insertSize+"\nLIBRARY_SOURCE\t"+librarySource+"\nLIBRARY_SELECTION\t"+librarySelection+"\n")
 					manifest.write("STUDY\t"+projectAccessionField+"\nSAMPLE\t"+sampleAccessionField+"\nNAME\t"+sampleName+"\n")
 					manifest.write("LIBRARY_STRATEGY\t"+libraryStrategy+"\nFASTQ\t"+fq1+"\nFASTQ\t"+fq2+"\n")
