@@ -116,6 +116,7 @@ class Ui_Form(object):
 
 
 	onlyfiles = []
+	ifolder = ""
 	def selectFiles(self):
 		self.selectedFilesArea.clear()
 		self.onlyfiles = []
@@ -141,6 +142,7 @@ class Ui_Form(object):
 				msg.setDetailedText("Accepted format are _1.fastq.gz   _2.fastq\n_1.fq.gz   _2.fastq\n_R1_001.fastq.gz   _R2_001.fastq\n_R1_001.fq.gz   _R2_001.fq.gz\n ")
 				msg.setStandardButtons(QMessageBox.Ok)
 				msg.exec_()
+		self.ifolder = "/".join((onlyfiles[0].split("/"))[0:-1])
 
 	def refreshTextArea(self,selected):
 		self.selectedFilesArea.clear()
@@ -392,7 +394,8 @@ class Ui_Form(object):
 
 		
 
-		
+		inputFolder = self.ifolder
+		print(inputFolder)
 		self.logArea.append("isTest: "+str(isTest)+"\n"+"inputFolder: "+str(inputFolder)+"\nfilesToSubmit: "+str(filesToSubmit)+"\nCreatePoject: "+str(createProject)+"\nCreateSample: "+str(createSample)+"\nProjectInfo: "+str(projectInfo)+"\nSampleInfo: "+str(sampleInfo)+"\nReadsInfo: "+str(readsInfo)+"\n\n")
 		self.logArea.repaint()
 		
