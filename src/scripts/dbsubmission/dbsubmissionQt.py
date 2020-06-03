@@ -111,7 +111,7 @@ class Ui_Form(object):
 		self.projectInfoButton.clicked.connect(self.selectProjectTable)
 		self.sampleInfoButton.clicked.connect(self.selectSampleTable)
 		self.readsInfoButton.clicked.connect(self.selectReadsInfo)
-		self.pushButton_6.clicked.connect(self.selectFiles)
+		self.sampleToSubmitButton.clicked.connect(self.selectFiles)
 
 
 	onlyfiles = []
@@ -121,62 +121,62 @@ class Ui_Form(object):
 		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./")
 		if len(filenames)>0:
 			for a in filenames:
-				if "_1.fastq" in a:
-					self.selectedFilesArea.append((a.replace("_1.fastq","").split("/")[-1]))
-				if "R1_001.fastq" in a:
-					self.selectedFilesArea.append((a.replace("_R1_001.fastq","").split("/"))[-1])
-				if "_1.fq" in a:
-					self.selectedFilesArea.append((a.replace("_1.fq","").split("/"))[-1])
-				if "R1_001.fq" in a:
-					self.selectedFilesArea.append((a.replace("_R1_001.fq","").split("/"))[-1])
+				if "_1.fastq.gz" in a:
+					self.selectedFilesArea.append((a.replace("_1.fastq.gz","").split("/")[-1]))
+				if "R1_001.fastq.gz" in a:
+					self.selectedFilesArea.append((a.replace("_R1_001.fastq.gz","").split("/"))[-1])
+				if "_1.fq.gz" in a:
+					self.selectedFilesArea.append((a.replace("_1.fq.gz","").split("/"))[-1])
+				if "R1_001.fq.gz" in a:
+					self.selectedFilesArea.append((a.replace("_R1_001.fq.gz","").split("/"))[-1])
 		for a in range(0,len(filenames)-1,+2):
-			if ("_1.fastq" in filenames[a] or "_2.fastq" in filenames[a] or "_R1_001.fastq" in filenames[a] or "_R2_001.fastq" in filenames[a] or "_1.fq" in filenames[a] or "_2.fq" in filenames[a] or "_R1_001.fq" in filenames[a] or "_R2_001.fq" in filenames[a])  and ( "_1.fastq" in filenames[a+1] or "_2.fastq" in filenames[a+1] or "_R1_001.fastq" in filenames[a+1] or "_R2_001.fastq" in filenames[a+1] or "_1.fq" in filenames[a+1] or "_2.fq" in filenames[a+1] or "_R1_001.fq" in filenames[a+1] or "_R2_001.fq" in filenames[a+1]):
+			if ("_1.fastq.gz" in filenames[a] or "_2.fastq.gz" in filenames[a] or "_R1_001.fastq.gz" in filenames[a] or "_R2_001.fastq.gz" in filenames[a] or "_1.fq.gz" in filenames[a] or "_2.fq.gz" in filenames[a] or "_R1_001.fq.gz" in filenames[a] or "_R2_001.fq.gz" in filenames[a])  and ( "_1.fastq.gz" in filenames[a+1] or "_2.fastq.gz" in filenames[a+1] or "_R1_001.fastq.gz" in filenames[a+1] or "_R2_001.fastq.gz" in filenames[a+1] or "_1.fq.gz" in filenames[a+1] or "_2.fq.gz" in filenames[a+1] or "_R1_001.fq.gz" in filenames[a+1] or "_R2_001.fq.gz" in filenames[a+1]):
 				self.onlyfiles.append((filenames[a],filenames[a+1]))
 			else:
 				msg = QMessageBox()
 				msg.setIcon(QMessageBox.Warning)
 				msg.setText("Some of the selected files are not in the expected format")
 				msg.setWindowTitle("Warning")
-				msg.setDetailedText("Accepted format are _1.fastq   _2.fastq\n_1.fq   _2.fastq\n_R1_001.fastq   _R2_001.fastq\n_R1_001.fq   _R2_001.fq\n ")
+				msg.setDetailedText("Accepted format are _1.fastq.gz   _2.fastq\n_1.fq.gz   _2.fastq\n_R1_001.fastq.gz   _R2_001.fastq\n_R1_001.fq.gz   _R2_001.fq.gz\n ")
 				msg.setStandardButtons(QMessageBox.Ok)
 				msg.exec_()
 
 	def refreshTextArea(self,selected):
 		self.selectedFilesArea.clear()
 		for item in self.onlyfiles:
-			if "_1.fastq" in item[0]:
+			if "_1.fastq.gz" in item[0]:
 
-				if (item[0].replace("_1.fastq","").split("/"))[-1] == selected:
-					self.selectedFilesArea.append((item[0].replace("_1.fastq","").split("/")[-1])+"  <--- ")
+				if (item[0].replace("_1.fastq.gz","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_1.fastq.gz","").split("/")[-1])+"  <--- ")
 				else:
-					self.selectedFilesArea.append((item[0].replace("_1.fastq","").split("/")[-1]))
-			if "R1_001.fastq" in item[0]:
-				if (item[0].replace("_R1_001.fastq","").split("/"))[-1] == selected:
-					self.selectedFilesArea.append((item[0].replace("_R1_001.fastq","").split("/"))[-1]+"  <---")
+					self.selectedFilesArea.append((item[0].replace("_1.fastq.gz","").split("/")[-1]))
+			if "R1_001.fastq.gz" in item[0]:
+				if (item[0].replace("_R1_001.fastq.gz","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fastq.gz","").split("/"))[-1]+"  <---")
 				else:
-					self.selectedFilesArea.append((item[0].replace("_R1_001.fastq","").split("/"))[-1])
-			if "_1.fq" in item[0]:
-				if (item[0].replace("_1.fq","").split("/"))[-1] == selected:
-					self.selectedFilesArea.append((item[0].replace("_1.fq","").split("/"))[-1]+"  <---")
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fastq.gz","").split("/"))[-1])
+			if "_1.fq.gz" in item[0]:
+				if (item[0].replace("_1.fq.gz","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_1.fq.gz","").split("/"))[-1]+"  <---")
 				else:
-					self.selectedFilesArea.append((item[0].replace("_1.fq","").split("/"))[-1])
-			if "R1_001.fq" in item[0]:
-				if (item[0].replace("_R1_001.fq","").split("/"))[-1] == selected:
-					self.selectedFilesArea.append((item[0].replace("_R1_001.fq","").split("/"))[-1]+"  <---")
+					self.selectedFilesArea.append((item[0].replace("_1.fq.gz","").split("/"))[-1])
+			if "R1_001.fq.gz" in item[0]:
+				if (item[0].replace("_R1_001.fq.gz","").split("/"))[-1] == selected:
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fq.gz","").split("/"))[-1]+"  <---")
 				else:
-					self.selectedFilesArea.append((item[0].replace("_R1_001.fq","").split("/"))[-1])
+					self.selectedFilesArea.append((item[0].replace("_R1_001.fq.gz","").split("/"))[-1])
 			
 		
 
 	def getPrefix(self,a):
-		if "_1.fastq" in a:
-			return ((a.replace("_1.fastq","").split("/")[-1]))
-		if "R1_001.fastq" in a:
-			return ((a.replace("_R1_001.fastq","").split("/"))[-1])
-		if "_1.fq" in a:
-			return ((a.replace("_1.fq","").split("/"))[-1])
-		if "R1_001.fq" in a:
-			return ((a.replace("_R1_001.fq","").split("/"))[-1])
+		if "_1.fastq.gz" in a:
+			return ((a.replace("_1.fastq.gz","").split("/")[-1]))
+		if "R1_001.fastq.gz" in a:
+			return ((a.replace("_R1_001.fastq.gz","").split("/"))[-1])
+		if "_1.fq.gz" in a:
+			return ((a.replace("_1.fq.gz","").split("/"))[-1])
+		if "R1_001.fq.gz" in a:
+			return ((a.replace("_R1_001.fq.gz","").split("/"))[-1])
 
 	def selectInputFolder(self):
 		foldername = QFileDialog.getExistingDirectory(None,"Select input folder","./")
