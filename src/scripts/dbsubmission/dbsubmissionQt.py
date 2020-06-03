@@ -7,6 +7,10 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog 
+from PyQt5.QtWidgets import QMessageBox
+import os,sys,time
+
 
 class Ui_Form(object):
 	def setupUi(self, Form,installationDirectory):
