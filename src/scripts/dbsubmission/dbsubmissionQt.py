@@ -395,8 +395,8 @@ class Ui_Form(object):
 		
 
 		inputFolder = self.ifolder
-		print(inputFolder)
-		self.logArea.append("isTest: "+str(isTest)+"\n"+"inputFolder: "+str(inputFolder)+"\nfilesToSubmit: "+str(filesToSubmit)+"\nCreatePoject: "+str(createProject)+"\nCreateSample: "+str(createSample)+"\nProjectInfo: "+str(projectInfo)+"\nSampleInfo: "+str(sampleInfo)+"\nReadsInfo: "+str(readsInfo)+"\n\n")
+		#print(inputFolder)
+		self.logArea.append("isTest: "+str(isTest)+"\n"+"inputFolder: "+str(inputFolder)+"\nCreatePoject: "+str(createProject)+"\nCreateSample: "+str(createSample)+"\nProjectInfo: "+str(projectInfo)+"\nSampleInfo: "+str(sampleInfo)+"\nReadsInfo: "+str(readsInfo)+"\n\n")
 		self.logArea.repaint()
 		
 		
