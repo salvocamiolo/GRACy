@@ -117,6 +117,11 @@ class Ui_Form(object):
 
 	onlyfiles = []
 	ifolder = ""
+	sampleAccession = {}
+	experimentAccession = {}
+	runAccession = {}
+
+
 	def selectFiles(self):
 		self.selectedFilesArea.clear()
 		self.onlyfiles = []
@@ -181,13 +186,7 @@ class Ui_Form(object):
 		if "R1_001.fq.gz" in a:
 			return ((a.replace("_R1_001.fq.gz","").split("/"))[-1])
 
-	def selectInputFolder(self):
-		foldername = QFileDialog.getExistingDirectory(None,"Select input folder","./")
-		self.inputFolderEntry.setText(foldername)
-	
-	def selectSampleToSubmit(self):
-		filename,__ = QFileDialog.getOpenFileName(None,"Select File","./")
-		self.sampleToSubmitEntry.setText(filename)
+
 
 	def selectProjectTable(self):
 		filename,__ = QFileDialog.getOpenFileName(None,"Select project info file","./")
@@ -220,11 +219,12 @@ class Ui_Form(object):
 			project_xml.write("<SUBMISSION_PROJECT>\n<SEQUENCING_PROJECT></SEQUENCING_PROJECT>\n</SUBMISSION_PROJECT>\n<PROJECT_LINKS>\n<PROJECT_LINK>\n<XREF_LINK>\n<DB></DB>\n<ID></ID>\n</XREF_LINK>\n</PROJECT_LINK>\n</PROJECT_LINKS>\n</PROJECT>\n</PROJECT_SET>")
 			#IMPORTANT! To change username and password in GRACy
 			project_xml.close()
-			if self.testSubmissionchkValue.text()==True:
+			if self.testSubmissionCombo.currentText()  =="Yes":
 				os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
 			else:
-				MsgBox = tk.messagebox.askquestion("You are going to submit your data to ENA. This is not a test submission. Do you with to continue?")
-				if MsgBox == 'yes':
+				
+				MsgBox = QMessageBox.question(self, 'PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+				if MsgBox == QMessageBox.Yes:
 					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
 				else:
 					exit()
@@ -242,8 +242,8 @@ class Ui_Form(object):
 						break
 
 	def createNewSample(self,sampleName):
-		if not sampleName in sampleAccession:
-			sampleAccession[sampleName] = ""
+		if not sampleName in self.sampleAccession:
+			self.sampleAccession[sampleName] = ""
 		infile = open(self.sampleInfoEntry.text())
 
 		infile.readline() #Read header
@@ -287,11 +287,11 @@ class Ui_Form(object):
 				xmlfile.write("<TAG>collecting institution</TAG>\n<VALUE>"+collectingInstitution+"</VALUE>\n</SAMPLE_ATTRIBUTE>\n<SAMPLE_ATTRIBUTE>\n")
 				xmlfile.write("<TAG>isolate</TAG>\n<VALUE>"+isolate+"</VALUE>\n</SAMPLE_ATTRIBUTE>\n</SAMPLE_ATTRIBUTES>\n</SAMPLE>\n</SAMPLE_SET>\n")
 				xmlfile.close()
-				if self.testSubmissionchkValue.text()==True:
+				if self.testSubmissionCombo.currentText()=="Yes":
 					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
 				else:
-					MsgBox = tk.messagebox.askquestion("You are going to submit your data to ENA. This is not a test submission. Do you with to continue?")
-					if MsgBox == 'yes':
+					MsgBox = QMessageBox.question(self, 'PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+					if MsgBox == QMessageBox.Yes:
 						os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
 
 				receiptFile = open("sampleReceipt.txt")
@@ -408,7 +408,7 @@ class Ui_Form(object):
 			
 			
 			
-			projectAccessionNumber = createNewProject(projectInfo)
+			projectAccessionNumber = self.createNewProject(projectInfo)
 			
 			self.logArea.append("A project was created on ENA with the accession number: "+projectAccessionNumber+"\n\n")
 			self.logArea.repaint()
@@ -420,13 +420,13 @@ class Ui_Form(object):
 			if not sampleName:
 				break
 
-			if not sampleName in experimentAccession:
-				experimentAccession[sampleName] = ""
+			if not sampleName in self.experimentAccession:
+				self.experimentAccession[sampleName] = ""
 
-			if not sampleName in runAccession:
-				runAccession[sampleName] = ""
+			if not sampleName in self.runAccession:
+				self.runAccession[sampleName] = ""
 
-			sampleList.append(sampleName)
+			#sampleList.append(sampleName)
 
 
 			#Create samples if needed
@@ -437,7 +437,7 @@ class Ui_Form(object):
 				
 				
 				
-				sampleAccessionNumber = createNewSample(sampleName)
+				sampleAccessionNumber = self.createNewSample(sampleName)
 				
 				self.logArea.append("Sample created for dataset "+sampleName+" with accession number: "+sampleAccessionNumber+"\n")
 				self.logArea.repaint()
@@ -473,7 +473,7 @@ class Ui_Form(object):
 				if createSample =="Yes":
 					sampleAccessionField = sampleAccessionNumber
 
-				sampleAccession[sampleName] = sampleAccessionField
+				self.sampleAccession[sampleName] = sampleAccessionField
 
 				if sampleAlias == sampleName:
 					foundRecord = 1
@@ -496,8 +496,8 @@ class Ui_Form(object):
 					if self.testSubmissionCombo.currentText()=="Yes":
 						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-2.2.0.jar  -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -test -submit >fastqReceipt")
 					else:
-						MsgBox = tk.messagebox.askquestion("You are going to submit your data to ENA. This is not a test submission. Do you with to continue?")
-						if MsgBox == 'yes':
+						MsgBox = QMessageBox.question(self, 'PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+						if MsgBox == QMessageBox.Yes:
 							os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-2.2.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
 						else:
 							exit()
@@ -515,29 +515,29 @@ class Ui_Form(object):
 						for item in fields:
 							if "ERR" in item or "SRR" in item or "DRR" in item: 
 								if not "ERROR" in item:
-									runAccession[sampleName] = item
+									self.runAccession[sampleName] = item
 
 							if "ERX" in item or "SRX" in item or "DRX" in item: 
-								experimentAccession[sampleName]=item
+								self.experimentAccession[sampleName]=item
 
 							
 					receiptFile.close()
 					
 					self.logArea.append("Fastq files submitted!\n")
-					self.logArea.append("Run accession number: "+runAccession[sampleName]+"\n")
-					self.logArea.append("Experiment accession number: "+experimentAccession[sampleName]+"\n")
+					self.logArea.append("Run accession number: "+self.runAccession[sampleName]+"\n")
+					self.logArea.append("Experiment accession number: "+self.experimentAccession[sampleName]+"\n")
 					self.logArea.repaint()
 					
 					
 					
 					
-					print(experimentAccession[sampleName],"Submitted")
+					print(self.experimentAccession[sampleName],"Submitted")
 					sys.stdin.read(1)
 
 
 
 			print("Finished")
-			print(sampleName,sampleAccession[sampleName],runAccession[sampleName],experimentAccession[sampleName])
+			print(sampleName,self.sampleAccession[sampleName],self.runAccession[sampleName],self.experimentAccession[sampleName])
 
 
 
@@ -548,8 +548,8 @@ class Ui_Form(object):
 
 		for item in self.onlyfiles:
 			item2 = self.getPrefix((item[0].split("/"))[-1])
-			#print(item,sampleAccession[item],runAccession[item],experimentAccession[item])
-			outfile.write(item2+"\t"+sampleAccession[item2]+"\t"+runAccession[item2]+"\t"+experimentAccession[item2]+"\n")
+			#print(item,sampleAccession[item],self.runAccession[item],experimentAccession[item])
+			outfile.write(item2+"\t"+self.sampleAccession[item2]+"\t"+self.runAccession[item2]+"\t"+self.experimentAccession[item2]+"\n")
 
 		outfile.close()
 
