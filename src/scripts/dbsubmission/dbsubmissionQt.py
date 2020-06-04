@@ -507,6 +507,7 @@ class Ui_Form(object):
 					print("fastqreceipt to transform ")
 					os.system("cat fastqReceipt")
 					os.system("sed -i '/Processed/d' fastqReceipt")
+					os.system("sed -i '/^$/d' fastqReceipt")
 					print("fastqreceipt transformed ")
 					os.system("cat fastqReceipt")
 					
