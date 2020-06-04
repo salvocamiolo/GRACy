@@ -494,11 +494,11 @@ class Ui_Form(object):
 					
 
 					if self.testSubmissionCombo.currentText()=="Yes":
-						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-2.2.0.jar  -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -test -submit >fastqReceipt")
+						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.0.0.jar  -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -test -submit >fastqReceipt")
 					else:
 						MsgBox = QMessageBox.question(self, 'PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 						if MsgBox == QMessageBox.Yes:
-							os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-2.2.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
+							os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.0.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
 						else:
 							exit()
 					#os.system("rm -f "+fq1+" "+fq2)
