@@ -504,7 +504,7 @@ class Ui_Form(object):
 					#os.system("rm -f "+fq1+" "+fq2)
 					#print "Waiting ENA output...."
 					#time.sleep(10)
-					os.system("grep . fastqReceipt > tempF ; mv tempF fastqReceipt")
+					os.system("sed -i '/processed/d' fastqReceipt")
 					receiptFile = open("fastqReceipt")
 					while True:
 						line = receiptFile.readline().rstrip()
