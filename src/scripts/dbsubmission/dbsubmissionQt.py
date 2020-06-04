@@ -505,10 +505,11 @@ class Ui_Form(object):
 					#print "Waiting ENA output...."
 					#time.sleep(10)
 					print("fastqreceipt to transform ")
-					sys.stdin.read(1)
+					os.system("cat fastqReceipt")
 					os.system("sed -i '/Processed/d' fastqReceipt")
 					print("fastqreceipt transformed ")
-					sys.stdin.read(1)
+					os.system("cat fastqReceipt")
+					
 
 					receiptFile = open("fastqReceipt")
 					while True:
