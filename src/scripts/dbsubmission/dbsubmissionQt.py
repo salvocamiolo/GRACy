@@ -223,11 +223,11 @@ class Ui_Form(object):
 			if self.testSubmissionCombo.currentText()  =="Yes":
 				os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
 			else:
-				MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
-				if MsgBox == "yes" or MsgBox == "Yes":
-					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
-				else:
-					exit()
+				#MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
+				#if MsgBox == "yes" or MsgBox == "Yes":
+				os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
+				#else:
+				#	exit()
 			receiptFile = open("projectReceipt")
 
 			while True:
@@ -290,11 +290,11 @@ class Ui_Form(object):
 				if self.testSubmissionCombo.currentText()=="Yes":
 					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
 				else:
-					MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
-					if MsgBox == "yes" or MsgBox == "Yes":
-						os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
-					else:
-						exit()
+					#MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
+					#if MsgBox == "yes" or MsgBox == "Yes":
+					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
+					#else:
+					#	exit()
 				receiptFile = open("sampleReceipt.txt")
 				while True:
 					line = receiptFile.readline().rstrip()
@@ -497,11 +497,11 @@ class Ui_Form(object):
 					if self.testSubmissionCombo.currentText()=="Yes":
 						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.0.0.jar  -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -test -submit >fastqReceipt")
 					else:
-						MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
-						if MsgBox == "yes" or MsgBox == "Yes":
-							os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.0.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
-						else:
-							exit()
+						#MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
+						#if MsgBox == "yes" or MsgBox == "Yes":
+						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.0.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
+						#else:
+						#	exit()
 					#os.system("rm -f "+fq1+" "+fq2)
 					#print "Waiting ENA output...."
 					#time.sleep(10)
