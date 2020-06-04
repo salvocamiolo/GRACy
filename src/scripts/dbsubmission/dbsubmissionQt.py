@@ -504,10 +504,12 @@ class Ui_Form(object):
 					#os.system("rm -f "+fq1+" "+fq2)
 					#print "Waiting ENA output...."
 					#time.sleep(10)
-					os.system("grep INFO fastqReceipt > tempF ; mv tempF fastqReceipt")
+					os.system("grep . fastqReceipt > tempF ; mv tempF fastqReceipt")
 					receiptFile = open("fastqReceipt")
 					while True:
 						line = receiptFile.readline().rstrip()
+						print("Line",line)
+						sys.stdin.read(1)
 						if not line:
 							break
 						fields = line.split(" ")
