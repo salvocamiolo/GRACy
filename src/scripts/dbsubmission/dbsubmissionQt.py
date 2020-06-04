@@ -223,7 +223,7 @@ class Ui_Form(object):
 				os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
 			else:
 				
-				MsgBox = QMessageBox.question(self, 'PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+				MsgBox = QMessageBox.question('PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 				if MsgBox == QMessageBox.Yes:
 					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"PROJECT=@project.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >projectReceipt")
 				else:
@@ -290,7 +290,7 @@ class Ui_Form(object):
 				if self.testSubmissionCombo.currentText()=="Yes":
 					os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://wwwdev.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
 				else:
-					MsgBox = QMessageBox.question(self, 'PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+					MsgBox = QMessageBox.question('PyQt5 message', "ou are going to submit your data to ENA. This is not a test submission. Do you with to continue?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 					if MsgBox == QMessageBox.Yes:
 						os.system("curl -u "+self.usernameEntry.text()+":"+self.passwordEntry.text()+" -F \"SUBMISSION=@submission.xml\" -F \"SAMPLE=@"+alias+"_sample.xml\" \"https://www.ebi.ac.uk/ena/submit/drop-box/submit/\" >sampleReceipt.txt")
 
