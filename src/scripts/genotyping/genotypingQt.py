@@ -630,7 +630,7 @@ class Ui_Form(object):
 	
 		
 	def plotGenotypes(self):
-		genes = ["ul120","ul9","rl12","rl13","ul1","ul11","ul139","rl5a","rl6","ul20","ul146","ul73","ul74"]
+		genes = ["ul139","ul146","ul120","ul74","ul73","ul20","ul11","ul9","ul1","rl13","rl12","rl6","rl5a"]
 		colorDict = {"G1":"blue","G1A":"lightblue","G1B":"darkblue","G1C":"deepskyblue","G2":"red","G2A":"lightcoral","G2B":"darkred","G3":"salmon","G3A":"green","G3B":"darkgreen","G4":"lightgreen","G4A":"yellow","G4B":"darkseagreen","G4C":"pink","G4D":"maroon","G5":"magenta","G6":"orchid","G7":"purple","G8":"silver","G9":"blueviolet","G10":"darkcyan","G11":"navy","G12":"black","G13":"gray","G14":"lightgray"}
 		
 		outputFolder = self.outputFolderEntry.text()
@@ -701,23 +701,23 @@ class Ui_Form(object):
 		for item in colorDict:
 			legend_elements.append(Patch(facecolor=colorcode.to_rgba(colorDict[item]),label=item))
 
-		plt.legend(handles=legend_elements,loc=0,bbox_to_anchor=(1.12, 0.9))
+		plt.legend(handles=legend_elements,loc=0,bbox_to_anchor=(1.12, 0.9),prop={'family': 'Arial'})
 
 
 
-		plot1.text(1,0.16,"UL120",rotation=14,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(0.80,0.61,"UL9",rotation=37,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(0.4,0.93,"RL12",rotation=62,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-0.15,1.02,"RL13",rotation=-85,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-0.66,0.84,"UL1",rotation=-60,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-1.05,0.46,"UL11",rotation=-30,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-1.22,-0.05,"UL139",rotation=3,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-1.05,-0.57,"RL5A",rotation=24,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-0.67,-0.94,"RL6",rotation=50,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(-0.17,-1.16,"UL20",rotation=75,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(0.35,-1.13,"UL146",rotation=-70,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(0.75,-0.81,"UL73",rotation=-45,fontweight='bold',fontsize=12,fontname="arial")
-		plot1.text(0.97,-0.36,"UL74",rotation=-14,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(1,0.16,"UL139",rotation=14,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(0.80,0.61,"UL146",rotation=37,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(0.4,0.93,"UL120",rotation=62,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-0.15,1.02,"UL74",rotation=-85,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-0.66,0.84,"UL73",rotation=-60,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-1.05,0.46,"UL20",rotation=-30,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-1.22,-0.05,"UL11",rotation=3,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-1.05,-0.57,"UL9",rotation=24,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-0.67,-0.94,"UL1",rotation=50,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(-0.17,-1.16,"RL13",rotation=75,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(0.35,-1.13,"RL12",rotation=-70,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(0.75,-0.81,"RL6",rotation=-45,fontweight='bold',fontsize=12,fontname="arial")
+		plot1.text(0.97,-0.36,"RL5A",rotation=-14,fontweight='bold',fontsize=12,fontname="arial")
 
 
 
