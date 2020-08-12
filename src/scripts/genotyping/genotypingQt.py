@@ -585,7 +585,7 @@ class Ui_Form(object):
 						if not countLine:
 							break
 						countFields = countLine.split(" ")
-						if int(countFields[1])>0:
+						if int(countFields[1])>int(self.minimumReadsEntry.text()):
 							numMatchedKmers[gr] +=1
 							for item in readsKmer[countFields[0]]:
 								matchedReads[gr].add(item)
