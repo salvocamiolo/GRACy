@@ -1,5 +1,5 @@
-#!/home/salvo/Github/GRACy/src/conda/bin/python
-installationDirectory = "/home/salvo/Github/GRACy/"
+#!/home3/scc20x/Software/mySoftware/GRACy/src/conda/bin/python
+installationDirectory = "/home3/scc20x/Software/mySoftware/GRACy/"
  
 
 
