@@ -735,8 +735,8 @@ class Ui_Form(object):
 			plot2.text(0.15,yLabel,(sample.split("/"))[-1],fontsize=14)
 			yLabel = yLabel - 0.05
 
-		if len(numberOfPlots)>1:
-			plot2.arrow(0.1,0.9,0,-yLabel,width=0.005)
+		#if len(numberOfPlots)>1:
+		#	plot2.arrow(0.1,0.9,0,-yLabel,width=0.005)
 
 		fig.savefig(self.outputFolderEntry.text()+"/"+outputFileName,dpi=300)
 
