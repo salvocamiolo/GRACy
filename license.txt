@@ -1,0 +1,14 @@
+GRACy is distributed under the GPL3 license. However the package embeds several third-party tools
+which are installed using the Anaconda environment.The Anaconda package installer is also distributed
+with the GRACy distribution.
+The anaconda license is available at :
+
+https://docs.anaconda.com/anaconda/eula/
+
+The file install.sh reports all the packages that are automatically installed when GRACy is installed.
+All the packages are free to use of course, but the user may want to check each single software specific
+license before modifying/distributing them 
+
+All the graphic interfaces are produced by using the Qt library (free for not commercial use, https://www.qt.io/)
+
+
