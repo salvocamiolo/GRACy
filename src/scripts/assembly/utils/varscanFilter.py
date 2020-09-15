@@ -26,7 +26,7 @@ read2 = args['read2']
 installationDirectory = args['installationDirectory']
 kmersInReads = []
 if validate == 1:
-	os.system(installationDirectory+"src/conda/bin/jellyfish count -m 50 -s 4G -t 8 -C  -o kmerCount.jf "+read1+" "+read2)
+	os.system(installationDirectory+"src/conda/bin/jellyfish count -m 50 -s 1G -t 8 -C  -o kmerCount.jf "+read1+" "+read2)
 
 	for seq_record in SeqIO.parse(reference,"fasta"):
 		refSeq = str(seq_record.seq)
