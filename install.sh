@@ -21,7 +21,6 @@ else
 ./src/conda/bin/conda config --add channels bioconda
 ./src/conda/bin/conda install -y  trim-galore
 ./src/conda/bin/conda install -c bioconda -y  bowtie2=2.3.5.1
-./src/conda/bin/conda install -c bioconda -c r -y  samtools=1.3.1 --override-channels
 ./src/conda/bin/conda install -c yuxiang -y  bam2fastq=1.1.0
 ./src/conda/bin/conda install -c bioconda -y  fastuniq=1.1
 ./src/conda/bin/conda install -c bioconda -y  cutadapt=2.6
@@ -49,6 +48,8 @@ else
 ./src/conda/bin/conda install -c anaconda -y pyqt=5.9.2
 ./src/conda/bin/conda install -c bioconda -y varscan=2.4.4
 ./src/conda/bin/conda install -c bioconda -y tabix
+./src/conda/bin/conda install -c bioconda -y  samtools=1.3.1
+./src/conda/bin/conda install -c bioconda -y  bcftools
 
 	fi
 fi
