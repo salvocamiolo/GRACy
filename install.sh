@@ -48,6 +48,8 @@ else
 ./src/conda/bin/conda install -c bioconda -y  exonerate=2.4
 ./src/conda/bin/conda install -c anaconda -y pyqt=5.9.2
 ./src/conda/bin/conda install -c bioconda -y varscan=2.4.4
+./src/conda/bin/conda install -c bioconda -y tabix
+
 	fi
 fi
 
