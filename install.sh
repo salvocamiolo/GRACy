@@ -37,7 +37,6 @@ else
 ./src/conda/bin/conda install -c bioconda -y  lastz=1.0.4
 ./src/conda/bin/conda install -c bioconda -y  perl-perl4-corelibs
 ./src/conda/bin/conda install -c bioconda -y  blast=2.9.0
-./src/conda/bin/conda install -c bioconda -y  lofreq=2.1.4
 ./src/conda/bin/conda install -c bioconda -y  cd-hit=4.8.1
 ./src/conda/bin/conda install -c bioconda -y  cap3
 ./src/conda/bin/conda install -c bioconda -y  bedtools=2.29.2
@@ -68,6 +67,7 @@ else
 	./src/conda2/bin/conda install -c bioconda -y  ragout=2.2
 	./src/conda2/bin/conda install -c bioconda -y  mummer
 	./src/conda2/bin/conda install -c bioconda -y  bcftools
+	./src/conda2/bin/conda install -c bioconda -y  lofreq
 
 	fi
 fi

@@ -450,7 +450,7 @@ class Ui_Form(object):
 			
 			
 
-			os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q "+str(self.baseQualityCombo.currentText())  +" -Q "+str(self.baseQualityCombo.currentText()) +" -f "+referenceFile+" -o "+sampleTempFolder+"/"+sampleName+"_SNPs.vcf "+sampleTempFolder+"/"+sampleName+"_markedDuplicates.bam")
+			os.system(installationDirectory+"src/conda2/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q "+str(self.baseQualityCombo.currentText())  +" -Q "+str(self.baseQualityCombo.currentText()) +" -f "+referenceFile+" -o "+sampleTempFolder+"/"+sampleName+"_SNPs.vcf "+sampleTempFolder+"/"+sampleName+"_markedDuplicates.bam")
 			print("Lofreq terminated")
 			#sys.stdin.read(1)
 
