@@ -507,7 +507,7 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_1_15001_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_1_15001_f.txt")
-				#os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda2/bin/bcftools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam | "+installationDirectory+"src/conda2/bin/bcftools call -mv -Ov -o output.vcf")
 				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels  -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
 				#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_1_15001_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam > pileup.txt")
@@ -523,7 +523,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat finalScaffold_1_15001_f.txt | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_1_15001_f.txt_con.fasta 2>null")
+				os.system("cat finalScaffold_1_15001_f.txt | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_1_15001_f.txt_con.fasta 2>null")
 				os.system("mv output.vcf output_firstPortion.vcf")
 				os.system("mv output_filtered.vcf  output_firstPortion_filtered.vcf")
 				os.system("rm -f test*")
@@ -575,7 +575,7 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt")
-				#os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda2/bin/bcftools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam | "+installationDirectory+"src/conda2/bin/bcftools call -mv -Ov -o output.vcf")
 				#os.system(installationDirectory+"src/conda/bin/lofreq call-parallel  --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels  -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam > pileup.txt")
 				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf 1 --strand-filter 0  > output.vcf")
@@ -592,7 +592,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt_con.fasta 2>null")
+				os.system("cat finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt_con.fasta 2>null")
 				os.system("mv output.vcf output_secondPortion.vcf")
 				os.system("mv output_filtered.vcf  output_filtered_secondPortion.vcf")
 				os.system("rm -f test*")
@@ -642,7 +642,7 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
-				#os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda2/bin/bcftools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam | "+installationDirectory+"src/conda2/bin/bcftools call -mv -Ov -o output.vcf")
 				#os.system(installationDirectory+"src/conda/bin/lofreq  call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam > pileup.txt")
 				os.system(installationDirectory+"src/conda/bin/varscan mpileup2cns pileup.txt --variants --output-vcf 1 --strand-filter 0 > output.vcf")
@@ -660,7 +660,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt_con.fasta 2>null")
+				os.system("cat finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt_con.fasta 2>null")
 				os.system("mv output.vcf output_thirdPortion.vcf")
 				os.system("mv output_filtered.vcf  output_filtered_thirdPortion.vcf")
 				os.system("rm -f test*")
@@ -980,7 +980,7 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_1_15001_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_1_15001_f.txt")
-				#os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda2/bin/bcftools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam | "+installationDirectory+"src/conda2/bin/bcftools call -mv -Ov -o output.vcf")
 				#os.system(installationDirectory+"src/conda/bin/lofreq  call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels -f finalScaffold_1_15001_f.txt -o output.vcf dedupped.bam")
 				#os.system("java -jar  "+installationDirectory+"resources/GenomeAnalysisTK.jar -T  HaplotypeCaller -R finalScaffold_1_15001_f.txt -I dedupped.bam  -o output.vcf -A StrandAlleleCountsBySample >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_1_15001_f.txt dedupped.bam > pileup.txt")
@@ -995,7 +995,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat finalScaffold_1_15001_f.txt | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_1_15001_f.txt_con.fasta 2>null")
+				os.system("cat finalScaffold_1_15001_f.txt | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_1_15001_f.txt_con.fasta 2>null")
 				os.system("mv output.vcf output_firstPortion.vcf")
 				os.system("mv output_filtered.vcf  output_firstPortion_filtered.vcf")
 				os.system("rm -f test*")
@@ -1045,7 +1045,7 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt")
-				#os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda2/bin/bcftools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam | "+installationDirectory+"src/conda2/bin/bcftools call -mv -Ov -o output.vcf")
 				#os.system(installationDirectory+"src/conda/bin/lofreq  call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt -o output.vcf dedupped.bam")
 				#os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt dedupped.bam > pileup.txt")
@@ -1063,7 +1063,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt_con.fasta 2>null")
+				os.system("cat finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_15001_"+str(assemblyLength -10000 )+"_f.txt_con.fasta 2>null")
 				os.system("mv output.vcf output_secondPortion.vcf")
 				os.system("mv output_filtered.vcf  output_filtered_secondPortion.vcf")
 				os.system("rm -f test*")
@@ -1114,7 +1114,7 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/picard CreateSequenceDictionary R=finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools faidx finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt")
-				#os.system(installationDirectory+"src/conda/bin/bcftools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam | "+installationDirectory+"src/conda/bin/bcftools call -mv -Ov -o output.vcf")
+				#os.system(installationDirectory+"src/conda2/bin/bcftools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam | "+installationDirectory+"src/conda2/bin/bcftools call -mv -Ov -o output.vcf")
 				#os.system(installationDirectory+"src/conda/bin/lofreq  call-parallel --pp-threads "+self.numThreadsCombo.currentText()+" -q 30 -Q 30 --call-indels -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt -o output.vcf dedupped.bam")
 				#os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/getMajorAllele.py output.vcf output_filtered.vcf >null 2>&1")
 				os.system(installationDirectory+"src/conda/bin/samtools mpileup -f finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt dedupped.bam > pileup.txt")
@@ -1133,7 +1133,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt_con.fasta 2>null")
+				os.system("cat finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > finalScaffold_"+str(assemblyLength - 10000 )+"_2000000_f.txt_con.fasta 2>null")
 				os.system("mv output.vcf output_thirdPortion.vcf")
 				os.system("mv output_filtered.vcf  output_filtered_thirdPortion.vcf")
 				os.system("rm -f test*")
@@ -1213,7 +1213,7 @@ class Ui_Form(object):
 				
 				
 				
-				os.system("cat "+projectName+"_genome.fasta | "+installationDirectory+"src/conda/bin/bcftools consensus output_filtered.vcf.gz > "+projectName+"_genome.fasta_con.fasta 2>null")
+				os.system("cat "+projectName+"_genome.fasta | "+installationDirectory+"src/conda2/bin/bcftools consensus output_filtered.vcf.gz > "+projectName+"_genome.fasta_con.fasta 2>null")
 				os.system("mv output.vcf completeGenome.vcf")
 				os.system("mv output_filtered.vcf  completeGenome_filtered.vcf")
 				os.system("rm -f test*")

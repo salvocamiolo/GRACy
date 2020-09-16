@@ -43,13 +43,12 @@ else
 ./src/conda/bin/conda install -c bioconda -y  bedtools=2.29.2
 ./src/conda/bin/conda install -c bioconda -y  fastx_toolkit=0.0.14
 ./src/conda/bin/conda install -c bioconda -y  blat=36
-./src/conda/bin/conda install -c bioconda -y  bcftools=1.8
 ./src/conda/bin/conda install -c bioconda -y  exonerate=2.4
 ./src/conda/bin/conda install -c anaconda -y pyqt=5.9.2
 ./src/conda/bin/conda install -c bioconda -y varscan=2.4.4
 ./src/conda/bin/conda install -c bioconda -y tabix
 ./src/conda/bin/conda install -c bioconda -y  samtools=1.3.1
-./src/conda/bin/conda install -c bioconda -y  bcftools
+
 
 	fi
 fi
@@ -68,6 +67,7 @@ else
 	echo "Miniconda2 successfully installed"
 	./src/conda2/bin/conda install -c bioconda -y  ragout=2.2
 	./src/conda2/bin/conda install -c bioconda -y  mummer
+	./src/conda2/bin/conda install -c bioconda -y  bcftools
 
 	fi
 fi
