@@ -11,7 +11,9 @@ else
 
 	echo "Installing miniconda 3"
 	cd src
+	if  test -f "miniconda3_inst.log"; then
 	rm miniconda3_inst.log
+	fi
 	touch miniconda3_inst.log
 	bash Miniconda3-latest-Linux-x86_64.sh -b -p ./conda > miniconda3_inst.log
 	cd ../
