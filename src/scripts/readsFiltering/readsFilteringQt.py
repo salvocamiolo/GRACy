@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog 
 from PyQt5.QtWidgets import QMessageBox
 
+
 import sys
 from os import listdir
 from os.path import isfile, join
@@ -176,7 +177,7 @@ class Ui_Form(object):
 	def selectFiles(self):
 		self.selectedFilesArea.clear()
 		self.onlyfiles = []
-		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./")
+		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./","*.fastq *.fq")
 		filenames = sorted(filenames)
 		if len(filenames)>0:
 			for a in filenames:
@@ -253,7 +254,7 @@ class Ui_Form(object):
 
 
 	def selectBowtieIndex(self):
-		filename, __ = QFileDialog.getOpenFileName(None,"Select human bowtie2 index","./","*index.1.bt2")
+		filename, __ = QFileDialog.getOpenFileName(None,"Select human bowtie2 index","./","*.rev.1.bt2")
 
 		if len(filename)>2:
 			self.bowtieIndexEntry.setText(filename)
@@ -471,7 +472,7 @@ class Ui_Form(object):
 					self.logTextArea.repaint()
 
 
-					os.system(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam")
+					os.system(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".rev.1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam")
 					#subprocess.call(installationDirectory+"src/conda/bin/bowtie2 --local -x "+bowtie2Ref.replace(".1.bt2","")+" -1 tempReads_140875_1.fastq -2 tempReads_140875_2.fastq -p "+self.numThreadsCombo.currentText()+" -S hostAlignment_140875.sam",shell=True)
 
 					time.sleep(2)

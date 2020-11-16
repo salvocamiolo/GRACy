@@ -69,7 +69,7 @@ class Ui_Form(object):
 	confFiles = []
 
 	def selectFiles(self):
-		filenames, __ = QFileDialog.getOpenFileNames(None,"Select configuration file list","./")
+		filenames, __ = QFileDialog.getOpenFileNames(None,"Select configuration file list","./","*.fasta *.fa *.fas")
 		for filename in filenames:
 			self.selectedFilesArea.append((filename.split("/"))[-1])
 		self.confFiles = filenames

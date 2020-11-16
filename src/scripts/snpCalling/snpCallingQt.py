@@ -178,7 +178,7 @@ class Ui_Form(object):
 	def selectFiles(self):
 		self.selectedFilesArea.clear()
 		self.onlyfiles = []
-		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./")
+		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./","*.fastq *.fq")
 		if len(filenames)>0:
 			for a in filenames:
 				if "_1.fastq" in a:
@@ -243,15 +243,15 @@ class Ui_Form(object):
 
 	
 	def selectCDSfile(self):
-		filename,__ = QFileDialog.getOpenFileName(None,"Select CDS file","./")
+		filename,__ = QFileDialog.getOpenFileName(None,"Select CDS file","./","*.fasta *.fas *.fa")
 		self.cdsFileEntry.setText(filename) 
 
 	def selectAnnotationFile(self):
-		filename, __= QFileDialog.getOpenFileName(None,"Select annotation file","./")
+		filename, __= QFileDialog.getOpenFileName(None,"Select annotation file","./","*.gff *.gff3")
 		self.annotationFileEntry.setText(filename)
 	
 	def selectGenomeFile(self):
-		filename, __= QFileDialog.getOpenFileName(None,"Select Genome fasta file","./")
+		filename, __= QFileDialog.getOpenFileName(None,"Select Genome fasta file","./","*.fasta *.fas *.fa")
 		self.genomeFileEntry.setText(filename)
 
 	def selectOuputFolder(self):

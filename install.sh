@@ -9,44 +9,60 @@ if  test -f "./src/conda/bin/conda"; then
 	echo "Miniconda3 already installed"
 else
 
-
+	echo "Installing miniconda 3"
 	cd src
-	bash Miniconda3-latest-Linux-x86_64.sh -b -p ./conda
+	rm miniconda3_inst.log
+	touch miniconda3_inst.log
+	bash Miniconda3-latest-Linux-x86_64.sh -b -p ./conda > miniconda3_inst.log
 	cd ../
 	if  test -f "./src/conda/bin/conda"; then
 	echo "Miniconda3 successfully installed"
-	./src/conda/bin/conda install -c anaconda -y pillow
-./src/conda/bin/conda install -c anaconda -y numpy
-./src/conda/bin/conda install -c conda-forge -y matplotlib 
-./src/conda/bin/conda config --add channels bioconda
-./src/conda/bin/conda install -y  trim-galore
-./src/conda/bin/conda install -c bioconda -y  bowtie2=2.3.5.1
-./src/conda/bin/conda install -c yuxiang -y  bam2fastq=1.1.0
-./src/conda/bin/conda install -c bioconda -y  fastuniq=1.1
-./src/conda/bin/conda install -c bioconda -y  cutadapt=2.6
-./src/conda/bin/conda install -c conda-forge -y pypdf2=1.26.0
-./src/conda/bin/conda install -c anaconda -y reportlab=3.5.9
-./src/conda/bin/conda install -c bioconda -y  biopython=1.76
-./src/conda/bin/conda install -c bioconda -y  jellyfish=2.2.10
-./src/conda/bin/conda install -c bioconda -y  bwa=0.7.17
-./src/conda/bin/conda install -c bioconda -y  prinseq=0.20.4
-./src/conda/bin/conda install -c bioconda -y  khmer=3.0.0
-./src/conda/bin/conda install -c bioconda -y  seqtk=1.3
-./src/conda/bin/conda install -c bioconda -y  spades=3.12
-./src/conda/bin/conda install -c bioconda -y  picard=2.21
-./src/conda/bin/conda install -c bioconda -y  lastz=1.0.4
-./src/conda/bin/conda install -c bioconda -y  perl-perl4-corelibs
-./src/conda/bin/conda install -c bioconda -y  blast=2.9.0
-./src/conda/bin/conda install -c bioconda -y  cd-hit=4.8.1
-./src/conda/bin/conda install -c bioconda -y  cap3
-./src/conda/bin/conda install -c bioconda -y  bedtools=2.29.2
-./src/conda/bin/conda install -c bioconda -y  fastx_toolkit=0.0.14
-./src/conda/bin/conda install -c bioconda -y  blat=36
-./src/conda/bin/conda install -c bioconda -y  exonerate=2.4
-./src/conda/bin/conda install -c anaconda -y pyqt=5.9.2
-./src/conda/bin/conda install -c bioconda -y varscan=2.4.4
-./src/conda/bin/conda install -c bioconda -y tabix
-./src/conda/bin/conda install -c bioconda -y  samtools=1.3.1
+	./src/conda/bin/conda config --set notify_outdated_conda false
+
+	echo "Installing pillow. Please wait...."
+	./src/conda/bin/conda install -c anaconda -y pillow > miniconda3_inst.log
+	echo "Checking pillow installation...."
+	./src/conda/bin/conda list > condaList
+	if grep -Fq pillow condaList; then
+		echo "Pillow was successfully installed"
+	else
+		echo "Pillow was not installed. Please check file miniconda3_inst.log for details"
+
+	read -n1 kbd
+
+
+
+	./src/conda/bin/conda install -c anaconda -y numpy
+	./src/conda/bin/conda install -c conda-forge -y matplotlib 
+	./src/conda/bin/conda config --add channels bioconda
+	./src/conda/bin/conda install -y  trim-galore
+	./src/conda/bin/conda install -c bioconda -y  bowtie2=2.3.5.1
+	./src/conda/bin/conda install -c yuxiang -y  bam2fastq=1.1.0
+	./src/conda/bin/conda install -c bioconda -y  fastuniq=1.1
+	./src/conda/bin/conda install -c bioconda -y  cutadapt=2.6
+	./src/conda/bin/conda install -c conda-forge -y pypdf2=1.26.0
+	./src/conda/bin/conda install -c anaconda -y reportlab=3.5.9
+	./src/conda/bin/conda install -c bioconda -y  biopython=1.76
+	./src/conda/bin/conda install -c bioconda -y  jellyfish=2.2.10
+	./src/conda/bin/conda install -c bioconda -y  bwa=0.7.17
+	./src/conda/bin/conda install -c bioconda -y  prinseq=0.20.4
+	./src/conda/bin/conda install -c bioconda -y  khmer=3.0.0
+	./src/conda/bin/conda install -c bioconda -y  seqtk=1.3
+	./src/conda/bin/conda install -c bioconda -y  spades=3.12
+	./src/conda/bin/conda install -c bioconda -y  picard=2.21
+	./src/conda/bin/conda install -c bioconda -y  lastz=1.0.4
+	./src/conda/bin/conda install -c bioconda -y  perl-perl4-corelibs
+	./src/conda/bin/conda install -c bioconda -y  blast=2.9.0
+	./src/conda/bin/conda install -c bioconda -y  cd-hit=4.8.1
+	./src/conda/bin/conda install -c bioconda -y  cap3
+	./src/conda/bin/conda install -c bioconda -y  bedtools=2.29.2
+	./src/conda/bin/conda install -c bioconda -y  fastx_toolkit=0.0.14
+	./src/conda/bin/conda install -c bioconda -y  blat=36
+	./src/conda/bin/conda install -c bioconda -y  exonerate=2.4
+	./src/conda/bin/conda install -c anaconda -y pyqt=5.9.2
+	./src/conda/bin/conda install -c bioconda -y varscan=2.4.4
+	./src/conda/bin/conda install -c bioconda -y tabix
+	./src/conda/bin/conda install -c bioconda -y  samtools=1.3.1
 
 
 	fi
