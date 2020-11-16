@@ -27,6 +27,7 @@ else
 		echo "Pillow was successfully installed"
 	else
 		echo "Pillow was not installed. Please check file miniconda3_inst.log for details"
+	fi
 
 	read -n1 kbd
 
