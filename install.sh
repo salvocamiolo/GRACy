@@ -51,7 +51,7 @@ else
 		echo "Matplotlib was not installed. Please check file installation.log for details"
 	fi
 
-	./src/conda/bin/conda config --add channels bioconda
+	./src/conda/bin/conda config --add channels bioconda >> installation.log
 
 
 	echo "Installing Trimgalore. Please wait...."

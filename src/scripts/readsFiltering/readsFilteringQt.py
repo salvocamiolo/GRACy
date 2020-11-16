@@ -290,7 +290,11 @@ class Ui_Form(object):
 		plt.xlabel("Position (bp)")
 		plt.ylabel("Coverage")
 		plt.title(expName)
-		plt.savefig(expName+"_covPlot.png")
+		plt.savefig(expName+"_covPlot.png",format='png')
+		plt.savefig(expName+"_covPlot.pdf",format='pdf')
+		plt.savefig(expName+"_covPlot.eps",format='eps')
+		plt.savefig(expName+"_covPlot.svg",format='svg')
+
 
 	def runTool(self,installationDirectory):
 
@@ -879,14 +883,14 @@ class Ui_Form(object):
 		self.label_2.setText(_translate("Form", "Output folder"))
 		self.outputFolderEntry.setText(_translate("Form", ""))
 		self.label_3.setText(_translate("Form", "Recoding file"))
-		self.label_4.setText(_translate("Form", "Human reference bowtie2 index"))
+		self.label_4.setText(_translate("Form", "Host reference bowtie2 index"))
 		self.label_5.setText(_translate("Form", "Adapter 1"))
 		self.label_6.setText(_translate("Form", "Adapter 2"))
 		self.label_7.setText(_translate("Form", "Number of threads"))
 		self.label_8.setText(_translate("Form", "Log window"))
 		self.recodingFileEntry.setText(_translate("Form", ""))
 		self.bowtieIndexEntry.setText(_translate("Form", ""))
-		self.humanReadsRemovalCheckbox.setText(_translate("Form", "Human reads removal"))
+		self.humanReadsRemovalCheckbox.setText(_translate("Form", "Host reads removal"))
 		self.adaptersTrimmingCheckbox.setText(_translate("Form", "Adapters trimming"))
 		self.sampleNameRecodingCheckbox.setText(_translate("Form", "Sample file name recoding"))
 		self.readsDeduplicationCheckbox.setText(_translate("Form", "Reads deduplication"))
