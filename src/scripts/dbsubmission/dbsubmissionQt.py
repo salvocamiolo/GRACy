@@ -126,7 +126,7 @@ class Ui_Form(object):
 	def selectFiles(self):
 		self.selectedFilesArea.clear()
 		self.onlyfiles = []
-		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./","*.fastq *.fq")
+		filenames,__ = QFileDialog.getOpenFileNames(None, "Select paired end fastq files","./","*.fastq.gz *.fq.gz")
 		if len(filenames)>0:
 			for a in filenames:
 				if "_1.fastq.gz" in a:
