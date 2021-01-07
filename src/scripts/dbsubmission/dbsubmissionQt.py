@@ -478,6 +478,7 @@ class Ui_Form(object):
 
 				if sampleAlias == sampleName:
 					foundRecord = 1
+
 					os.system("ln -s "+inputFolder+"/"+fq1)
 					os.system("ln -s "+inputFolder+"/"+fq2)
 
