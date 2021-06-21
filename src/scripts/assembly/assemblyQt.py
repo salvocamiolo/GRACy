@@ -212,6 +212,13 @@ class Ui_Form(object):
 				
 				os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/assembly/utils/runQualityFiltering.py qualityFiltering.conf "+installationDirectory)
 				os.system("mkdir -p 1_cleanReads")
+				testFormat = open(projectName+"_hq_1.fastq")
+				header = testFormat.readline().rstrip()
+				testFormat.close()
+				time.sleep(1)
+				if " 1" in header:
+					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/readsFiltering/utils/changeHeaderFormat.py "+projectName+"_hq_1.fastq "+projectName+"_hq_2.fastq")
+				
 				os.system("mv "+projectName+"_hq_1.fastq ./1_cleanReads/qualityFiltered_1.fq")
 				os.system("mv "+projectName+"_hq_2.fastq ./1_cleanReads/qualityFiltered_2.fq")
 
@@ -246,6 +253,15 @@ class Ui_Form(object):
 				else:
 					os.system("mkdir 1_cleanReads")
 					os.chdir("1_cleanReads")
+					testFormat = open(read1)
+					header = testFormat.readline().rstrip()
+					testFormat.close()
+					time.sleep(1)
+				if " 1" in header:
+					os.system("cp "+read1+" qualityFiltered_1.fq")
+					os.system("cp "+read2+" qualityFiltered_2.fq")
+					os.system(installationDirectory+"src/conda/bin/python "+installationDirectory+"src/scripts/readsFiltering/utils/changeHeaderFormat.py qualityFiltered_1.fq qualityFiltered_2.fq")
+				else:
 					os.system("ln -s "+read1+" qualityFiltered_1.fq")
 					os.system("ln -s "+read2+" qualityFiltered_2.fq")
 					os.chdir("../")
