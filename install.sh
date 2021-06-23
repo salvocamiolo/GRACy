@@ -66,6 +66,7 @@ else
 
 	echo "Installing Bowtie2. Please wait...."
 	./src/conda/bin/conda install -c bioconda -y  bowtie2=2.3.5.1 >> installation.log
+	./src/conda/bin/conda install -y tbb=2020.2 >> installation.log
 	echo "Checking bowtie2 installation...."
 	./src/conda/bin/conda list > condaList
 	if grep -Fq bowtie2 condaList; then
