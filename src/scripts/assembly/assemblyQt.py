@@ -253,10 +253,11 @@ class Ui_Form(object):
 				else:
 					os.system("mkdir 1_cleanReads")
 					os.chdir("1_cleanReads")
-					testFormat = open(read1)
-					header = testFormat.readline().rstrip()
-					testFormat.close()
-					time.sleep(1)
+					
+				testFormat = open(read1)
+				header = testFormat.readline().rstrip()
+				testFormat.close()
+				time.sleep(1)
 				if " 1" in header:
 					os.system("cp "+read1+" qualityFiltered_1.fq")
 					os.system("cp "+read2+" qualityFiltered_2.fq")
