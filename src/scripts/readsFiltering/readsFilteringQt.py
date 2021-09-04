@@ -857,7 +857,7 @@ class Ui_Form(object):
 
 
 		for item in datasetStatistics:
-			outfile.write(self.getPrefix(codes[(dataset[0].split("/"))[-1]])  +"\t")
+			outfile.write(self.getPrefix(codes[(item[0].split("/"))[-1]])  +"\t")
 		outfile.write("\n")
 		for a in range(len(statisticsToReport)):
 			outfile.write(statisticsToReport[a]+"\t")
