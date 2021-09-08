@@ -570,7 +570,7 @@ class Ui_Form(object):
 						#warnFile.write(notes+"\n")
 						gffNote += "Pseudo "
 						if exon[locus][0][2]=="+":   #************* Positive strand
-							gffFile.write(assemblyName+"\texonerate\t"+"gene"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_gene;Name="+locus+";Product="+locus+"\t"+gffNote+"-gene\n")
+							gffFile.write(assemblyName+"\texonerate\t"+"gene"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_gene;Name="+locus+";Product="+locus+";"+gffNote+"-gene\n")
 							gffFile.write(assemblyName+"\texonerate\t"+"mRNA"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_mRNA;Parent="+locus+"_gene;Name="+locus+".1;Product="+locus+";"+gffNote+"-mRNA\n")
 							numExon = 1
 							for item in exon[locus]:
@@ -984,7 +984,7 @@ class Ui_Form(object):
 							warnFile.write(notes+"\n")
 							gffNote += "Pseudo "
 							if exon[locus][0][2]=="+":   #************* Positive strand
-								gffFile.write(assemblyName+"\texonerate\t"+"gene"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_gene;Name="+locus+";Product="+locus+"\t"+gffNote+"-gene\n")
+								gffFile.write(assemblyName+"\texonerate\t"+"gene"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_gene;Name="+locus+";Product="+locus+";"+gffNote+"-gene\n")
 								gffFile.write(assemblyName+"\texonerate\t"+"mRNA"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_mRNA;Parent="+locus+"_gene;Name="+locus+".1;Product="+locus+";"+gffNote+"-mRNA\n")
 								numExon = 1
 								for item in exon[locus]:
@@ -1115,7 +1115,7 @@ class Ui_Form(object):
 							warnFile.write(notes+"\n")
 							gffNote += "Pseudo "
 							if exon[locus][0][2]=="+":   #************* Positive strand
-								gffFile.write(assemblyName+"\texonerate\t"+"gene"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_gene;Name="+locus+";Product="+locus+"\t"+gffNote+"-gene\n")
+								gffFile.write(assemblyName+"\texonerate\t"+"gene"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_gene;Name="+locus+";Product="+locus+";"+gffNote+"-gene\n")
 								gffFile.write(assemblyName+"\texonerate\t"+"mRNA"+"\t"+str(int(gene[locus][0]))+"\t"+str(int(gene[locus][1])+3)+"\t.\t"+str(gene[locus][2])+"\t.\tID="+locus+"_mRNA;Parent="+locus+"_gene;Name="+locus+".1;Product="+locus+";"+gffNote+"-mRNA\n")
 								numExon = 1
 								for item in exon[locus]:
