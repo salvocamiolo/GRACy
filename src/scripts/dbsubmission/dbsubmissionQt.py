@@ -496,11 +496,11 @@ class Ui_Form(object):
 					
 
 					if self.testSubmissionCombo.currentText()=="Yes":
-						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.7.0.jar  -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -test -submit >fastqReceipt")
+						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-4.2.0.jar  -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -test -submit >fastqReceipt")
 					else:
 						#MsgBox, __ = QInputDialog.getText(None, 'Text Input Dialog', 'You are going to submit your data to ENA. This is not a test submission. Type yes to continue....')
 						#if MsgBox == "yes" or MsgBox == "Yes":
-						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-3.7.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
+						os.system(installationDirectory+"src/conda/bin/java -Xmx2048m -jar "+installationDirectory+"src/scripts/dbsubmission/utils/webin-cli-4.2.0.jar -context reads -userName "+self.usernameEntry.text()+" -password "+self.passwordEntry.text()+"  -manifest "+sampleName+"_manifestFile.txt -submit >fastqReceipt")
 						#else:
 						#	exit()
 					#os.system("rm -f "+fq1+" "+fq2)
