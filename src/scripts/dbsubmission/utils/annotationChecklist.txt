@@ -1,0 +1,11 @@
+General description	 Human herpesvirus 5 strain DUR08
+Assembly Method      	SPADes v. 3.1
+Coverage             	1000x
+Sequencing Technology	Illumina MiSeq
+Locus TAG	PAT1
+Strain name	PaT1
+Isolation source	Blood
+Country	South Africa
+Collection date	11-Sep-12
+Notes:	UL9 gene mutated
+
