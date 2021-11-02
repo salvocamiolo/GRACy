@@ -45,6 +45,7 @@ while True:
     if not line:
         break
     fields = line.split("\t")
+
     if fields[2] == "CDS":
         geneName = (fields[8].split("Product="))[-1]
         if not geneName in geneCoord:
@@ -56,13 +57,24 @@ while True:
             protSeqs[geneName] = "T"+protSeqs[geneName]
         else:
             geneCoord[geneName]+=fields[3]+".."+fields[4]
+    
+    if fields[2] == "lncRNA":
+        geneName = (fields[8].split("Product="))[-1]
+        if not geneName in geneCoord:
+            geneCoord[geneName] = fields[3]+".."+fields[4]
+        if not geneName in protStrand:
+            protStrand[geneName] = fields[6]
+        if protStrand[geneName] == "-":
+            geneCoord[geneName] = "complement("+geneCoord[geneName]+")"
+
+
 
 infile.close()
 
 
 #check coordinates for missing stop codon
 for gene in gene2report:
-    if gene in geneCoord:
+    if gene in geneCoord and not "RNA" in gene:
         geneStart = int((((geneCoord[gene].split(","))[0]).split(".."))[0])-1
         geneEnd = int((((geneCoord[gene].split(","))[-1]).split(".."))[-1])
 
@@ -137,7 +149,7 @@ outfile.write("FT                   /note=\""+notes+"\"\n")
 outfile.write("FT                   acronym: HCMV; acronym: \"HHV-5\"\n")
 
 for gene in gene2report:
-    if gene in protSeqs:
+    if gene in protSeqs and gene in geneCoord:
         print(protSeqs[gene])
         print(geneCoord[gene])
         print(protStrand[gene])
@@ -156,7 +168,7 @@ for gene in gene2report:
             outfile.write("FT   gene            "+geneStartCoord+".."+geneEndCoord+"\n")
         outfile.write("FT                   /gene=\""+gene+"\"\n")
         outfile.write("FT   CDS             "+geneCoord[gene]+"\n")
-        outfile.write("FT                   /gene=\""+gene+"\"\n")
+        #outfile.write("FT                   /gene=\""+gene+"\"\n")
         outfile.write("FT                   /codon_start=1\n")
         ##handle not for UL30A
         if gene == "UL30A":
@@ -189,6 +201,15 @@ for gene in gene2report:
             translationString+="\n"
             print(translationString)
         outfile.write(translationString)
+
+    if "RNA" in gene:
+        outfile.write("FT   gene            "+geneCoord[gene]+"\n")
+        outfile.write("FT                   /gene=\""+gene+"\"\n")
+        outfile.write("FT   ncRNA           "+geneCoord[gene]+"\n")
+        outfile.write("FT                   /ncRNA_class=\"lncRNA\"\n")
+
+
+
 
 outfile.write("SQ   Sequence "+str(len(genomeSeq))+";\n")
 

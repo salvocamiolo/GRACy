@@ -7,6 +7,8 @@ parser.add_argument("-e","--EMBL",required=True, help="The annoation file in ENB
 parser.add_argument("-p","--project",required=True,help="The ENA project accession number to add the genome annotation to")
 parser.add_argument("-s","--sample",required=True,help="The ENA sample accession number to add the genome annotation to")
 parser.add_argument("-o","--outputPrefix",required=True,help="the prefix of the generated output files")
+parser.add_argument("-t","--validation",required=True,help="tells webin-cl to perform a test submissio to validate the annoatation file")
+parser.add_argument("-i","--installationDirectory",required=True,help="The GRACy installation directory")
 
 args = vars(parser.parse_args())
 
@@ -14,6 +16,8 @@ emblFile = args['EMBL']
 projectNumber  = args['project']
 sampleNumber = args['sample']
 prefix = args['outputPrefix']
+validation = args['validation'] #If yes the submission will only be validated
+installationDirectory = args['installationDirectory']
 
 #copy the embl file in the current directory
 os.system("cp "+emblFile+" ./")
@@ -60,6 +64,10 @@ outfile.close()
 #compressing files
 os.system("gzip "+emblFile)
 os.system("gzip chromosome.list")
+
+#submitting/Validating to ENA
+if validation == "yes":
+    os.system(installationDirectory+"/src/conda/bin/java -jar "+installationDirectory+"/src/scripts/dbsubmission/utils/webin-cli-4.2.0.jar -username Webin-50760 -password Elisaegizia14 -context genome -manifest "+prefix+"_manifest.txt -validate")
 
 
 

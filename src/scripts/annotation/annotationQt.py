@@ -459,7 +459,7 @@ class Ui_Form(object):
 
 
 
-				if foundStartCodon == True and foundStopCodon == True and numCodonRefines <5 and abs(int(len(cdsSeq)/3) - len(sequence)) <10: # Write gff and cds file ********************
+				if foundStartCodon == True and foundStopCodon == True and numCodonRefines <5 and abs(int(len(cdsSeq)/3) - len(sequence)) <10 : # Write gff and cds file ********************
 					#warnFile.write("A valid ORF for gene "+locus+" after prediction refinement\n")
 					if  notes == "":
 						notes = "A valid ORF has been found for gene "+locus+"!\n"
@@ -863,7 +863,7 @@ class Ui_Form(object):
 						warnFile.write(notes)#+"\n")
 
 					# Write gff and cds file ********************
-					if foundStartCodon == True and foundStopCodon == True:
+					if foundStartCodon == True and foundStopCodon == True and abs(int(len(cdsSeq)/3) - len(sequence)) <10:
 
 						warnFile.write("A valid ORF for gene "+locus+" after prediction refinement!\n")
 						if notes == "":
@@ -1271,6 +1271,15 @@ class Ui_Form(object):
 						newCDSLine +=a+"\t"
 
 					cdsInfo[locus].append(newCDSLine)
+
+			#annotate lncRNA
+			print("Ci arriva")
+			os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"/src/scripts/annotation/lncRNA_annotation.py -f "+installationDirectory+"/src/scripts/annotation/proteinDB/lncRNAs.fasta -i "+ file2Annotate+" -o lncRNA140875 -c "+installationDirectory+"/src/conda/")
+			os.system("cat "+suffixName+"_cds.fasta lncRNA140875_lncrna_seqs.fasta > temp_cds.fasta")
+			os.system("cat "+suffixName+"_annotation.gff lncRNA140875_lncrna_gff3.gff > temp_gff.gff" )
+			os.system("mv temp_cds.fasta "+suffixName+"_cds.fasta")
+			os.system("mv temp_gff.gff "+suffixName+"_annotation.gff")
+			os.system("rm -rf lncRNA140875*")
 
 
 
