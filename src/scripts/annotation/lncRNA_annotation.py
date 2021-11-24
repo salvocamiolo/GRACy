@@ -71,5 +71,6 @@ for seq_record in SeqIO.parse(lncRNAfile,"fasta"):
 
 
 outfile1.close()
+outfile2.close()
 
 

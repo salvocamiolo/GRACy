@@ -1272,18 +1272,8 @@ class Ui_Form(object):
 
 					cdsInfo[locus].append(newCDSLine)
 
-			#annotate lncRNA
-			print("Ci arriva")
-			os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"/src/scripts/annotation/lncRNA_annotation.py -f "+installationDirectory+"/src/scripts/annotation/proteinDB/lncRNAs.fasta -i "+ file2Annotate+" -o lncRNA140875 -c "+installationDirectory+"/src/conda/")
-			os.system("cat "+suffixName+"_cds.fasta lncRNA140875_lncrna_seqs.fasta > temp_cds.fasta")
-			os.system("cat "+suffixName+"_annotation.gff lncRNA140875_lncrna_gff3.gff > temp_gff.gff" )
-			os.system("mv temp_cds.fasta "+suffixName+"_cds.fasta")
-			os.system("mv temp_gff.gff "+suffixName+"_annotation.gff")
-			os.system("rm -rf lncRNA140875*")
 
-
-
-
+			
 
 			for cds in exonCoordAll:
 				geneCoord[cds] = (min(exonCoordAll[cds]),max(exonCoordAll[cds]))
@@ -1309,8 +1299,18 @@ class Ui_Form(object):
 
 			outfile.close()
 			os.system("mv temp140875.gff "+suffixName+"_annotation.gff")
-			os.system("mv "+suffixName+"* "+outputFolder)
+		
 			infileGFF.close()
+
+			os.system(installationDirectory+"/src/conda/bin/python "+installationDirectory+"/src/scripts/annotation/lncRNA_annotation.py -f "+installationDirectory+"/src/scripts/annotation/proteinDB/lncRNAs.fasta -i "+ file2Annotate+" -o lncRNA140875 -c "+installationDirectory+"/src/conda/")
+			os.system("cat "+suffixName+"_cds.fasta lncRNA140875_lncrna_seqs.fasta > temp_cds.fasta")
+			os.system("cat "+suffixName+"_annotation.gff lncRNA140875_lncrna_gff3.gff > temp_gff.gff" )
+			os.system("mv temp_cds.fasta "+suffixName+"_cds.fasta")
+
+			os.system("mv temp_gff.gff "+suffixName+"_annotation.gff")
+
+			os.system("rm -rf lncRNA140875* outputBlast.txt tempFasta.fasta")
+			os.system("mv "+suffixName+"* "+outputFolder)
 
 
 
