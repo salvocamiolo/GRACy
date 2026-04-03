@@ -698,7 +698,7 @@ class Ui_Form(object):
 
 				outfile = open(projectName+"_genome.fasta","w")
 				outfile.write(">finalScaffold\n"+finalSequence)
-
+				outfile.close()
 
 
 
@@ -1170,7 +1170,7 @@ class Ui_Form(object):
 					finalSequence+=str(seq_record.seq)
 
 				outfile = open(projectName+"_genome.fasta","w")
-				outfile.write(">finalScaffold\n"+finalSequence+"\n")
+				outfile.write(">finalScaffold_"+projectName+"\n"+finalSequence+"\n")
 				outfile.close()
 				
 
